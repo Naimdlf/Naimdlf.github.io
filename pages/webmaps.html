@@ -1,0 +1,116 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Naim Ferris" />
+  <meta name="description" content="Resume" />
+  <title>Naim's Portfolio - GIS</title>
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Mapbox GL -->
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet" />
+
+  <style>
+    #map { 
+      height: 700px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    #title {
+      z-index: 9999;
+      position: absolute;
+      width: 100%;
+      background-color: rgb(28, 247, 46);
+      opacity: 0.6;
+      text-align: center;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <h1>Naim Ferris</h1>
+      <div class="button-group">
+        <button type="button" onclick="window.location.href='index.html';">Home</button>
+
+        <!-- Projects -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+          <div id="projectsDropdown" class="dropdown-content">
+            <a href="/pages/GIS.html">GIS</a>
+            <a href="/pages/code.html">Code</a>
+            <a href="/pages/sample.html">Writing Samples</a>
+          </div>
+        </div>
+
+        <!-- Web Maps -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+          <div id="mapsDropdown" class="dropdown-content">
+            <a href="/pages/webmaps.html">Webmaps</a>
+            <a href="#">Project Two</a>
+            <a href="#">Project Three</a>
+          </div>
+        </div>
+
+        <!-- About Me -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+          <div id="aboutDropdown" class="dropdown-content">
+            <a href="/pages/portresume.html">Resume</a>
+            <a href="/pages/index.html#contact">Contact Info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- JavaScript -->
+   <section>
+    <br>
+    <div id="map"></div>
+</section>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/satellite-v9',
+    center: [-122.989, 45.522],
+    zoom: 17
+  });
+
+  new mapboxgl.Marker({ color: 'orange' })
+    .setLngLat([-122.989, 45.522])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hillsboro Civic Center'))
+    .addTo(map);
+
+  new mapboxgl.Marker({ color: 'green' })
+    .setLngLat([-122.99104302088651, 45.52222127773033])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hello World. Welcome to Hillsboro!'))
+    .addTo(map);
+
+  new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-right' })
+    .setLngLat([-122.99, 45.52])
+    .setHTML('<h1>We Love Hillsboro!</h1>')
+    .addTo(map);
+
+  new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-left' })
+    .setLngLat([-122.98890595841216, 45.5229335513485])
+    .setHTML('<a href="https://www.hillsboro-oregon.gov/">City of Hillsboro Website</a>')
+    .addTo(map);
+</script>
+
+<!-- JS Files -->
+<script src="/JS/dropdown.js"></script>
+<script src="/JS/minimizeheader.js"></script>
+</body>
+</html>
