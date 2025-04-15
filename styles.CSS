@@ -183,7 +183,7 @@ button:hover, button:focus {
   display: flex; 
   align-items: flex-start; 
   gap: 20px;
-  border-radius: 8px; /* Maintain rounded corners on the container */
+  border-radius: 8px;
 }
 
 
