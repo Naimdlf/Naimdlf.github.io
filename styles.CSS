@@ -1,0 +1,297 @@
+/* Author: Naim Ferris */
+
+/* Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background Image Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(/Photos/vecteezy_abstract-gradient-green-blue-liquid-wave-background_22013980.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  margin: 0 auto;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-image: url(/Photos/HillsboroDowntownMtHood\ copy.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: visible;
+  border-radius: 8px;
+  transition: all .8s ease;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  filter: blur(1px);
+  z-index: 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 10px;
+  position: relative;
+  z-index: 5;
+  flex-wrap: wrap;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Attribution old */
+.image-attribution {
+  text-align: right;
+  padding: 5px 10px;
+  font-size: 0.75em;
+  color: grey;
+  z-index: 10;
+}
+
+/* Attribution */
+/*.image-attribution2 {
+  text-align: right;
+  padding: 5px 10px;
+  font-size: 0.75em;
+  color: grey;
+  z-index: 10;
+}
+
+/* Buttons starter taken from https://www.w3schools.com/tags/tag_button.asp */
+button { 
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: white;
+  padding: 10px 18px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all .8s ease;
+}
+
+button:hover, button:focus {
+  background: linear-gradient(135deg, #2980b9, #27ae60);
+  transform: scale(1.03);
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Toggle dropdown */
+.show {
+  display: block;
+}
+
+/* Read more button */
+#more, #more1, #more2, #more3 {display: none;}
+
+/* Filter CSS */
+.filterDiv {
+  background-color: transparent;
+  float: left;
+  color: #ffffff;
+  margin: 2px;
+  display: none;
+  opacity: 1;
+  border-radius: 8px;
+  max-width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: grayscale(70%);
+}
+
+.filterDiv:hover {
+  transform: scale(1.10);
+  filter: grayscale(0%);
+}
+
+/*.filter-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}*/
+
+
+#imagePreviewSection {
+  transition: all 0.4s ease;
+}
+
+.show {
+  display: block;
+}
+
+.gissection {
+  padding: 10px;
+  overflow: auto; /* Prevents clipping when scaling */
+  display: flex;
+  flex-wrap: wrap;
+  display: flex; 
+  align-items: flex-start; 
+  gap: 20px;
+  border-radius: 8px; /* Maintain rounded corners on the container */
+}
+
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+/* from CS 110 class template modified */
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 90%;
+  object-fit: cover;
+  border: 3px solid #4d7ea8;
+  margin-bottom: 0px;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: rgb(77, 125, 168);
+  margin: 15px 0;
+}
+
+/* Link Styles */
+a {
+  color: #4d7ea8;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #8e44ad;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  }
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+h3 {
+  color: #3498db;
+  margin: 15px 0 10px 0;
+}
+
+/* List Styles */
+ul, ol {
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Skills Section */
+section section {
+  box-shadow: none;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 15px;
+  background-color: rgba(44, 62, 80, 0.1);
+  border-radius: 8px;
+}  
