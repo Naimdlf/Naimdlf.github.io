@@ -1,0 +1,622 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Naim Ferris" />
+  <meta name="description" content="Resume" />
+  <title>Naim's Portfolio - GIS</title>
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Mapbox GL -->
+  <!--Assignment 1-->
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet" />
+  <!--Assignment 2 map 1-->
+      <!--    1.1.  Include the reference to the Mapbox JavaScript here in the <head> of the page  -->
+  <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+      <!--    1.2 Include the reference to the Mapbox CSS here in the <head> of the page  -->
+  <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' /> -->
+
+
+  <style>
+    #map { 
+      height: 700px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    #title {
+      z-index: 9999;
+      position: absolute;
+      width: 100%;
+      background-color: rgb(28, 247, 46);
+      opacity: 0.6;
+      text-align: center;
+      top: 0;
+    }
+
+    /*https://gis.stackexchange.com/questions/279127/how-to-add-css-styling-in-mapbox-gl-popup*/
+    .mapboxgl-popup-close-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding-bottom: 10px;
+  color: black;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.mapboxgl-marker{
+  opacity: 0.75;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <h1>Naim Ferris</h1>
+      <div class="button-group">
+        <button type="button" onclick="window.location.href='index.html';">Home</button>
+
+        <!-- Projects -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+          <div id="projectsDropdown" class="dropdown-content">
+            <a href="GIS.html">GIS</a>
+            <a href="/pages/code.html">Code</a>
+            <a href="/pages/sample.html">Writing Samples</a>
+          </div>
+        </div>
+
+        <!-- Web Maps -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+          <div id="mapsDropdown" class="dropdown-content">
+            <a href="webmaps.html">Webmaps</a>
+            <a href="#">Project Two</a>
+            <a href="#">Project Three</a>
+          </div>
+        </div>
+
+        <!-- About Me -->
+        <div class="dropdown">
+          <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+          <div id="aboutDropdown" class="dropdown-content">
+            <a href="portresume.html">Resume</a>
+            <a href="index.html#contact">Contact Info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <hr>
+  <!-- JS Files -->
+<script src="/JS/dropdown.js"></script>
+<script src="/JS/minimizeheader.js"></script>
+
+
+  <!-- JavaScript -->
+  <!--Assignment 1-->
+   <section>
+    <h2>Assignment 1: Explore Hillsboro</h2>
+    <section class="contextsection">Hillsboro is a beautiful city outside of Portland. Bellow you can see notable buildings in Hillsboro marked. Further down the page their are fixed maps exploring each of the areas in detail. </section>
+    <div id="map"></div>
+</section>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/satellite-v9',
+    center: [-122.989, 45.522],
+    zoom: 17
+  });
+
+  //hillsboro Civic Center Marker//
+  new mapboxgl.Marker({color: 'green'})
+    .setLngLat([-122.989, 45.522])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hillsboro Civic Center'))
+    .addTo(map);
+
+    new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-right' })
+    .setLngLat([-122.99, 45.52])
+    .setHTML('<h1>We Love Hillsboro!</h1>')
+    .addTo(map);
+
+    //Hillsboro Max Station
+  new mapboxgl.Marker({ color: 'green' })
+    .setLngLat([-122.99104302088651, 45.52222127773033])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hello World. Welcome to Hillsboro!'))
+    .addTo(map);
+
+  new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-left'})
+    .setLngLat([-122.98890595841216, 45.5229335513485])
+    .setHTML('<a href="https://www.hillsboro-oregon.gov/">City of Hillsboro Website</a>')
+    .addTo(map);
+
+    //Hillsboro Airport
+    new mapboxgl.Marker({ color: 'red'})
+    .setLngLat([-122.9491848370618, 45.54204498307635])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Airport! <br> <a href="https://www.portofportland.com/HIO">Learn more</a>'))
+    .addTo(map);
+
+    //Nike Air Hanger
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.93943442280144, 45.5399079892515])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Nike Air Corporate Hanger! <br> <a href="https://tvaarchitects.com/project/nike-air-hangar/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.95058490459954,
+    45.5324332425852])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is where Hillsboro Airways classes take place! <br> <a href="https://www.hillsboronewstimes.com/news/new-ae">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.9883241737372,
+    45.52159144283624])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hart Community Theater! <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98506352755274,
+    45.52241931291533])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is Bag and Baggage on Main Street! <br> <a href="https://bagnbaggage.org/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98644318712616,
+    45.52373237347916])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is The Hillsboro Collective Market! <br> <a href="https://www.collectivemarket.net//">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92772531069409,
+    45.5318961579253])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is The Intel Hawthorn Farm Campus! <br> <a href="https://www.exploreintel.com/campuses/oregon">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92961336702757,
+    45.558746675478915])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro QTS data center! <br> <a href="https://qtsdatacenters.com/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.90843039863512,
+    45.55371746719268])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Ballpark! <br> <a href="https://en.wikipedia.org/wiki/Hillsboro_Ballpark">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.93130754638672,
+    45.55306796672471])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Genentech Hillsboro Campus! <br> <a href="https://www.gene.com/contact-us/visit-us/hillsboro">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.94571345984596,
+    45.55472800541068])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the GXO Logistics Wharehouse! <br> <a href="https://gxo.com/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.91775837089844,
+    45.54439145163215])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is Intel Gordon Moore Park<br> <a href="https://www.exploreintel.com/ronleracres">Learn more</a>'))
+    .addTo(map);
+
+
+
+
+
+</script>
+<hr>
+<br>
+
+<!--Assignment 2 Map 1 Fixed-->
+
+    <style>
+        /* 1.4 Insert the CSS code here between the <style> tags */
+        /*  body { margin:50px; padding:0; } */
+          #map1 { position:relative; height:300px; width:100%; border-radius: 8px;}
+        /* 2.5.2 Insert additional CSS code here between the <style> tags */
+          #map2 { position:relative; height:300px; width:100%; border-radius: 8px;}
+          #map3 {position:relative; height:500px; width:100%; border-radius: 8px;}
+    </style>
+
+        <!-- 1.3 Insert the div for the structure of the page here in the <body> of the page -->
+          <section>
+            <h2> Assignment 2 Map 1 Fixed: </h2>
+            <section class="contextsection">Here we can see Hillsboro's main street. The blue markers mark major community buildings in the area. Green marks government buildings. This downtown is a populer spot for shoping and theater. </section>
+            <div id='map1'></div>
+          </section>
+          <section>
+            <h2> Assignment 2 Map 2 Fixed:</h2>
+            <section class="contextsection">Here we can see the Hillsboro Airport. The markers in red are inforstructure related to the airport. The Hillsboro Airshow is hosted here every year. <a href="https://oregonairshow.com/hillsboro-2025/">Learn more</a></section>
+            <div id='map2'></div>
+          </section>
+          <section>
+            <h2> Assignment 2 Map 3 Fixed:</h2>
+            <section class="contextsection">In the North East corner of Hillsboro there are many industrial and tech jobs (marked in pink!). Intel is the <a href="https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000">biggest employer in Hillsboro and Oregon</a>. </section>
+            <div id='map3'></div>
+          </section>
+        <script>
+            /* Insert the JavaScript within the <script> tags, within the body */
+            // 2.1 Start with the Mapbox access token
+
+
+            // 2.2 Then initialize the first map
+            var map = new mapboxgl.Map({
+       container: 'map1', // id of a div on your page, where the map will be inserted
+       style: 'mapbox://styles/mapbox/satellite-v9', // the style URL 'mapbox://styles/mapbox/streets-v11' 
+       center: [-122.986189, 45.522638], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+       zoom: 15 // starting zoom 
+   });
+
+            // 2.3 Add any other variables (such as popups and markers) to the first map
+            var popup = new mapboxgl.Popup()
+                      .setText('This is my first point.');
+
+                  var marker = new mapboxgl.Marker({color:'red'})
+                    .setLngLat([-122.6788, 45.5212]) // starting position [lng, lat]
+                    .setPopup(popup) //add the popup named "popup" to this marker 
+		    .addTo(map); // add it to the map with the ID "map"
+
+            // 2.4 Add arguments to disable the map interactivity here
+                           // Disable drag and zoom handlers.
+                           map.dragPan.disable();
+               map.scrollZoom.disable();
+               map.boxZoom.disable();
+               map.dragRotate.disable();
+               map.keyboard.disable();
+               map.doubleClickZoom.disable();
+               map.touchZoomRotate.disable();
+               map.touchZoomRotate.disableRotation();
+            // Disable drag and zoom handlers.
+
+            // 2.5.3 Then initialize the 2nd map
+         // Then initialize the 2nd map
+         var map2 = new mapboxgl.Map({
+         container: 'map2', // id of a div on your page, where the map will be inserted
+         style: 'mapbox://styles/mapbox/satellite-v9', // stylesheet location
+         center: [-122.9491848370618, 45.54204498307635], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+         zoom: 12 // starting zoom 
+         });
+
+
+            // 2.5.4 Add any other variables (such as markers) to the second map
+            var popup2 = new mapboxgl.Popup()
+         .setText('This is my second point.');
+
+         var marker2 = new mapboxgl.Marker({color:'blue'})
+           .setLngLat([-122.6588, 45.1212]) // starting position [lng, lat] 
+           .setPopup(popup2) //add the popup to the marker 
+           .addTo(map2); // id it to the map with the ID *map2*
+
+            // 2.5.5 Add arguments to disable the second map's interactivity here
+                     // Disable drag and zoom handlers. 
+         map2.dragPan.disable();
+         map2.scrollZoom.disable();
+         map2.boxZoom.disable();
+         map2.dragRotate.disable();
+         map2.keyboard.disable();
+         map2.doubleClickZoom.disable();
+         map2.touchZoomRotate.disable();
+         map2.touchZoomRotate.disableRotation();
+            // 2.6 Change the map pointers
+
+            var map3 = new mapboxgl.Map({
+         container: 'map3', // id of a div on your page, where the map will be inserted
+         style: 'mapbox://styles/mapbox/satellite-v9', // stylesheet location
+         center: [-122.91775837089844,
+         45.54599145163215], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+         zoom: 13 // starting zoom 
+         });
+
+            // 2.5.5 Add arguments to disable the second map's interactivity here
+                     // Disable drag and zoom handlers. 
+         map3.dragPan.disable();
+         map3.scrollZoom.disable();
+         map3.boxZoom.disable();
+         map3.dragRotate.disable();
+         map3.keyboard.disable();
+         map3.doubleClickZoom.disable();
+         map3.touchZoomRotate.disable();
+         map3.touchZoomRotate.disableRotation();
+
+	// Change the map pointers
+	      map.getCanvas().style.cursor = 'auto';
+	      map2.getCanvas().style.cursor = 'auto';
+        map3.getCanvas().style.cursor = 'auto';
+
+  // map markers
+  new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.94571345984596,
+    45.52159144283624])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('This is the Hart Community Theater! <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98506352755274,
+    45.52241931291533])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('This is Bag and Baggage on Main Street! <br> <a href="https://bagnbaggage.org/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98644318712616,
+    45.52373237347916])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('This is The Hillsboro Collective Market! <br> <a href="https://www.collectivemarket.net//">Learn more</a>'))
+    .addTo(map);
+
+    //Hillsboro Airport
+    new mapboxgl.Marker({ color: 'red'})
+    .setLngLat([-122.9491848370618, 45.54204498307635])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Airport! <br> <a href="https://www.portofportland.com/HIO">Learn more</a>'))
+    .addTo(map2);
+
+    //Nike Air Hanger
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.93943442280144, 45.5399079892515])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Nike Air Corporate Hanger! <br> <a href="https://tvaarchitects.com/project/nike-air-hangar/">Learn more</a>'))
+    .addTo(map2);
+
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.95058490459954,
+    45.5324332425852])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is where Hillsboro Airways classes take place! <br> <a href="https://www.hillsboronewstimes.com/news/new-ae">Learn more</a>'))
+    .addTo(map2);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92772531069409,
+    45.5318961579253])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is The Intel Hawthorn Farm Campus! <br> <a href="https://www.exploreintel.com/campuses/oregon">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92961336702757,
+    45.558746675478915])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro QTS data center! <br> <a href="https://qtsdatacenters.com/">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.90843039863512,
+    45.55371746719268])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Ballpark! <br> <a href="https://en.wikipedia.org/wiki/Hillsboro_Ballpark">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.93130754638672,
+    45.55306796672471])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Genentech Hillsboro Campus! <br> <a href="https://www.gene.com/contact-us/visit-us/hillsboro">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.94571345984596,
+    45.55472800541068])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the GXO Logistics Wharehouse! <br> <a href="https://gxo.com/">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.91775837089844,
+    45.54439145163215])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is Intel Gordon Moore Park<br> <a href="https://www.exploreintel.com/ronleracres">Learn more</a>'))
+    .addTo(map3);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.9883241737372,
+    45.52159144283624])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hart Community Theater! <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+    .addTo(map);
+
+    new mapboxgl.Marker({color: 'green'})
+    .setLngLat([-122.989, 45.522])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hillsboro Civic Center'))
+    .addTo(map);
+
+    new mapboxgl.Marker({ color: 'green' })
+    .setLngLat([-122.99104302088651, 45.52222127773033])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hello World. Welcome to Hillsboro!'))
+    .addTo(map);
+        </script>
+
+
+
+<!--Assignment 2 Map 2 fly-to-->
+
+    <!--<style>
+        /* CSS for a full page map   */
+        /*body { margin:0; padding:0; }
+        /*#map { position:absolute; top:0; bottom:0; width:100%; }
+        
+        /* The CSS for the "Fly" button  */
+        #fly {
+            display: block; /* displays over the map */
+            position: relative; /* displays over the map */
+            margin: 0px auto; 
+            width: 50%;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px; /* rounded corners */
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: oldlace;
+            background: DarkRed;
+        }
+    </style>
+
+
+    <Section>
+      <div id='map'></div>
+      <br/>
+      <button id='fly'>Fly - Once</button>
+    </Section>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9tZXJzb24iLCJhIjoiY2o1bXE2bHlyMnJhZDMzbnpyMnhlODdpcSJ9.QJMJ_cTFCY050aZfSn1umQ';
+        
+        // initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-118.243683,34.052235],
+            zoom: 8,
+            minZoom: 6,
+            maxZoom: 15
+        });
+           
+        
+        // Add popups and markers to the map
+        var popup = new mapboxgl.Popup()
+            .setText('This is my first point.');
+
+        var marker = new mapboxgl.Marker({color:'DarkRed'})
+            .setLngLat([-118.243683,34.052235]) // starting position [lng, lat]
+            .setPopup(popup) //add the popup to the marker 
+            .addTo(map);
+        
+        var popup2 = new mapboxgl.Popup()
+            .setText('This is my second point.');
+
+        var marker2 = new mapboxgl.Marker({color:'DarkRed'})
+            .setLngLat([-97.70,30.30]) // starting position [lng, lat]
+            .setPopup(popup2) //add the popup to the marker 
+            .addTo(map);
+        
+        
+        // add a 'Listener' to the div with the ID 'fly', that's the button.
+       document.getElementById('fly').addEventListener('click', function () {
+            map.flyTo({
+                center: [-97.70,30.30], 
+                //zoom: 9,
+                //speed: 0.2
+            });
+        });
+        
+        map.on('zoomend', function(e){
+               console.log(map.getZoom())
+        });
+        
+    </script>
+<!--Assignment 2 Map 3 fly-to many-->
+<!--comment out all bellow style-->    
+  <!-- <style>
+        /* CSS for a full page map   */
+        /*body { margin:0; padding:0; }
+        /*#map { position:absolute; top:0; bottom:0; width:100%; }
+        
+        /* The CSS for the "Fly" button  */
+        #fly {
+            display: block; /* displays over the map */
+            position: relative; /* displays over the map */
+            margin: 0px auto; 
+            width: 50%;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px; /* rounded corners */
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: oldlace;
+            background: DarkRed;
+        }
+    </style>
+
+    <Section>
+      <div id='map'></div>
+      <br/>
+      <button id='fly'>Fly - Many</button>
+    </Section>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9tZXJzb24iLCJhIjoiY2o1bXE2bHlyMnJhZDMzbnpyMnhlODdpcSJ9.QJMJ_cTFCY050aZfSn1umQ';
+        
+        /* Variables for the marker and fly-to locations*/
+        var clickCounter = 1; // keep track of the number of times the user has clicked
+        var flyLocations = [[151.21529669782535,-33.85660618894459],[2.2944,48.8589], [-97.70,30.30]]; // Where the map will fly to
+        
+        
+        
+        // initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: flyLocations[0],
+            zoom: 17
+        });
+        
+
+           
+        
+        // Add popups and markers to the map
+        var popup = new mapboxgl.Popup()
+            .setText('This is my first point.');
+
+        var marker = new mapboxgl.Marker({color:'DarkRed'})
+            .setLngLat(flyLocations[0]) // put the marker at the first starting position in the flyLocations array [lng, lat]
+            .setPopup(popup) //add the popup to the marker 
+            .addTo(map);
+        
+        var popup2 = new mapboxgl.Popup()
+            .setText('This is my second point.');
+
+        var marker2 = new mapboxgl.Marker({color:'DarkRed'})
+            .setLngLat(flyLocations[1]) // put the marker at the second starting position in the flyLocations array [lng, lat]
+            .setPopup(popup2) //add the popup to the marker 
+            .addTo(map);
+        
+        var popup3 = new mapboxgl.Popup()
+            .setText('This is my third point.');
+
+        var marker3 = new mapboxgl.Marker({color:'DarkRed'})
+            .setLngLat(flyLocations[2]) // put the marker at the third starting position in the flyLocations array [lng, lat]
+            .setPopup(popup3) //add the popup to the marker 
+            .addTo(map);
+        
+        
+        // add a 'Listener' to the div with the ID 'fly', that's the button.
+        document.getElementById('fly').addEventListener('click', function () {
+            console.log("flying to " + flyLocations[clickCounter])
+            map.flyTo({
+                center: flyLocations[clickCounter] // look up the value of the click counter in the flyLocations array.
+            });
+
+            // update the click counter to the next location
+            clickCounter = clickCounter +1;
+            if (clickCounter > flyLocations.length-1) clickCounter = 0; // if the user has clicked more times than the length of the flyLocations array, reset it to 0.
+
+        });
+        
+        
+        </script> --> 
+        <footer>
+          <p>© 2025 Naim Ferris |</p>
+          <p>
+            Header background image by 
+            <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+            transferred by 
+            <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+            <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+          </p>
+          <p>
+            <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+          </p>
+          <p>
+            Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+          </p>
+        </footer>
+</body>
+</html>
