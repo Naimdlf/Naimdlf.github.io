@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>University of Oregon Mapping</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  
+  <!-- Mapbox GL JS and CSS -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #title { z-index: 9999; 
+         background-color:rgb(28, 247, 46); 
+         opacity: 60%; 
+         text-align: center 
+     }
+  </style>
+</head>
+<body>
+  <div id='map'></div>
+  <div id='title'>
+    <h1>My Map of Hillsboro</h1>
+    <h2>By: Naim Ferris</h2>
+</div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+
+    // Initialize the map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/satellite-v9',
+      center: [-122.989, 45.522],
+      zoom: 17
+    });
+
+// Popup for Civic Center
+var popup = new mapboxgl.Popup({ offset: 25 })
+  .setHTML('Hillsboro Civic Center');
+
+//s Orange marker at Civic Center
+var marker2 = new mapboxgl.Marker({ color: 'orange' })
+  .setLngLat([-122.989, 45.522])
+  .setPopup(popup)
+  .addTo(map);
+
+      // Popup for Hatfield Government Center
+      var popup1 = new mapboxgl.Popup({ offset: 25 })
+      .setHTML('Hello World. Welcome to Hillsboro!');
+
+    // Marker 3: Green marker at Hatfield Government Center
+    var greenMarker = new mapboxgl.Marker({ color: 'green' })
+      .setLngLat([-122.99104302088651, 45.52222127773033])
+      .setPopup(popup1)
+      .addTo(map);
+
+     var popup_layer = new mapboxgl.Popup({
+       closeOnClick: true, anchor: 'top-right'
+     })
+     .setLngLat([-122.99, 45.52])
+     .setHTML('<h1>We Love Hillsboro!</h1>')
+     .addTo(map);
+
+     var popup_layer_voodoo = new mapboxgl.Popup({
+       closeOnClick: true, anchor: 'top-left'
+     })
+     .setLngLat([-122.98890595841216, 45.5229335513485])
+     .setHTML('<a href="https://www.hillsboro-oregon.gov/">City of Hillsboro Website</a>')
+     .addTo(map);
+  </script>
+</body>
+</html>
