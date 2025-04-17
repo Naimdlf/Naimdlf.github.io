@@ -15,7 +15,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url(/photos/vecteezy_abstract-gradient-green-blue-liquid-wave-background_22013980.jpg);
+  background-image: url(photos/vecteezy_abstract-gradient-green-blue-liquid-wave-background_22013980.jpg);
   background-size: cover;
   background-position: center;
   opacity: 0.5;
@@ -29,7 +29,7 @@ header {
   top: 0;
   width: 100%;
   z-index: 10;
-  background-image: url(/photos/HillsboroDowntownMtHoodcopy.jpeg);
+  background-image: url(photos/HillsboroDowntownMtHoodcopy.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
