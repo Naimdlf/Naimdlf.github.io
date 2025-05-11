@@ -1,0 +1,35 @@
+body {
+    background-color: #f6f1e3;
+    font-family: 'Times New Roman', Times, serif;
+ }
+ 
+ h1 {
+    text-align: center;
+ }
+
+ h2 {
+    text-align: center;
+    font-size: smaller;
+ }
+
+ section{
+    text-align: left;
+ }
+
+ p {
+    font-size: 18px;
+ }
+
+li {
+    width: 800px;
+}
+
+footer  {
+        border-radius: 20px;
+        text-align: center;
+        background: #73AD21;
+        margin: auto;
+        padding: 10px;
+        width: 200px;
+        height: 40px;
+      }     
