@@ -21,10 +21,9 @@
   <!--Assignment 2 map 1-->
       <!--    1.1.  Include the reference to the Mapbox JavaScript here in the <head> of the page  -->
   <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
-      <!--    1.2 Include the reference to the Mapbox CSS here in the <head> of the page  -->
+      <-- 1.2 Include the reference to the Mapbox CSS here in the <head> of the page  -->
   <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' /> -->
   
-<!-- hello -->
  <!-- hello -->
 
   <style>
@@ -120,16 +119,6 @@
     cursor: pointer;
     }
 
-    /* #title {
-      z-index: 9999;
-      position: absolute;
-      width: 100%;
-      background-color: rgb(28, 247, 46);
-      opacity: 0.6;
-      text-align: center;
-      top: 0;
-    } */
-
       /*https://gis.stackexchange.com/questions/279127/how-to-add-css-styling-in-mapbox-gl-popup*/
       .mapboxgl-popup-close-button {
     background: transparent;
@@ -175,37 +164,39 @@
       <div class="button-group">
         <button type="button" onclick="window.location.href='index.html';">Home</button>
 
-        <!-- Projects -->
-        <div class="dropdown">
-          <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
-          <div id="projectsDropdown" class="dropdown-content">
-            <a href="GIS.html">GIS</a>
-            <a href="/pages/code.html">Code</a>
-            <a href="/pages/sample.html">Writing Samples</a>
-          </div>
-        </div>
-
-        <!-- Web Maps -->
-        <div class="dropdown">
-          <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
-          <div id="mapsDropdown" class="dropdown-content">
-            <a href="webmaps.html">Webmaps</a>
-            <a href="#">Project Two</a>
-            <a href="#">Project Three</a>
-          </div>
-        </div>
-
-        <!-- About Me -->
-        <div class="dropdown">
-          <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
-          <div id="aboutDropdown" class="dropdown-content">
-            <a href="portresume.html">Resume</a>
-            <a href="index.html#contact">Contact Info</a>
-          </div>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
         </div>
       </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <a href="#">Project Two</a>
+          <a href="#">Project Three</a>
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
     </div>
-  </header>
+  </div>
+</header>
   <hr>
   <!-- JS Files -->
   <script src="js/dropdown.js"></script>
@@ -451,56 +442,6 @@
                map1.touchZoomRotate.disable();
                map1.touchZoomRotate.disableRotation();
             // Disable drag and zoom handlers.
-
-        //     // 2.5.3 Then initialize the 2nd map
-        //  // Then initialize the 2nd map
-        //  var map2 = new mapboxgl.Map({
-        //  container: 'map2', // id of a div on your page, where the map will be inserted
-        //  style: 'mapbox://styles/mapbox/satellite-v9', // stylesheet location
-        //  center: [-122.9491848370618, 45.54204498307635], // starting position [lng, lat] eg. [-122.6788, 45.5212]
-        //  zoom: 12 // starting zoom 
-        //  });
-
-
-        //     // 2.5.4 Add any other variables (such as markers) to the second map
-        //     var popup2 = new mapboxgl.Popup()
-        //  .setText('This is my second point.');
-
-        //  var marker2 = new mapboxgl.Marker({color:'blue'})
-        //    .setLngLat([-122.6588, 45.1212]) // starting position [lng, lat] 
-        //    .setPopup(popup2) //add the popup to the marker 
-        //    .addTo(map2); // id it to the map with the ID *map2*
-
-        //     // 2.5.5 Add arguments to disable the second map's interactivity here
-        //              // Disable drag and zoom handlers. 
-        //  map2.dragPan.disable();
-        //  map2.scrollZoom.disable();
-        //  map2.boxZoom.disable();
-        //  map2.dragRotate.disable();
-        //  map2.keyboard.disable();
-        //  map2.doubleClickZoom.disable();
-        //  map2.touchZoomRotate.disable();
-        //  map2.touchZoomRotate.disableRotation();
-        //     // 2.6 Change the map pointers
-
-        //     var map3 = new mapboxgl.Map({
-        //  container: 'map3', // id of a div on your page, where the map will be inserted
-        //  style: 'mapbox://styles/mapbox/satellite-v9', // stylesheet location
-        //  center: [-122.91775837089844,
-        //  45.54599145163215], // starting position [lng, lat] eg. [-122.6788, 45.5212]
-        //  zoom: 13 // starting zoom 
-        //  });
-
-        //     // 2.5.5 Add arguments to disable the second map's interactivity here
-        //              // Disable drag and zoom handlers. 
-        //  map3.dragPan.disable();
-        //  map3.scrollZoom.disable();
-        //  map3.boxZoom.disable();
-        //  map3.dragRotate.disable();
-        //  map3.keyboard.disable();
-        //  map3.doubleClickZoom.disable();
-        //  map3.touchZoomRotate.disable();
-        //  map3.touchZoomRotate.disableRotation();
 
 	// Change the map pointers
 	      map1.getCanvas().style.cursor = 'auto';

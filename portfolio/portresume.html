@@ -12,43 +12,44 @@
 
     </head>
     <body>
-      <header>
-        <div class="header-container">
-          <h1> Naim Ferris</h1>
-          <div class="button-group">
-            <button type="button" onclick="window.location.href='index.html';">Home</button>
-            <!--Projects Button-->
-            <div class="dropdown">
-              <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
-              <div id="projectsDropdown" class="dropdown-content">
-                <a href="gis.html">GIS</a>
-                <a href="code.html">Code</a>
-                <a href="sample.html">Writing Samples</a>
-              </div>
-            </div>
-      
-            <!--Web Maps Button-->
-            <div class="dropdown">
-              <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
-              <div id="mapsDropdown" class="dropdown-content">
-                <a href="webmaps.html">Web Maps</a>
-                <a href="#">Project Two</a>
-                <a href="#">Project Three</a>
-              </div>
-            </div>
-      
-            <!--About Me Button-->
-            <div class="dropdown">
-              <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
-              <div id="aboutDropdown" class="dropdown-content">
-                <a href="portresume.html">Resume</a>
-                <a href="index.html#contact">Contact Info</a>
-              </div>
-            </div>
-            </div>
-          </div>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
         </div>
-      </header>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <a href="#">Project Two</a>
+          <a href="#">Project Three</a>
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
          <!--Dropdown script-->
     <script src="js/dropdown.js"></script>
     
@@ -68,16 +69,39 @@
         <h3>Introduction</h3>
         <p>I am currently a junior at the University of Oregon with a strong interest in public service and local government. My goal is to build a career that combines both qualitative and quantitative skills, allowing me to develop the core competencies essential for impactful and effective work in the public sector.</p>
     </Section>
+      <!-- featured python projects -->
+    <section class="contextsection">
+      <h2>CS 110 projects</h2>
+      <div class="horizontalcontent">
+        <a href="Python.html#turtle" class="featured-link">
+          <div class="featured">
+            <h3>Python Drawing using Turtle</h3>
+            <p>Code exemplifies the power of vectorization.</p>
+          </div>
+        </a>
+        <a href="Python.html#spacy" class="featured-link">
+          <div class="featured">
+            <h3>Text Analysis with SpaCy</h3>
+            <p>Text filtering and counting of text</p>
+          </div>
+        </a>
+        <a href="Python.html#colab" class="featured-link">
+          <div class="featured">
+            <h3>Colab visualizing data</h3>
+            <p>Code using different libraries to do basic data cleaning and charting of baby name data.</p>
+          </div>
+        </a>
+      </div>
+    </section>
     <!--Skills-->
     <section>
         <hr>
         <h3>Skills Summary</h3>
-      
         <h4>Hard Skills</h4>
         <ul>
-          <li class="featured">Proficient in Slack, Zoom, Microsoft Office, Google Suite, and ArcGIS Pro</li>
-          <li class="featured">Experienced in customer service, including phone communication and support</li>
-          <li class="featured">Adept at project management and public speaking</li>
+          <li>Proficient in Slack, Zoom, Microsoft Office, Google Suite, and ArcGIS Pro</li>
+          <li>Experienced in customer service, including phone communication and support</li>
+          <li>Adept at project management and public speaking</li>
         </ul>
       
         <h4>Soft Skills</h4>

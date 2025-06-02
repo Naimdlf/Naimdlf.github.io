@@ -1,0 +1,24 @@
+/* Styles for code section */
+.code-container {
+    background-color: #2d3748;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+    border-left: 4px solid #4299e1;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #e2e8f0;
+    display: block;
+    white-space: pre;
+}
+
+.keyword { color: #f56565; }
+.function { color: #68d391; }
+.string { color: #fbb6ce; }
+.comment { color: #a0aec0; font-style: italic; }
+.parameter { color: #90cdf4; }
