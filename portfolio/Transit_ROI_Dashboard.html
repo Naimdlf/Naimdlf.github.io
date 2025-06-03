@@ -1,0 +1,65 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="Naim Ferris">
+            <meta name="description" content="Resume">
+            <title>Naim's Transit Expenditure Dashboard - GIS</title>
+        </head>
+        <link rel="stylesheet" href="/Transit_dashboard.css">
+        <script src="js/dropdown.js"></script>
+    <body>
+        <header>
+            <h1>Transit Expenditure Dashboard</h1>
+
+            <button onclick="window.location.href='index.html';">Home</button>
+            <!--Projects Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+                <div id="projectsDropdown" class="dropdown-content">
+                <a href="gis.html">GIS</a>
+                <a href="JS.html">Java Script</a>
+                <a href="Python.html">Python</a>
+                <a href="sample.html">Writing Samples</a>
+                </div>
+            </div>
+
+            <!--Web Maps Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+                <div id="mapsDropdown" class="dropdown-content">
+                <a href="webmaps.html">Webmaps</a>
+                <a href="Transit_ROI_Dashboard.html">Transit ROI Dashboard</a>
+                <a href="#">Project Three</a>
+                </div>
+            </div>
+
+            <!--About Me Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+                <div id="aboutDropdown" class="dropdown-content">
+                <a href="portresume.html">Resume</a>
+                <a href="index.html#contact">Contact Info</a>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        </header>
+        <div class="map">
+            <h1>About this project</h1>
+            <div class="contextsection">blah blah blah</div>
+            <hr>
+        <div class="iframe-container">
+            <!-- <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button> -->
+            <iframe src="webmaps/final/transitwebmap.html"></iframe>
+        </div>
+        </div>
+
+        <footer class="shine">
+            Background image by kjpargeter https://www.freepik.com/free-photo/abstract-grunge-metal-background_4540218.htm#fromView=keyword&page=1&position=4&uuid=76124ef2-bcac-4368-978d-f5f4cc2ed226&query=Metal+Background
+        </footer>
+    </body>
+</html>

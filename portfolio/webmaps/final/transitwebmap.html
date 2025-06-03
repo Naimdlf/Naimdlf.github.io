@@ -1,0 +1,171 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Naim Ferris" />
+  <meta name="description" content="Resume" />
+  <title>Naim's Transit Dashboard Map - GIS</title>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+  <style>
+    body { margin:0; padding:0; }
+        #map {height: 700px; width: 100%;}
+
+        #togglebtn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 16;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        }
+          .panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 15;
+            padding: 1rem;
+          }
+
+          /* Shine */
+
+          .shine {
+            font-size: 14px;
+            padding: 45px 1rem;
+            font-weight: 400;
+            border: none;
+            outline: none;
+            color: #000;
+            background: linear-gradient(
+              45deg,
+              #999999 5%,
+              #c2bebe 10%,
+              #ccc 30%,
+              #979595 50%,
+              #ccc 70%,
+              #ffffff 80%,
+              #999 95%
+            );
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+          }
+          /* legond */
+             .LegendContainer {
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+     z-index: 2;
+     width: 220px;
+     height: 40px;
+     background: rgba(80, 80, 80, .75);
+     transition: width 2s, height 2s; /* this is the time it takes for the container to transition */
+     border-radius: 7px;
+     overflow: hidden;
+   }
+
+   /*  style for items with the class "descriptionPanel" when active */
+   .LegendContainer:hover {
+     width: 240px;
+     height: 240px;
+   }
+
+   /* style for items with the class "legendItem" */
+   .legendItem {
+       margin: 0px;
+       padding-left: 10px;
+       display:inline-block;
+       margin:auto;
+       transform: translate(50%, 50%);
+   }
+    
+  </style>
+</head>
+<body>
+  <div id='map'></div>
+    <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button>
+          <div class="shine w3-sidebar w3-bar-block w3-border-right panel"    style="display:none" id="mySidebar">
+            <a href="#" class="w3-bar-item w3-button">Link 1</a>
+            <a href="#" class="w3-bar-item w3-button">Link 2</a>
+            <a href="#" class="w3-bar-item w3-button">Link 3</a>
+        </div>
+        <!-- Legend Container -->
+        <div class="LegendContainer" style="padding:10px;">
+          <div class="legendItem">
+            <input type="checkbox" id="City_Labels" checked>
+            <label for="City_Labels">City Labels</label>
+          </div>
+          <div class="legendItem">
+            <input type="checkbox" id="Transit_Expendature" checked>
+            <label for="Transit_Expendature">Transit Expendature</label>
+          </div>
+          <div class="legendItem">
+            <input type="checkbox" id="Urban_Area" checked>
+            <label for="Urban_Area">Urban Area</label>
+          </div>
+          <div class="legendItem">
+            <input type="checkbox" id="Public_Transit" checked>
+            <label for="Public_Transit">Public Transit</label>
+          </div>
+          <div class="legendItem">
+            <input type="checkbox" id="Drove_Alone" checked>
+            <label for="Drove_Alone">Drove Alone</label>
+          </div>
+          <div class="legendItem">
+            <input type="checkbox" id="Vehicle_Available" checked>
+            <label for="Vehicle_Available">Vehicle Available</label>
+          </div>
+        </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+
+    // Initialize the map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/nferris1/cmazw9wbr009n01rcbd1ogveh',
+      center: [-122.679, 45.512],
+      zoom: 7
+    });
+                                  // Add search box
+                var geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl,
+                  marker: { color: 'orange' },
+                  placeholder: 'Search for places'
+                });
+                map.addControl(geocoder, 'top-right'); // Adds search box to top-left by default
+                 const nav = new mapboxgl.NavigationControl(); 
+            map.addControl(nav, 'top-right'); //change to match container and map ID.
+            // geolocator sits under controls.
+            const geolocate = new mapboxgl.GeolocateControl({
+                positionOptions: {
+                enableHighAccuracy: true
+                },
+                trackUserLocation: true,
+                showUserHeading: true
+                });
+                map.addControl(geolocate, 'top-right');
+                
+  </script>
+   <script src="panel.js"></script>
+
+</body>
+</html>
