@@ -380,14 +380,14 @@ const layers = [
   'City_Labels', 'Transit_Expendature', 'Urban_Area', 'Public_Transit', 'Drove_Alone', 'Vehicle_Available',
 ];
 
-// Go through each layer and add a click event
+// Go through each layer and add a click event. Had help from AI
 layers.forEach(function(layerID) {
   if (map.getLayer(layerID)) {
     map.on('click', layerID, function(e) {
       // Open the sidebar
       document.getElementById('mySidebar').classList.add('open');
 
-      // Get the city and state from the clicked feature
+      // Get the city and state from the clicked feature. Had help from AI
       const info = e.features[0].properties.newcity;
       const parts = info.split(',');
       const city = parts[0].trim();
