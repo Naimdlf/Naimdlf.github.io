@@ -316,3 +316,12 @@ footer {
   background-color: rgba(44, 62, 80, 0.1);
   border-radius: 8px;
 }  
+
+iframe {
+    border: none;
+    position: sticky;
+    margin: 0 auto;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}

@@ -15,13 +15,31 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
 
-
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-
   <style>
-    body { margin:0; padding:0; }
-        #map {height: 700px; width: 100%;}
+        body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          /* content does not spill out of page */
+          overflow: hidden;
+        }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        
+        #loadMapBtn {
+          position: absolute;
+          top: 45%;
+          left: 45%;
+          z-index: 9999;
+          text-align: center;
+        }
+
+        li {
+            list-style-type: none;
+            left: 0rem;
+            margin: .5rem;
+            padding-left: 1px;
+        }
 
         #togglebtn {
         position: absolute;
@@ -31,19 +49,31 @@
         padding: 0.5rem 1rem;
         cursor: pointer;
         }
-          .panel {
+        .panel {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 250px;
             height: 100%;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-            display: none;
             z-index: 15;
             padding: 1rem;
-          }
+            left: -300px;
+            transition: left 0.5s ease-in-out;
+            overflow-y: auto;     /* <-- this is the key */
+            max-height: 100vh;    /* ensures it respects the viewport height */
+        }
 
-          /* Shine */
+        hr {
+        margin: 8px 0;
+        border: 0;
+        border-top: 1px solid #000000;
+        }
+
+        /* When sidebar is open */
+        .panel.open {
+            left: 0;
+        }
+
+          /* Shine  https://ibelick.com/blog/creating-metallic-effect-with-css*/
 
           .shine {
             font-size: 14px;
@@ -67,84 +97,230 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
           }
-          /* legond */
-             .LegendContainer {
-     position: absolute;
-     bottom: 20px;
-     right: 20px;
-     z-index: 2;
-     width: 220px;
-     height: 40px;
-     background: rgba(80, 80, 80, .75);
-     transition: width 2s, height 2s; /* this is the time it takes for the container to transition */
-     border-radius: 7px;
-     overflow: hidden;
-   }
 
-   /*  style for items with the class "descriptionPanel" when active */
-   .LegendContainer:hover {
-     width: 240px;
-     height: 240px;
-   }
+   /* list styleing */
 
-   /* style for items with the class "legendItem" */
-   .legendItem {
-       margin: 0px;
-       padding-left: 10px;
-       display:inline-block;
-       margin:auto;
-       transform: translate(50%, 50%);
-   }
-    
-  </style>
+   #statesList li,
+#citiesList li,
+#agenciesList li{
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: -16px;
+}
+
+/* make darker on hover */
+#statesList li:hover,
+#citiesList li:hover,
+#agenciesList li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* menu https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers /*/
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 500;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #0e2b3f;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #748089;
+    }
+</style>
+
 </head>
 <body>
-  <div id='map'></div>
-    <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button>
-          <div class="shine w3-sidebar w3-bar-block w3-border-right panel"    style="display:none" id="mySidebar">
-            <a href="#" class="w3-bar-item w3-button">Link 1</a>
-            <a href="#" class="w3-bar-item w3-button">Link 2</a>
-            <a href="#" class="w3-bar-item w3-button">Link 3</a>
-        </div>
-        <!-- Legend Container -->
-        <div class="LegendContainer" style="padding:10px;">
-          <div class="legendItem">
-            <input type="checkbox" id="City_Labels" checked>
-            <label for="City_Labels">City Labels</label>
-          </div>
-          <div class="legendItem">
-            <input type="checkbox" id="Transit_Expendature" checked>
-            <label for="Transit_Expendature">Transit Expendature</label>
-          </div>
-          <div class="legendItem">
-            <input type="checkbox" id="Urban_Area" checked>
-            <label for="Urban_Area">Urban Area</label>
-          </div>
-          <div class="legendItem">
-            <input type="checkbox" id="Public_Transit" checked>
-            <label for="Public_Transit">Public Transit</label>
-          </div>
-          <div class="legendItem">
-            <input type="checkbox" id="Drove_Alone" checked>
-            <label for="Drove_Alone">Drove Alone</label>
-          </div>
-          <div class="legendItem">
-            <input type="checkbox" id="Vehicle_Available" checked>
-            <label for="Vehicle_Available">Vehicle Available</label>
-          </div>
-        </div>
+
+        <!-- added button to try and stop accruing raster tiles -->
+     <button id="loadMapBtn">Load Map</button>
+         <!-- map activation -->
+          <div id='map'></div>
+          <!-- menu taken from https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/ -->
+    <nav id="menu"></nav>
+
+          <!-- sidebar -->
+                  <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button>
+                  <!-- modified w3 sidebar https://www.w3schools.com/w3css/w3css_sidebar.asp -->
+                  <div class="shine w3-sidebar w3-bar-block w3-border-right panel" id="mySidebar">
+
+      <!-- a list of states that finds cities on click -->
+      <ul id="statesList">
+          <h3>States</h3>
+      <li onclick="findCities('AK')">AK</li><hr>
+      <li onclick="findCities('AL')">AL</li><hr>
+      <li onclick="findCities('AR')">AR</li><hr>
+      <li onclick="findCities('AZ')">AZ</li><hr>
+      <li onclick="findCities('CA')">CA</li><hr>
+      <li onclick="findCities('CO')">CO</li><hr>
+      <li onclick="findCities('CT')">CT</li><hr>
+      <li onclick="findCities('DE')">DE</li><hr>
+      <li onclick="findCities('FL')">FL</li><hr>
+      <li onclick="findCities('GA')">GA</li><hr>
+      <li onclick="findCities('HI')">HI</li><hr>
+      <li onclick="findCities('ID')">ID</li><hr>
+      <li onclick="findCities('IL')">IL</li><hr>
+      <li onclick="findCities('IN')">IN</li><hr>
+      <li onclick="findCities('IA')">IA</li><hr>
+      <li onclick="findCities('KS')">KS</li><hr>
+      <li onclick="findCities('KY')">KY</li><hr>
+      <li onclick="findCities('LA')">LA</li><hr>
+      <li onclick="findCities('ME')">ME</li><hr>
+      <li onclick="findCities('MD')">MD</li><hr>
+      <li onclick="findCities('MA')">MA</li><hr>
+      <li onclick="findCities('MI')">MI</li><hr>
+      <li onclick="findCities('MN')">MN</li><hr>
+      <li onclick="findCities('MS')">MS</li><hr>
+      <li onclick="findCities('MO')">MO</li><hr>
+      <li onclick="findCities('MT')">MT</li><hr>
+      <li onclick="findCities('NE')">NE</li><hr>
+      <li onclick="findCities('NV')">NV</li><hr>
+      <li onclick="findCities('NH')">NH</li><hr>
+      <li onclick="findCities('NJ')">NJ</li><hr>
+      <li onclick="findCities('NM')">NM</li><hr>
+      <li onclick="findCities('NY')">NY</li><hr>
+      <li onclick="findCities('NC')">NC</li><hr>
+      <li onclick="findCities('ND')">ND</li><hr>
+      <li onclick="findCities('OH')">OH</li><hr>
+      <li onclick="findCities('OK')">OK</li><hr>
+      <li onclick="findCities('OR')">OR</li><hr>
+      <li onclick="findCities('PA')">PA</li><hr>
+      <li onclick="findCities('RI')">RI</li><hr>
+      <li onclick="findCities('SC')">SC</li><hr>
+      <li onclick="findCities('SD')">SD</li><hr>
+      <li onclick="findCities('TN')">TN</li><hr>
+      <li onclick="findCities('TX')">TX</li><hr>
+      <li onclick="findCities('UT')">UT</li><hr>
+      <li onclick="findCities('VT')">VT</li><hr>
+      <li onclick="findCities('VA')">VA</li><hr>
+      <li onclick="findCities('WA')">WA</li><hr>
+      <li onclick="findCities('WV')">WV</li><hr>
+      <li onclick="findCities('WI')">WI</li><hr>
+      <li onclick="findCities('WY')">WY</li><hr>
+    </ul>
+
+      <!-- from cities back to states -->
+      <button id="backBtn" style="
+        display:none; 
+        position: absolute;
+        top: 10px;
+        left: 150px;
+        z-index: 16;
+        padding: 0.5rem 1rem;
+        cursor: pointer;" onclick="showStates()">Back to States</button>
+      <h3 id="cityStateHeader" style="display:none;"></h3>
+
+      <!-- cities list -->
+      <ul id="citiesList"></ul>
+
+      <!-- agency list back to cities -->
+      <button id="backToCitiesBtn" style="
+        display:none; 
+        position: absolute;
+        top: 10px;
+        left: 150px;
+        z-index: 16;
+        padding: 0.5rem 1rem;
+        cursor: pointer;" onclick="showCities()">Back to Cities</button>
+      <h3 id="agencyHeader" style="display:none; "></h3>
+
+      <!-- agencies list -->
+      <ul id="agenciesList"></ul>
+      
+      <!-- back to agencies -->
+        <button id="backToAgencyBtn" style="
+        display:none; 
+        position: absolute;
+        top: 10px;
+        left: 150px;
+        z-index: 16;
+        padding: 0.5rem 0.8rem;
+        cursor: pointer;" onclick="showAgencies(currentCity)">Back to Agencies</button>
+        <h3 id="detailHeader" style="display:none;"></h3>
+
+      <!-- agancies details -->
+      <ul id="detailList"></ul>
+
+    </div>
+
+
+      </div>
+        
+      </div>
+
+    </div>
 
   <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+    // sets layer ids
+            // layer class Key-Value Pairs https://www.w3schools.com/js/js_objects.asp
+        const LayerGroups = {
+        'Drove_Alone': ['Drove_Alone', 'Drove_Alone_Point'],
+        'Transit_Expendature': ['Transit_Expendature', 'Transit_Expendature_Point'],
+        'Urban_Area': ['Urban_Area', 'Urban_Area_Point'],
+        'Public_Transit': ['Public_Transit', 'Public_Transit_Point'],
+        'Drove_Alone': ['Drove_Alone', 'Drove_Alone_Point'],
+        'Vehicle_Available': ['Vehicle_Available', 'Vehicle_Available_Point']
+      };
 
+    //Mapboxtoken
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmZlcnJpczEiLCJhIjoiY205MzFhY3FpMGhzeTJrbXZxb2QzYndlbCJ9.2FrPZ5kK71BdYn76-w1JQQ';
+    
+    // stops the map from being displayed until it is actively loaded in
+    document.getElementById('loadMapBtn').onclick = function() {
+    document.getElementById('map').style.display = 'block';
+    // Bounds around US
+    var bounds = [
+      [-156.1356, 16.7612], // Southwest (lon, lat)
+      [-20.8824, 71.6334]   // Northeast (lon, lat)
+    ];
+    // filter group
+    const filterGroup = document.getElementById('filter-group');
     // Initialize the map
     var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/nferris1/cmazw9wbr009n01rcbd1ogveh',
+      style: 'mapbox://styles/nferris1/cmbp6qyko003701rl0rmsflfo',
       center: [-122.679, 45.512],
-      zoom: 7
+        zoom: 7, 
+        minZoom: 3,   
+        maxZoom: 10,
+      maxBounds: bounds
     });
-                                  // Add search box
+    // stops rotation
+    map.dragRotate.disable();
+    map.touchZoomRotate.disableRotation();
+
+                // Add search box https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
                 var geocoder = new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
                 mapboxgl: mapboxgl,
@@ -152,9 +328,10 @@
                   placeholder: 'Search for places'
                 });
                 map.addControl(geocoder, 'top-right'); // Adds search box to top-left by default
+
                  const nav = new mapboxgl.NavigationControl(); 
             map.addControl(nav, 'top-right'); //change to match container and map ID.
-            // geolocator sits under controls.
+            // geolocator sits under controls. https://docs.mapbox.com/mapbox-gl-js/example/locate-user/
             const geolocate = new mapboxgl.GeolocateControl({
                 positionOptions: {
                 enableHighAccuracy: true
@@ -164,8 +341,72 @@
                 });
                 map.addControl(geolocate, 'top-right');
                 
-  </script>
-   <script src="panel.js"></script>
+    // hides the button after map load
+    this.style.display = 'none'; 
 
+// when mapbox loads add toggle menu links
+map.on('load', () => {
+      // had AI explain this and then I modified a little: Add layer toggle menu links https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers grabs our layers grouped with a raster and a vector.
+      for (const group in LayerGroups) {
+        if (document.getElementById(group)) continue;
+
+        // this creates an <a> link grabs the group and sets css class to on. 
+        const link = document.createElement('a');
+        link.id = group;
+        link.href = '#';
+        link.textContent = group;
+        link.className = 'active';
+          // when we click a link this function runs
+        link.onclick = function (e) {
+          // this stops the link from refreshing the page
+          e.preventDefault();
+          e.stopPropagation();
+          //loops through for each of the layerId
+          LayerGroups[group].forEach(layerId => {
+            // if the layer is visable then we skip it.
+            if (!map.getLayer(layerId)) return;
+            const visibility = map.getLayoutProperty(layerId, 'visibility');
+            // visibility can = none or visible
+            map.setLayoutProperty(layerId, 'visibility', visibility === 'visible' ? 'none' : 'visible');
+            this.className = visibility === 'visible' ? '' : 'active';
+          });
+        };
+
+        document.getElementById('menu').appendChild(link);
+      }
+
+// List of all the map layers we want to add a click event to
+const layers = [
+  'City_Labels', 'Transit_Expendature', 'Urban_Area', 'Public_Transit', 'Drove_Alone', 'Vehicle_Available',
+];
+
+// Go through each layer and add a click event
+layers.forEach(function(layerID) {
+  if (map.getLayer(layerID)) {
+    map.on('click', layerID, function(e) {
+      // Open the sidebar
+      document.getElementById('mySidebar').classList.add('open');
+
+      // Get the city and state from the clicked feature
+      const info = e.features[0].properties.newcity;
+      const parts = info.split(',');
+      const city = parts[0].trim();
+      const state = parts[1] ? parts[1].trim() : '';
+
+      // Load the city and agency info
+      findCities(state);
+      showAgencies(city);
+        });
+      }
+    }); 
+  });
+
+};
+
+  </script>
+                  <!-- w3schools for the start of the side -->
+              <script src="panel.js"></script>
+                            <!-- sidebar JS -->
+              <script src="sidebar.js"></script>
 </body>
 </html>
