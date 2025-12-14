@@ -123,8 +123,9 @@ button:hover, button:focus {
 
 /* Filter CSS */
 .filterDiv {
+  flex: 0 1 150px;
   background-color: transparent;
-  float: left;
+  float: 0 0 auto;
   color: #ffffff;
   margin: 5px;
   display: none;
@@ -141,6 +142,13 @@ button:hover, button:focus {
   filter: grayscale(0%);
 }
 
+.filterDiv img {
+  width: auto;              /* fill the flex item */
+  height: 160px;            /* fixed height for consistent rows */
+  border-radius: 8px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
 #imagePreviewSection {
   transition: all 0.4s ease;
 }
@@ -151,12 +159,11 @@ button:hover, button:focus {
 
 .gissection {
   padding: 15px;
-  display: inline-flex; /*https://stackoverflow.com/questions/49703014/arrange-images-having-different-heights-in-a-grid*/
-  flex-direction: column;
+  display: flex; /*https://stackoverflow.com/questions/49703014/arrange-images-having-different-heights-in-a-grid*/
+  /* grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); */
   flex-wrap: wrap;
-  height: 850px;
-   /*places all items in the container*/
-  z-index: 999;
+  justify-content: center;
+  align-items: flex-start;
   border-radius: 8px; /* Maintain rounded corners on the container */
 }
 
@@ -325,3 +332,26 @@ iframe {
     width: 100%;
     z-index: 10;
 }
+
+/* Hide filter bar when image preview is open */
+#myBtnContainer {
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  transition: transform 0.4s ease, height 1.4s ease;
+}
+
+.preview-open #myBtnContainer {
+  opacity: 0;
+  transform: translateY(-10px);
+  height: 0;
+  pointer-events: none;
+}
+
+.full-width-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px; /* optional padding */
+}
+

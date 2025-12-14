@@ -1,4 +1,8 @@
 //https://www.w3schools.com/howto/howto_js_filter_elements.asp
+
+ // store currently previewed image globally
+ var currentImagesrc = "";
+
 filterSelection("all")
 function filterSelection(c) {
     var x, i;
@@ -52,18 +56,33 @@ function showLargeImage(imgElement) {
     var mapDescription = document.getElementById("mapDescription");  // The paragraph to display the description
     var gridSection = document.querySelector(".gissection");
 
+    currentImagesrc = imgElement.src;
+
     // Set the source of the image in the preview
     previewImage.src = imgElement.src; 
 
     // Get the description from the corresponding <p> tag
     var description = imgElement.nextElementSibling.textContent; //https://www.w3schools.com/jsref/prop_element_nextelementsibling.asp
 
-    // Set the description in the preview section
+    // Get the description FIRST
+    var description = imgElement.nextElementSibling.textContent;
+
+    // Set image
+    previewImage.src = imgElement.src;
+
+    // Set accessible text
+    previewImage.alt = "Enlarged map view. " + imgElement.alt;
+
+    // Update description panel
     mapDescription.textContent = description;
 
+
+    
     // Show the preview section and hide the grid
     previewSection.style.display = "block"; 
     gridSection.style.display = "none"; 
+
+    document.body.classList.add("preview-open");
 }
 
 
@@ -75,7 +94,16 @@ function closePreview() {
     previewSection.style.display = 'none';
 
     // Show the image grid section
-    gridSection.style.display = "block";
+    gridSection.style.display = "flex";
+    document.body.classList.remove("preview-open");
+}
+
+function downloadbtn() {
+    // Find the original anchor tag associated with the clicked image
+    const link = document.createElement("a");
+    link.href = currentImagesrc;
+    link.download = currentImagesrc.split("/").pop();
+    link.click();
 }
 
   
