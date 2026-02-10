@@ -124,7 +124,7 @@
         bottom: 10px;
         right: 10px;
         border-radius: 3px;
-        width: 120px;
+        width: 170px;
         border: 1px solid rgba(0, 0, 0, 0.4);
         font-family: 'Open Sans', sans-serif;
     }
@@ -134,18 +134,17 @@
         color: #404040;
         display: block;
         margin: 0;
-        padding: 0;
         padding: 10px;
         text-decoration: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        text-align: center;
+        text-align: left;
     }
 
-    #menu a:last-child {
+    /* #menu a:last-child {
         border: none;
-    }
+    } */
 
-    #menu a:hover {
+    /* #menu a:hover {
         background-color: #f8f8f8;
         color: #404040;
     }
@@ -153,11 +152,38 @@
     #menu a.active {
         background-color: #0e2b3f;
         color: #ffffff;
+    } */
+
+        #menu a.active::after {
+      content: " ✓";
+      font-weight: bold;
+      margin-left: auto;
     }
 
-    #menu a.active:hover {
-        background: #748089;
+        #menu a.legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+
+          .legend-swatch {
+        width: 12px;
+        height: 12px;
+        min-width: 12px;
+        min-height: 12px;
+        border: 1px solid #000;
+        box-sizing: border-box;
+      }
+          #menu-title {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 6px;
+      background: #eee;
+      border-bottom: 1px solid #ccc;
+    }
+
+
+
 </style>
 
 </head>
@@ -168,7 +194,8 @@
          <!-- map activation -->
           <div id='map'></div>
           <!-- menu taken from https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/ -->
-    <nav id="menu"></nav>
+    <nav id="menu"><div id="menu-title">Urban Areas (base layer)</div></nav>
+
 
           <!-- sidebar -->
                   <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button>
@@ -230,6 +257,7 @@
       <li onclick="findCities('WY')">WY</li><hr>
     </ul>
 
+
       <!-- from cities back to states -->
       <button id="backBtn" style="
         display:none; 
@@ -279,7 +307,6 @@
         
       </div>
 
-    </div>
 
   <script>
     // sets layer ids
@@ -287,10 +314,11 @@
         const LayerGroups = {
         'Drove_Alone': ['Drove_Alone', 'Drove_Alone_Point'],
         'Transit_Expendature': ['Transit_Expendature', 'Transit_Expendature_Point'],
-        'Urban_Area': ['Urban_Area', 'Urban_Area_Point'],
+        // 'Urban_Area': ['Urban_Area', 'Urban_Area_Point'],
         'Public_Transit': ['Public_Transit', 'Public_Transit_Point'],
-        'Drove_Alone': ['Drove_Alone', 'Drove_Alone_Point'],
-        'Vehicle_Available': ['Vehicle_Available', 'Vehicle_Available_Point']
+        'Vehicle_Available': ['Vehicle_Available', 'Vehicle_Available_Point'],
+        'Population': ['Population', 'data-driven-circles']
+
       };
 
     //Mapboxtoken
@@ -305,7 +333,7 @@
       [-20.8824, 71.6334]   // Northeast (lon, lat)
     ];
     // filter group
-    const filterGroup = document.getElementById('filter-group');
+    // const filterGroup = document.getElementById('filter-group');
     // Initialize the map
     var map = new mapboxgl.Map({
       container: 'map',
@@ -346,39 +374,86 @@
 
 // when mapbox loads add toggle menu links
 map.on('load', () => {
+                // force layers off on load.
+          for (const group in LayerGroups) {
+      LayerGroups[group].forEach(layerId => {
+        if (map.getLayer(layerId)) {
+          map.setLayoutProperty(layerId, 'visibility', 'none');
+        }
+      });
+    }
+            // makes it so urban areas are on by defualt
+        ['Urban_Area', 'Urban_Area_Point'].forEach(layerId => {
+        if (map.getLayer(layerId)) {
+          map.setLayoutProperty(layerId, 'visibility', 'visible');
+        }
+      });
       // had AI explain this and then I modified a little: Add layer toggle menu links https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers grabs our layers grouped with a raster and a vector.
-      for (const group in LayerGroups) {
-        if (document.getElementById(group)) continue;
+            for (const group in LayerGroups) {
+              if (document.getElementById(group)) continue;
 
-        // this creates an <a> link grabs the group and sets css class to on. 
-        const link = document.createElement('a');
-        link.id = group;
-        link.href = '#';
-        link.textContent = group;
-        link.className = 'active';
+              // this creates an <a> link grabs the group and sets css class to on. 
+              const link = document.createElement('a');
+              link.id = group;
+              link.href = '#';
+                link.classList.add('legend-item');
+
+      const swatch = document.createElement('span');
+      swatch.className = 'legend-swatch';
+
+      // TEMP color mapping (you should align with your map style)
+      const layerColors = {
+        Transit_Expendature: '#1f78b4',
+        Urban_Area: '#33a02c',
+        Public_Transit: '#e31a1c',
+        Drove_Alone: '#ff7f00',
+        Vehicle_Available: '#6a3d9a',
+        Population: '#33a02c'
+      };
+
+      
+      swatch.style.backgroundColor = layerColors[group] || '#999';
+
+      link.appendChild(swatch);
+      link.appendChild(document.createTextNode(group));
+
           // when we click a link this function runs
-        link.onclick = function (e) {
-          // this stops the link from refreshing the page
-          e.preventDefault();
-          e.stopPropagation();
-          //loops through for each of the layerId
-          LayerGroups[group].forEach(layerId => {
-            // if the layer is visable then we skip it.
-            if (!map.getLayer(layerId)) return;
-            const visibility = map.getLayoutProperty(layerId, 'visibility');
-            // visibility can = none or visible
-            map.setLayoutProperty(layerId, 'visibility', visibility === 'visible' ? 'none' : 'visible');
-            this.className = visibility === 'visible' ? '' : 'active';
+              link.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // turn everything off
+        for (const otherGroup in LayerGroups) {
+          LayerGroups[otherGroup].forEach(layerId => {
+            if (map.getLayer(layerId)) {
+              map.setLayoutProperty(layerId, 'visibility', 'none');
+            }
           });
-        };
+
+          const otherLink = document.getElementById(otherGroup);
+          if (otherLink) otherLink.classList.remove('active');
+        }
+
+        // turn selected group on
+        LayerGroups[group].forEach(layerId => {
+          if (map.getLayer(layerId)) {
+            map.setLayoutProperty(layerId, 'visibility', 'visible');
+          }
+        });
+
+        this.classList.add('active');
+      };
+
 
         document.getElementById('menu').appendChild(link);
       }
 
 // List of all the map layers we want to add a click event to
 const layers = [
-  'City_Labels', 'Transit_Expendature', 'Urban_Area', 'Public_Transit', 'Drove_Alone', 'Vehicle_Available',
+  'City_Labels', 'Transit_Expendature', 'Urban_Area', 'Public_Transit', 'Drove_Alone', 'Vehicle_Available', 'Population'
 ];
+
+
 
 // Go through each layer and add a click event. Had help from AI
 layers.forEach(function(layerID) {
