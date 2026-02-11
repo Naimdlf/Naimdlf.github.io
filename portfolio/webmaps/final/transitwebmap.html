@@ -100,21 +100,26 @@
 
    /* list styleing */
 
-   #statesList li,
-#citiesList li,
-#agenciesList li{
-  cursor: pointer;
-  padding: 6px 10px;
-  transition: background-color 0.2s ease-in-out;
-  margin-left: -16px;
-}
+    #statesList li,
+    #citiesList li,
+    #agenciesList li{
+      cursor: pointer;
+      padding: 6px 10px;
+      transition: background-color 0.2s ease-in-out;
+      margin-left: -16px;
+    }
 
-/* make darker on hover */
-#statesList li:hover,
-#citiesList li:hover,
-#agenciesList li:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
+    /* make darker on hover */
+    #statesList li:hover,
+    #citiesList li:hover,
+    #agenciesList li:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* make mouse pointer when clicking polygon to open sidebar */
+    #click:hover, #layerID:hover, #layers:hover {
+      cursor:pointer
+    }
 
 /* menu https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers /*/
     #menu {
@@ -329,7 +334,7 @@
     document.getElementById('map').style.display = 'block';
     // Bounds around US
     var bounds = [
-      [-156.1356, 16.7612], // Southwest (lon, lat)
+      [-186.1356, 16.7612], // Southwest (lon, lat)
       [-20.8824, 71.6334]   // Northeast (lon, lat)
     ];
     // filter group
@@ -337,13 +342,14 @@
     // Initialize the map
     var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/nferris1/cmbp6qyko003701rl0rmsflfo',
+      style: 'mapbox://styles/nferris1/cmlh8kr89000u01skddvrcye5',
       center: [-122.679, 45.512],
         zoom: 7, 
         minZoom: 3,   
         maxZoom: 10,
       maxBounds: bounds
     });
+
     // stops rotation
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
@@ -383,7 +389,7 @@ map.on('load', () => {
       });
     }
             // makes it so urban areas are on by defualt
-        ['Urban_Area', 'Urban_Area_Point'].forEach(layerId => {
+        ['Urban_Area', 'Urban_Area_Point', 'Public_Transit', 'Public_Transit_Point'].forEach(layerId => {
         if (map.getLayer(layerId)) {
           map.setLayoutProperty(layerId, 'visibility', 'visible');
         }
@@ -401,14 +407,14 @@ map.on('load', () => {
       const swatch = document.createElement('span');
       swatch.className = 'legend-swatch';
 
-      // TEMP color mapping (you should align with your map style)
+      //map colors
       const layerColors = {
-        Transit_Expendature: '#1f78b4',
+        Transit_Expendature: '#7CFC00',
         Urban_Area: '#33a02c',
-        Public_Transit: '#e31a1c',
+        Public_Transit: '#6a3d9a',
         Drove_Alone: '#ff7f00',
-        Vehicle_Available: '#6a3d9a',
-        Population: '#33a02c'
+        Vehicle_Available: '#87CEEB',
+        Population: '#FFC000'
       };
 
       
@@ -462,6 +468,7 @@ layers.forEach(function(layerID) {
       // Open the sidebar
       document.getElementById('mySidebar').classList.add('open');
 
+
       // Get the city and state from the clicked feature. Had help from AI
       const info = e.features[0].properties.newcity;
       const parts = info.split(',');
@@ -472,11 +479,19 @@ layers.forEach(function(layerID) {
       findCities(state);
       showAgencies(city);
         });
-      }
-    }); 
+      };
+
+      // Pointer effect on hover https://docs.mapbox.com/mapbox-gl-js/example/polygon-popup-on-click/
+  map.on('mouseenter', layerID, () => {
+    map.getCanvas().style.cursor = 'pointer';
   });
 
-};
+  map.on('mouseleave', layerID, () => {
+    map.getCanvas().style.cursor = '';
+  });
+});
+})
+    }
 
   </script>
                   <!-- w3schools for the start of the side -->
