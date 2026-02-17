@@ -14,7 +14,7 @@
 
       <!-- Load the `mapbox-gl-geocoder` plugin. -->
       <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
-      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css"> -->
+      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
 
 
     <style>
@@ -328,7 +328,7 @@
 
       //Mapboxtoken
       mapboxgl.accessToken = MAPBOX_TOKEN;
-      console
+
       // stops the map from being displayed until it is actively loaded in
       document.getElementById('loadMapBtn').onclick = function() {
       document.getElementById('map').style.display = 'block';
@@ -505,7 +505,7 @@
           document.getElementById('menu').appendChild(link);
       }
 
-                  // map click logic
+      // map click logic
       map.on('click', 'id', (e) => {
         const feature = e.features[0];
         if (!feature) return;
@@ -613,7 +613,7 @@
 
 
     </script>
-         <script src="sidebar/panel.js"></script>
+         <script src="panel.js"></script>
          <link rel="stylesheet" href="sidebar/sidebar.css">
          
   </body>
