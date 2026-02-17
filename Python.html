@@ -1,0 +1,251 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Naim Ferris">
+    <meta name="description" content="Resume">
+    <title>Naim's Portfolio - GIS</title>
+    <!--CSS Link-->
+     <link rel="stylesheet" href="styles.css">
+         <!--copied from GE Aye CSS-->
+     <link rel="stylesheet" href="codestyle.css">
+</head>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <!-- <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a> -->
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+<body>
+
+        <!-- Dropdown script -->
+    <script src="js/dropdown.js"></script>
+
+    <!--header script-->
+    <script src="js/minimizeheader.js"></script>
+
+    <br>
+    <section>
+    <h2>Page Context</h2>
+    <section class="contextsection">The bellow projects where coded at The University or Oregon in 2025. Most of it was programed in CS 110. Many had some degree of starter code.</section>
+  </section>
+
+  <!-- <hr id="turtle"> -->
+  <section>
+  <section>
+    <h2>Turtle</h2>
+    This project is about creating a graphical scene using Python’s Turtle graphics module. I used the provided building block functions (draw_rectangle, draw_square, draw_triangle, draw_circle, draw_polygon, draw_curve, etc.) to create functions that draw composite shapes such as a house, sun, trees, etc. Code is vectorized meaning that is arrays as opposed to explicit python loops
+  </section>
+
+  <section>
+    <h2>Sample Code</h2>
+    <p>
+            This function creates a oval cloud shape using multiple overlapping circles. The parameters allow for flexible positioning and scaling:
+            <br><br>
+            • <strong>t</strong>: The Turtle object used to draw<br>
+            • <strong>radius_x</strong>: Horizontal radius (width) of the oval<br>
+            • <strong>radius_y</strong>: Vertical radius (height) of the oval<br>
+            • <strong>fill_color</strong> Fills the oval with the specified color
+        </p>
+            <!--code container copied from GE Aye CSS-->
+        <div class="code-container">
+    <code><span class="keyword">def</span> <span class="function">draw_oval</span>(<span class="parameter">t</span>, <span class="parameter">radius_x</span>, <span class="parameter">radius_y</span>, <span class="parameter">fill_color</span>=<span class="string">None</span>):<br>
+    <span class="comment">"""Draw an oval centered at the turtle's current position"""</span><br>
+    <span class="keyword">if</span> <span class="parameter">fill_color</span>:<br>
+        <span class="parameter">t</span>.<span class="function">fillcolor</span>(<span class="parameter">fill_color</span>)<br>
+        <span class="parameter">t</span>.<span class="function">begin_fill</span>()<br>
+    <span class="comment"># Save starting position</span><br>
+    <span class="comment"># middle of the oval</span><br>
+    <span class="parameter">center_x</span>, <span class="parameter">center_y</span> = <span class="parameter">t</span>.<span class="function">xcor</span>(), <span class="parameter">t</span>.<span class="function">ycor</span>()<br>
+    <span class="comment"># picks up the pen</span><br>
+    <span class="parameter">t</span>.<span class="function">penup</span>()<br>
+    <span class="comment"># makes a full circle </span><br>
+    <span class="keyword">for</span> <span class="parameter">angle</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">361</span>):<br>
+        <span class="comment"># Convert degrees to radians and compute oval coordinates</span><br>
+        <span class="parameter">x</span> = <span class="parameter">center_x</span> + <span class="parameter">radius_x</span> * <span class="function">math.cos</span>(<span class="function">math.radians</span>(<span class="parameter">angle</span>))<br>
+        <span class="parameter">y</span> = <span class="parameter">center_y</span> + <span class="parameter">radius_y</span> * <span class="function">math.sin</span>(<span class="function">math.radians</span>(<span class="parameter">angle</span>))<br>
+        <span class="keyword">if</span> <span class="parameter">angle</span> == <span class="number">0</span>:<br>
+            <span class="parameter">t</span>.<span class="function">goto</span>(<span class="parameter">x</span>, <span class="parameter">y</span>)<br>
+            <span class="parameter">t</span>.<span class="function">pendown</span>()<br>
+        <span class="keyword">else</span>:<br>
+            <span class="parameter">t</span>.<span class="function">goto</span>(<span class="parameter">x</span>, <span class="parameter">y</span>)</code>
+    </div>
+  </section>
+
+  <section>
+    <h2>Final Scene</h2>
+    Here's the completed turtle graphics scene featuring a house with colorful house, clouds, and sun:
+
+    <br>
+    <br>
+
+    <img src="photos/project5.png" alt="The scene combines multiple composite shapes created from basic turtle graphics functions. The house uses rectangles and triangles. The clouds demonstrate the stretching technique shown in the code sample above, and the overall composition creates a colorful, pastoral scene." style="width: 100%;">
+
+    <button><a href="py/project5.py" download style="color: rgb(46, 46, 46);">Download Project</a></button>
+  </section>
+  </section>
+  
+    <!-- <hr id="spacy"> -->
+    <section>
+    <section>
+        <h2>Advanced Text Analysis with SpaCy</h2>
+        In this project I learned how to make a virtual environment in VScode, install python libraries, and apply text analysis techniques. This includes text cleaning and using SpaCy to obtain meaningful word frequency results.
+    </section>
+
+    <section>
+                <h2>Code Example: Word Tokenization and Normalization</h2>
+        <p>
+            This function processes input text to normalize similar words by converting to lowercase, removing punctuation, numbers, and very short words. If a word passes the tests it is determined to be part of words_normalized and this is returned by the function:<br><br>
+            • <strong>text</strong>: The input string to process<br>
+            • Converts all text to lowercase to standardize<br>
+            • Uses a SpaCy <code>nlp</code> model (loaded externally) to tokenize and analyze text<br>
+            • Filters out newline chars, punctuation, numbers, and words shorter than 3 characters<br>
+            • Turns remaining words to their base forms<br>
+            • Returns a list of normalized words
+        </p>
+        <!--code container copied from GE Aye CSS-->
+    <div class="code-container">
+        <code>
+        <span class="keyword">def</span> <span class="function">word_tokenization_normalization</span>(<span class="parameter">text</span>):<br>
+            <span class="comment"># Convert all text to lowercase to standardize</span><br>
+            <span class="parameter">text</span> = <span class="parameter">text</span>.lower()<br>
+            <span class="comment"># Process text using SpaCy NLP model</span><br>
+            <span class="parameter">doc</span> = nlp(<span class="parameter">text</span>)<br>
+            <br>
+            <span class="parameter">words_normalized</span> = []<br>
+            <span class="keyword">for</span> <span class="parameter">word</span> <span class="keyword">in</span> <span class="parameter">doc</span>:<br>
+                <span class="comment"># Filter out newlines, punctuation, numbers, short words</span><br>
+                <span class="keyword">if</span> <span class="parameter">word</span>.text != <span class="string">'\n'</span> <span class="keyword">and</span> <span class="keyword">not</span> <span class="parameter">word</span>.is_stop <br>
+                    <span class="keyword">and</span> <span class="keyword">not</span> <span class="parameter">word</span>.is_punct <span class="keyword">and</span> <span class="keyword">not</span> <span class="parameter">word</span>.like_num <span class="keyword">and</span> <span class="function">len</span>(<span class="parameter">word</span>.text.strip()) &gt; <span class="number">2</span>:<br>
+                    <span class="comment"># Lemmatize to base form</span><br>
+                    <span class="parameter">word_lemmatized</span> = <span class="function">str</span>(<span class="parameter">word</span>.lemma_)<br>
+                    <span class="parameter">words_normalized</span>.append(<span class="parameter">word_lemmatized</span>)<br>
+            <br>
+            <span class="keyword">return</span> <span class="parameter">words_normalized</span>
+        </code>
+    </div>
+    </section>
+    <section>
+            <h2>Output</h2>
+        <p>
+            Here's the final output after analyzing George Orwell's 1946 article <em>"Why I Write"</em>:
+        </p>
+
+        <img src="photos/project6.png" alt="Terminal output showing each word with its number of occurrences." style="width: 100%;">
+        <button><a href="Text/requirements.txt" download style="color: rgb(46, 46, 46);">Download Requirements</a></button>
+        <button><a href=".venv/project6.py" download style="color: rgb(46, 46, 46);">Download Project</a></button>
+    </section>
+            
+    </section>
+    </section>
+    <!-- <hr id="colab"> -->
+    <section>
+    <section>
+                <h2>Exploring a Dataset using Pandas, Matplotlib, Seaborn</h2>
+                In a google Colab we explored how to visualize data. We also got to select and import a real world dataset (in my case NYC baby names). 
+    </section>
+    <section>
+                <h2>Sample Code</h2>
+        <p>
+            This script analyzes baby name data from the year 2011, identifies the most popular name, and visualizes the top 50 names using a bar chart:
+            <br><br>
+            • Filters the dataset for births in 2011<br>
+            • Groups by name and sums counts<br>
+            • Sorts and selects the top name<br>
+            • Visualizes the top 50 names with seaborn
+        </p>
+        <div class="code-container">
+        <code>
+        <span class="comment"># Filter the DataFrame for the year 2011</span><br>
+        <span class="parameter">df_2011</span> = <span class="parameter">df</span>[<span class="parameter">df</span>['Year of Birth'] == <span class="number">2011</span>]<br><br>
+
+        <span class="comment"># Group by name and sum the counts</span><br>
+        <span class="parameter">name_total_counts_2011</span> = <span class="parameter">df_2011</span>.<span class="function">groupby</span>("Child's First Name")['Count'].<span class="function">sum</span>()<br><br>
+
+        <span class="comment"># Sort and get the most popular name</span><br>
+        <span class="parameter">most_popular_name_2011</span> = <span class="parameter">name_total_counts_2011</span>.<span class="function">sort_values</span>(<span class="parameter">ascending</span>=<span class="literal">False</span>).<span class="function">index</span>[<span class="number">0</span>]<br>
+        <span class="parameter">most_popular_name_count_2011</span> = <span class="parameter">name_total_counts_2011</span>.<span class="function">sort_values</span>(<span class="parameter">ascending</span>=<span class="literal">False</span>).<span class="function">iloc</span>[<span class="number">0</span>]<br><br>
+
+        <span class="comment"># Print the result</span><br>
+        <span class="function">print</span>(<span class="string">f"The most popular baby name in 2011 is '{most_popular_name_2011}' with {most_popular_name_count_2011} occurrences."</span>)<br><br>
+
+        <span class="comment"># Visualize the top 50 names</span><br>
+        <span class="parameter">n</span> = <span class="number">50</span><br>
+        <span class="parameter">top_names_2011</span> = <span class="parameter">name_total_counts_2011</span>.<span class="function">sort_values</span>(<span class="parameter">ascending</span>=<span class="literal">False</span>).<span class="function">head</span>(<span class="parameter">n</span>)<br><br>
+
+        <span class="function">plt.figure</span>(<span class="parameter">figsize</span>=(<span class="number">12</span>, <span class="number">6</span>))<br>
+        <span class="function">sns.barplot</span>(<span class="parameter">x</span>=<span class="parameter">top_names_2011.index</span>, <span class="parameter">y</span>=<span class="parameter">top_names_2011.values</span>, <span class="parameter">hue</span>=<span class="parameter">top_names_2011.index</span>, <span class="parameter">palette</span>=<span class="string">'viridis'</span>, <span class="parameter">legend</span>=<span class="literal">False</span>)<br>
+        <span class="function">plt.title</span>(<span class="string">f'Top {n} Most Popular Baby Names in 2011 (Total Count)'</span>)<br>
+        <span class="function">plt.xlabel</span>(<span class="string">'Baby Name'</span>)<br>
+        <span class="function">plt.ylabel</span>()</span></code></div>
+    </section>
+
+    <section>
+        <h2>Chart</h2>
+         My research question was who had the most popular baby name in 2011. We created a chart using import pandas as pd, matplotlib.pyplot as plt, and seaborn as sns:
+        
+
+        <img src="photos/project7.png" alt="output reads 'The most popular baby name in 2011 is 'JAYDEN' with 5328 occurrences.' chart sits under output with header reading top 50 most popular baby names in 2011 (total Count). The top result is Jayden with other 5000 occurrences on the bar graph" style="width: 80%;">
+
+        <br>
+        <button><a href="/portfolio/py/project7.html" style="color: rgb(46, 46, 46);">Open CoLab</a></button>
+        <button><a href="csv/Popular_Baby_Names.csv" download style="color: rgb(46, 46, 46);">Download CSV</a></button>
+
+    </section>
+    </section>
+
+    
+
+    </section>
+        <footer class="footer-attribution">
+        <p>© 2025 Naim Ferris |</p>
+        <p>
+        Header background image by 
+        <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+        transferred by 
+        <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+        <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+        </p>
+        <p>
+        <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+        </p>
+        <p>
+        Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+        </p>
+  </section>
+  </footer>
+</body>

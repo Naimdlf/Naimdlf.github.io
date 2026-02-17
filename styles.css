@@ -1,0 +1,357 @@
+/* Author: Naim Ferris */
+
+/* Reset & Global Styles */
+* { /* https://www.w3schools.com/cssref/sel_all.php */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /*http://w3schools.com/css/css3_box-sizing.asp*/
+}
+
+/* Background Image Overlay Taken from https://ayethuzaruo.github.io/110-s25-project2-demo1/*/
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(photos/vecteezy_abstract-gradient-green-blue-liquid-wave-background_22013980.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  margin: 0 auto;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-image: url(photos/HillsboroDowntownMtHoodcopy.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: visible;
+  border-radius: 8px;
+  transition: all .8s ease;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  filter: blur(1px);
+  z-index: 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 10px;
+  position: relative;
+  z-index: 5;
+  flex-wrap: wrap;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Buttons starter taken from https://www.w3schools.com/tags/tag_button.asp */
+button { 
+  background: linear-gradient(135deg, #3498db, #2ecc71); /*https://www.youtube.com/watch?v=4kWHW7da4U8*/
+  color: white;
+  padding: 10px 18px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all .8s ease;
+}
+
+button:hover, button:focus {
+  background: linear-gradient(135deg, #2980b9, #27ae60);
+  transform: scale(1.03);
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Toggle dropdown */
+.show {
+  display: block;
+}
+
+/* Read more button */
+#more, #more1, #more2, #more3 {display: none;}
+
+/* Filter CSS */
+.filterDiv {
+  flex: 0 1 150px;
+  background-color: transparent;
+  float: 0 0 auto;
+  color: #ffffff;
+  margin: 5px;
+  display: none;
+  opacity: 1;
+  border-radius: 8px;
+  max-width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: grayscale(70%);
+}
+
+.filterDiv:hover {
+  transform: scale(1.10);
+  filter: grayscale(0%);
+}
+
+.filterDiv img {
+  width: auto;              /* fill the flex item */
+  height: 160px;            /* fixed height for consistent rows */
+  border-radius: 8px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#imagePreviewSection {
+  transition: all 0.4s ease;
+}
+
+.show {
+  display: block;
+}
+
+.gissection {
+  padding: 15px;
+  display: flex; /*https://stackoverflow.com/questions/49703014/arrange-images-having-different-heights-in-a-grid*/
+  /* grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 8px; /* Maintain rounded corners on the container */
+}
+
+.contextsection {
+  background: linear-gradient(#297fb955, #8abbeb40);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Style the buttons */
+.btn {
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #666;
+}
+
+.btn.active {
+  background-color: #666;
+
+}
+
+/* from CS 110 class template modified taken from https://ayethuzaruo.github.io/110-s25-project2-demo1 /*/
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 90%;
+  object-fit: cover;
+  border: 3px solid #4d7ea8;
+  margin-bottom: 0px;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: rgb(77, 125, 168);
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+/* Link Styles */
+/* typical for all websites*/
+a {
+  color: #4d7ea8;
+  text-decoration: none; /*makes it so the link does not start with underline*/
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #8e44ad;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  }
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+h3 {
+  color: rgb(42, 84, 112);
+  margin: 15px 0 10px 0;
+}
+
+/* List Styles */
+ul, ol {
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.horizontalcontent {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+/*featured section*/
+.featured {
+  flex: auto;
+  padding: 10px;
+  background-color: #e7f2fa;
+  flex-wrap: wrap;
+  list-style-type: none;
+  align-items: start;
+  justify-content: auto;
+  border-radius: 20px;
+  border: 1px solid #b3d7ea;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  /* all transitions here */
+  transition: transform 1s ease, background-color 1.3s ease, box-shadow 0.3s ease;
+}
+
+.featured:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #2979af, #239d56);
+  cursor: pointer;
+}
+
+.featured-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-link:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.featured:hover p, .featured:hover h3, .featured-link:hover a {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* Skills Section */
+section section {
+  box-shadow: none;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 15px;
+  background-color: rgba(44, 62, 80, 0.1);
+  border-radius: 8px;
+}  
+
+iframe {
+    border: none;
+    position: sticky;
+    margin: 0 auto;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Hide filter bar when image preview is open */
+#myBtnContainer {
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  transition: transform 0.4s ease, height 1.4s ease;
+}
+
+.preview-open #myBtnContainer {
+  opacity: 0;
+  transform: translateY(-10px);
+  height: 0;
+  pointer-events: none;
+}
+
+.full-width-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px; /* optional padding */
+}
+

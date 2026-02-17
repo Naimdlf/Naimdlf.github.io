@@ -1,0 +1,233 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Naim Ferris">
+    <meta name="description" content="Resume">
+    <title>CS 110, Project 2</title>
+    <!--CSS Link-->
+     <link rel="stylesheet" href="styles.css">
+
+    </head>
+    <body>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <!-- <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a> -->
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+         <!--Dropdown script-->
+    <script src="js/dropdown.js"></script>
+    
+    <!--header script-->
+    <script src="js/minimizeheader.js"></script>
+<br>
+    <section>
+        <!--Contact Info-->
+        <section style="text-align: center; margin-top: 20px;">
+            <H2>Resume</H2>
+            <!-- <img src="photos/abstract-blue-and-green-pattern-1536x1024.webp" alt="Abstract green and blue swirls" class="profile-image">
+            <!-- <img src="photos/Headshot.PNG" alt="headshot Naim Ferris (white guy) in front of green bush" class="profile-image"> -->
+            <h3 style="margin: 10px 0;">971-226-1176 | nferris@uoregon.edu</h3>
+        </section>
+    </section>
+    <Section>
+        <!--Introduction-->
+        <hr>
+        <h3>Introduction</h3>
+        <p>I am currently a senior at the University of Oregon with a strong interest in public service and local government. My goal is to build a career that combines both qualitative and quantitative skills, allowing me to develop the core competencies essential for impactful and effective work in the public sector.</p>
+        <hr>
+    </Section>
+      <!-- featured python projects -->
+    <!-- <section class="contextsection">
+      <h2>CS 110 projects</h2>
+      <div class="horizontalcontent">
+        <a href="Python.html#turtle" class="featured-link">
+          <div class="featured">
+            <h3>Python Drawing using Turtle</h3>
+            <p>Code exemplifies the power of vectorization.</p>
+          </div>
+        </a>
+        <a href="Python.html#spacy" class="featured-link">
+          <div class="featured">
+            <h3>Text Analysis with SpaCy</h3>
+            <p>Text filtering and counting of text</p>
+          </div>
+        </a>
+        <a href="Python.html#colab" class="featured-link">
+          <div class="featured">
+            <h3>Colab visualizing data</h3>
+            <p>Code using different libraries to do basic data cleaning and charting of baby name data.</p>
+          </div>
+        </a>
+      </div>
+    </section> -->
+    <!--Skills-->
+    <section>
+      <hr>
+        <h3>Skills Summary</h3>
+        <h4>Hard Skills</h4>
+        <ul>
+          <li>Data & Analysis: Excel (advanced formulas), survey design & administration, qualitative/quantitative analysis</li>
+          <li>GIS & Web Mapping: Mapbox, ArcGIS (Remote Sensing, Raster, Vector and Point Pattern Analysis), HTML, CSS, JavaScript</li>
+          <li>Policy & Engagement: Policy memo writing, stakeholder coordination, public speaking, community outreach</li>
+          <li>Tools: Microsoft Office, Google Workspace, Adobe Illustrator</li>
+        </ul>
+      
+        <h4>Soft Skills</h4>
+        <ul>
+          <li>Stakeholder Coordination, Applied Problem Solving, Written Policy Communication</li>
+          <li>Public speaking, Group Facilitation, Community Engagement, Conflict Mediation</li>
+          <li>Time Management</li>
+        </ul>
+      <hr>
+    </section>      
+    <!--Eduction-->
+    <section>
+      <hr>
+        <h3>Education</h3>
+    
+        <h4>Bachelor of Science <i>| University of Oregon</i><span style="float:right;">Expected June 2026</span></h4>
+        <ul>
+          <li><strong>Majors:</strong> Planning, Public Policy, and Management; Spatial Data Science and Technology</li>
+          <li><strong>GPA:</strong> 3.8</li>
+        </ul>
+    
+        <h4>Associate of Arts Oregon Transfer <i>| Portland Community College</i><span style="float:right;">June 2023</span></h4>
+        <ul>
+          <li><strong>GPA:</strong> 3.8</li>
+          <li>Dean’s List or President’s List every quarter</li>
+        </ul>
+        <hr>
+    </section>
+          <!--Work Experience-->
+    <section>
+        <hr>
+        <h3>Work Experience</h3>
+
+                <h4>Student Cartographer <i>| University of Oregon, Infographics Lab</i> <span style="float:right;">May 2025 – Present</span></h4>
+        <ul>
+            <li>Maintained Web and Static maps using HTML, CSS, JavaScript, Mapbox, ArcGIS, and Adobe Illustrator.</li>
+            <li>Contributed to public-facing mapping projects including projects the Global Initiative on Ungulate Migration and an interactive map showing the Network Startup Resource Centers current partners.</li>
+        </ul>
+
+
+        <h4>Resident Assistant <i>| University of Oregon, Eugene, OR</i> <span style="float:right;">September 2023 – Present</span></h4>
+        <ul>
+            <li>Conducted individual meetings with 57 incoming college residents to assess needs, provide referrals, and support adjustment to college life.</li>
+            <li>Organized and led 12+ community-building programs to improve community engagement and retention.</li>
+            <li>Counseled students on various personal and academic challenges.</li>
+            <li>Enforced university policies and responded to on-call incidents, balancing safety and student support.</li>
+        </ul>
+
+                <h4>Accessible Transportation Intern <i>| TriMet, Portland, OR </i><span style="float:right;">June 2025 – October 2025</span></h4>
+        <ul>
+            <li>Developed and executed a rollout plan for Aira, a mobile wayfinding technology, improving navigation access for blind and low-vision riders.</li>
+            <li>Authored a phase-one evaluation report integrating qualitative and quantitative data to inform findings and recommendations.</li>
+            <li>Recruited and coordinated of 30+ pilot participants, facilitating field tests, stakeholder meetings, and survey administration.</li>
+            <li>Collaborated with internal staff and external contractors to manage pilot operations, improve service quality, and rider engagement.</li>
+            <li>Provided administrative support for ongoing projects, and created public-facing content for TriMet.org</li>
+        </ul>
+
+        <h4>Community Development Intern <i>| City of Hillsboro, OR </i><span style="float:right;">June 2024 – August 2024</span></h4>
+        <ul>
+            <li>Supported evaluation of a revenue and cost of service model for property taxes, fees, and land use categories. </li>
+            <li>Developed a high-level analytical framework linking property categories, demographics, land values, types of service, and other service costs. </li>
+            <li>Coordinated stakeholder outreach and organized background information to support departmental analysis.</li>
+        </ul>
+
+        <h4>Election Commissioner <i>| ASUO, University of Oregon </i> <span style="float:right;">January 2024 – May 2024</span></h4>
+        <ul>
+            <li>Administered office hours advising students on election rules and procedures. </li>
+            <li>Helped draft new election rules and timelines for the 2023-2024 academic school year. </li>
+            <li>Arranged presentations to increase student engagement, reaching out to 46 professors.</li>
+            <li>Achieved a 64% increase in voter turnout, the second-highest level in the past 7 years. </li>
+        </ul>
+
+        <h4>Co-Chair <i>| Hillsboro Youth Advisory Council </i><span style="float:right;">September 2020 – June 2023</span></h4>
+        <ul>
+            <li>Managed council social media for one year.</li>
+            <li>Co-chaired twice monthly meetings and contributed to successful collaboration between council members.</li>
+            <li>Planned a successful volunteer event for Global Youth Services Day.</li>
+            <li>Presented policy recommendations to the city council, highlighting the importance of compost access in multifamily complexes and Home Energy Score policy in Hillsboro.</li>
+            <li> Contributed to organizational development by helping to draft new bylaws and recruiting new members.</li>
+        </ul>
+
+        <h4>Intern <i>| AGS Tax Group, Newton Upper Falls, MA </i><span style="float:right;">July 2022 – August 2022</span></h4>
+        <ul>
+            <li>Demonstrated strong organizational skills by filing dozens of documents accurately and managing phone calls.</li>
+            <li>Assisted with errands and clerical tasks.</li>
+        </ul>
+
+        <h4>Information Services Intern <i>| City of Hillsboro, OR </i><span style="float:right;">June 2021 – September 2021</span></h4>
+        <ul>
+            <li>Conducted targeted outreach for the HiLight Bridge Program, a City of Hillsboro means-tested broadband internet service.</li>
+            <li>Knocked on dozens of doors in south Hillsboro to inform residents about the program.</li>
+            <li>Coordinated and attended various events to reach a wider audience and provided information and assistance to individuals interested in the program.</li>
+            <li>Established partnerships with 5 local organizations to promote the program through flyer distribution.</li>
+        </ul>
+        <hr>
+    </section>
+    <!--Additional Work-->
+    <section>
+        <hr>
+        <h3>Additional Work Experience</h3>
+        <ul>
+            <li><strong>Shift Leader:</strong> University Dining Services <span style="float:right;">August 2022 – September 2023</span></li>
+            <li><strong>Barista:</strong> Ava Roastaria <span style="float:right;">February 2022 – June 2023</span></li>
+            <li><strong>Hillsboro 2035 Environmental Stewardship Committee</strong> <span style="float:right;"> February 2022 – June 2023</span></li>
+        </ul>
+        <hr>
+    </section>
+    <!--Footer-->
+    <footer>Created by Naim Ferris, CS110, Project 2</footer>
+    <footer class="footer-attribution">
+      <p>
+        Header background image by 
+        <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank">M.O. Stevens</a>, 
+        transferred by 
+        <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank">Werewombat</a>, 
+        <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank">Public Domain</a>.
+      </p>
+      <p>
+        <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank">Blue Green Background Vectors by Vecteezy</a>
+      </p>
+      <p><a href="https://www.color-meanings.com/" target="_blank">Color Meanings (2024)</a>. Abstract blue and green pattern.</p>
+    </footer>
+</body>
+
+</html>

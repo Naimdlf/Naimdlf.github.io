@@ -1,0 +1,192 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Naim Ferris">
+    <meta name="description" content="Resume">
+    <title>Naim's Portfolio - GIS</title>
+    <!--CSS Link-->
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <!-- <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a> -->
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+     <!--Dropdown script-->
+<script src="js/dropdown.js"></script>
+
+<!--header script-->
+<script src="js/minimizeheader.js"></script>
+
+<!--Filter Script-->
+<script src="js/filter.js"></script>
+
+<br>
+<!--filter-->
+<section id="myBtnContainer">
+  <div>
+    <h2>Filter By</h2>
+    <button class="btn active" onclick="filterSelection('all')">Show All</button>
+    <button class="btn" onclick="filterSelection('GIScience')">GIScience</button>
+    <button class="btn" onclick="filterSelection('Public Policy')">Public Policy</button>
+    <button class="btn" onclick="filterSelection('Data Driven Cartography')">Data Driven Cartography</button>
+    <button class="btn" onclick="filterSelection('Spatial Analysis')">Spatial Analysis</button>
+  </div>
+  <div class="gissectionwrapper">
+    <div class="gissection">
+    <!-- data driven cart maps -->
+      <div class="filterDiv Data Driven Cartography show">
+        <img src="gisphoto/gisphotoDDC/Layout.pdf.jpg" alt="Map titled 'Portland Oregon at 3 Different Scales' showing reference maps of the Willamate Valley, Portland suburbs, and Downtown Portland." role="button"   onkeydown="if(event.key === 'Enter'){ showLargeImage(this); }" tabindex="0" aria-label="View larger map" onclick="showLargeImage(this)">
+        <p style="display: none;">This map was made in Data Driven Cartography at UO. The assignment was to create a reference map at 3 different scales adjusting symbology for each. By combining data from different sources we are able to add roads, hillshade and water features adding layers as the maps zoom in.</p>
+      </div>
+
+      <div class="filterDiv Data Driven Cartography show">
+        <img src="gisphoto/gisphotoDDC/Layout6.pdf.jpg" alt="Map titled 'Tualatin Mountain Range Park Amenities' showing the park a hillshade, transit routes, trails, recriation and roads" onclick="showLargeImage(this)">
+        <p style="display: none;">This map was made in Data Driven Cartography at UO. The map combines Ortho Imagery with hydrometric Tinting, and Hill Shade to create an appealing looking map.</p>
+      </div>
+      
+      <div class="filterDiv Data Driven Cartography show">
+        <img src="gisphoto/gisphotoDDC/Layout5.pdf.jpg" alt="Map titled 'Terrain Design Around Forest Park Portland OR.' showing 8 map frames displaying examples of Hillshade  Ortho Imagery, land cover, curvature, contour lines, and hydrometric tinting" onclick="showLargeImage(this)">
+        <p style="display: none;">This map was made in Data Driven Cartography at UO. The assignment was to show different terrain symbology and applying them to the natural feature of our choice. I decided to clip Forest Park in Portland.</p>
+      </div>
+
+      <div class="filterDiv Data Driven Cartography show">
+        <img src="gisphoto/gisphotoDDC/Layout4.pdf.jpg" alt="Map titled 'Mapping of Populations in Oregon' showing 4 map frames displaying thematic population data in oregon tinting" onclick="showLargeImage(this)">
+        <p style="display: none;">This map was made in Data Driven Cartography at UO. The Assignment was to come up with 4 unique symbology for Census Population Data</p>
+      </div>
+
+      <div class="filterDiv Data Driven Cartography show">
+        <img src="gisphoto/gisphotoDDC/Layout2.pdf.jpg" alt="Map titled 'Housing Vacancy Rate in America' showing Variation in Housing Vacancy Rates by standard deviation across the U.S." onclick="showLargeImage(this)">
+        <p style="display: none;">This assignment focused on creating shared classification schemes across map frames. By comparing county and census tract level data, it demonstrates the Modifiable Areal Unit Problem, where results change depending on the scale of geographic aggregation.</p>
+      </div>
+
+      <div class="filterDiv GIScience Spatial Analysis Static Maps show">
+        <img src="gisphoto/Layout2.jpg" alt="Map titled 'Crop Land Cover Change 2019 to 2021,' showing areas in Oregon where crops changed over time."  onclick="showLargeImage(this)">
+        <p style="display: none;">This map was made in GIScience 1 at UO. The assignment used USDA crop cover raster data to examine changes between 2019 and 2021. It helped me advance my raster analysis skills.</p>
+      </div>
+
+      <div class="filterDiv Public Policy Static Maps show">
+        <img src="gisphoto/UGB and Notable Rivers.jpg" alt="Map titled 'Urban Growth Boundaries and Notable Rivers within Lane County.' Shows UGBs and highlighted rivers." onclick="showLargeImage(this)">
+        <p style="display: none;">Created in 2025 for UO’s Urban Geographic Information Systems class. We were asked to highlight all UGBs and rivers in Lane County, especially the McKenzie and Willamette Rivers in Eugene.</p>
+      </div>
+
+      <div class="filterDiv GIScience Static Maps Spatial Analysis show">
+        <img src="gisphoto/Layout.jpg" alt="Hillshade map of the Wallowa Mountains with two viewsheds along the McCully Trail." onclick="showLargeImage(this)">
+        <p style="display: none;">Made in GIScience 1 (2025). The assignment used DEMs to create a hillshade, and we used slope and aspect to find visible areas and suitable habitat from two viewpoints.</p>
+      </div>
+
+      <div class="filterDiv Public Policy Static Maps show">
+        <img src="gisphoto/unnamed.png" alt="Map titled '5 Most Housing Insecure Census Tracts in Lane County,' showing areas with high housing insecurity based on income and rent burden." onclick="showLargeImage(this)">
+        <p style="display: none;">Created in 2025 for Urban GIS. The project involved pulling data from the US Census website to identify areas with high housing insecurity in Eugene.</p>
+      </div>
+
+      <div class="filterDiv GIScience Static Maps show">
+        <img src="gisphoto/Layout[93].jpg" alt="Map showing notable city locations in Oregon using red markers." onclick="showLargeImage(this)">
+        <p style="display: none;">A simple GIScience 1 map using Oregon Spatial Data Library data to show city locations.</p>
+      </div>
+
+      <div class="filterDiv GIScience Static Maps show">
+        <img src="gisphoto/Census Designations in the Pacific Northwest.jpg" alt="Map showing census designations in Oregon, Washington, and Idaho, including counties, urban areas, and CBSAs." onclick="showLargeImage(this)">
+        <p style="display: none;">Made for GIScience 1. Involved joining multiple tables to separate variables, and using Arcade code in the label symbology screen to customize labels.</p>
+      </div>
+
+      <div class="filterDiv Public Policy Static Maps show">
+        <img src="gisphoto/Layout[23].jpg" alt="Heat map of residents over age 65 in Eugene Census Block Groups within the UGB." onclick="showLargeImage(this)">
+        <p style="display: none;">Created for Urban GIS at UO. We created new fields to calculate per capita values and mapped elderly population density.</p>
+      </div>
+
+      <div class="filterDiv GIScience Static Maps Spatial Analysis show">
+        <img src="gisphoto/Layout[79].jpg" alt="Map showing crop diversity by county in Oregon (2019), with greater diversity in valleys and plains." onclick="showLargeImage(this)">
+        <p style="display: none;">Made for GIScience (2025). Required the use of the domain tool, zonal operations, raster calculator, and exporting data to Excel for further analysis.</p>
+        <img style="display: none;" src="/gisphoto/Picture1.png" alt="Bar chart showing number of pixels for each crop class. Evergreen forest, shrubland, and grassland dominate. Nectarines, celery, and honeydew are least common.">
+      </div>
+
+      <div class="filterDiv Public Policy Static Maps show">
+        <img src="gisphoto/Layout.pdf.jpg" type="application/pdf" alt="Map showing high school zones within the Eugene-Springfield UGB with 9 districts." onclick="showLargeImage(this)">
+        <p style="display: none;">Map made for Urban GIS. Involved calculating geometry and editing attributes to find the area of each high school zone.</p>
+      </div>
+
+      <div class="filterDiv Public Policy Static Maps show">
+        <img src="gisphoto/Layout1.pdf.jpg" type="application/pdf" alt="Map showing three final site candidates for an emergency shelter in downtown Eugene, based on specific spatial criteria." onclick="showLargeImage(this)">
+        <p style="display: none;">Final project for Urban GIS. Combined attribute joins, spatial joins, buffers, and filters to identify three suitable emergency shelter sites within Eugene.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+<section id="imagePreviewSection" style="display: none; transition: all 0.4s ease;">
+    <h2 style="text-align: center;">
+      <button onclick="closePreview()" style="float: left;">Back</button> 
+      <button onclick="downloadbtn()" style="float: right;">Download</button>
+      Map Overview
+    </h2>
+  
+    <!-- Flex container that holds both the about section and the image -->
+    <div style="display: flex; align-items: flex-start; gap: 20px;">
+      <!-- About This Map Section -->
+      <div class="about-map" style="width: 30%; text-align: left; padding: 15px; background: rgba(255, 255, 255, 0.8); border-radius: 8px; transition: all 0.4s ease;">
+        <h3>About This Map</h3>
+        <p id="mapDescription"></p>
+      </div>
+  
+      <!-- Image -->
+      <img id="previewImage" src="" alt="" style="max-width: 60%; height: auto; display: block; transition: all 0.4s ease;">
+    </div>
+  </section>
+  
+  <footer class="footer-attribution">
+    <p>© 2025 Naim Ferris |</p>
+    <p>
+      Header background image by 
+      <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+      transferred by 
+      <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+      <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+    </p>
+    <p>
+      <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+    </p>
+    <p>
+      Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+    </p>
+  </footer>
+  </body>
+
+

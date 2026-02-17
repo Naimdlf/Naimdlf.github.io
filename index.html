@@ -1,0 +1,137 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Naim Ferris" />
+  <meta name="description" content="Portfolio Home" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Naim's Portfolio - Home</title>
+</head>
+<!--https://www.w3schools.com/tags/tag_body.asp-->
+<body>
+  <!--https://www.w3schools.com/tags/tag_header.asp-->
+ <header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <!-- <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a> -->
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <hr>
+ <!--Dropdown script-->
+<script src="js/dropdown.js"></script>
+
+<!--header script-->
+<script src="js/minimizeheader.js"></script>
+
+<!--class name https://www.youtube.com/watch?v=DlQ1VVWZzaw-->
+<section class="contextsection">
+  <h2>Featured</h2>
+  <div class="horizontalcontent">
+    <a href="gis.html" class="featured-link">
+      <div class="featured">
+        <h3>A page displaying GIS projects</h3>
+        <p>Filter by project type.</p>
+      </div>
+    </a>
+    <a href="code.html" class="featured-link">
+      <div class="featured">
+        <h3>Java Portfolio Code</h3>
+        <p>Code samples and tools built in CS 111.</p>
+      </div>
+    </a>
+    <a href="sample.html" class="featured-link">
+      <div class="featured">
+        <h3>Collection of writing</h3>
+        <p>Essays from public policy and ethics classes.</p>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="about-website">
+  <h2>About This Website</h2>
+  <p>This portfolio was created to showcase my work in GIS, coding, and writing. It was built from scratch using HTML, CSS, and JavaScript over a weekend in April 2025.
+  I used <a href="https://www.w3schools.com/" target="_blank">W3Schools</a> to figure out a lot of the JS. When I got stuck, I occasionally turned to other sources linked in the HTML</a>.
+  The site will continue to evolve as I add new projects. If you open the HTML I have added comments linking to the pages I used for the code.</p>
+</section>
+
+<section id="contact" class="contextsection" style="background: linear-gradient(555deg, #3493db00, #0f8b28a5);">
+  <h1>Contact</h1>
+  <p>
+    <strong>Email:</strong>
+    <a href="mailto:nferris@uoregon.edu" style="color: lightcyan;">
+      nferris@uoregon.edu
+    </a>
+  </p>
+  <p>
+    <strong>Phone:</strong> <a href="tel:19712261176" style="color: lightcyan;">(971) 226-1176</a> <!-- telaphone tag can open face time https://stackoverflow.com/questions/17219688/href-tel-and-mobile-numbers-->
+  </p>  
+  <p>
+    <strong>LinkedIn:</strong>
+    <a href="https://www.linkedin.com/in/naim-ferris/" target="_blank" style="color: lightcyan; text-decoration: underline;">
+      www.linkedin.com/in/naim-ferris
+    </a>
+  </p>
+  <p>
+    <strong>Github:</strong>
+    <a href="https://github.com/Naimdlf/Naimdlf.github.io" target="_blank" style="color: lightcyan; text-decoration: underline;">
+      github.com/Naimdlf/Naimdlf
+    </a>
+  </p>
+</section>
+
+
+<footer class="footer-attribution">
+  <p>© 2025 Naim Ferris |</p>
+  <p>
+    Header background image by 
+    <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+    transferred by 
+    <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+    <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+  </p>
+  <p>
+    <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+  </p>
+  <p>
+    Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+  </p>
+</footer>
+
+</body>
+</html>
+
