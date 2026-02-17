@@ -1,1 +1,1 @@
-const MAPBOX_TOKEN = '';
+const MAPBOX_TOKEN = 'sksksk';
