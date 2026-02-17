@@ -1,1 +1,0 @@
-const MAPBOX_TOKEN = 'sksksjjj';
