@@ -1,0 +1,620 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Naim Ferris" />
+    <meta name="description" content="Resume" />
+    <title>Naim's Transit Dashboard Map - GIS</title>
+
+      <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.js'></script>
+      <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css' rel='stylesheet' />
+
+      <!-- Load the `mapbox-gl-geocoder` plugin. -->
+      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+
+
+    <style>
+          body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            /* content does not spill out of page */
+            overflow: hidden;
+          }
+           #map { position:absolute; z-index: -30; top:0; bottom:0; width:100%; } 
+          
+
+          /* bottons */
+
+          #loadMapBtn {
+            position: absolute;
+            top: 45%;
+            left: 45%;
+            z-index: 9999;
+            text-align: center;
+          }
+
+          /* toggel mode panel */
+
+          /* Top toggle container */
+          #togglemodebtn {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0;
+            background: linear-gradient(
+                45deg,
+                #999999 5%,
+                #c2bebe 10%,
+                #ccc 30%,
+                #979595 50%,
+                #ccc 70%,
+                #ffffff 80%,
+                #999 95%
+              );
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            z-index: 1;
+          }
+
+          /* Toggle buttons */
+          #togglemodebtn button {
+            background: #f2f2f2;
+            border: 1px solid #c9c9c9;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.15s ease;
+          }
+
+          /* Hover */
+          #togglemodebtn button:hover {
+            background: #e6e6e6;
+            border-color: #999;
+          }
+
+          /* Pressed */
+          #togglemodebtn button:active {
+            transform: translateY(4px);
+          }
+
+          /* Active selected state */
+          #togglemodebtn button.active {
+            background: #525151;
+            color: white;
+            border-color: #0e2b3f;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+          }
+
+          .mapboxgl-ctrl-top-right {
+            top: 50px
+          }
+
+            /* Shine  https://ibelick.com/blog/creating-metallic-effect-with-css*/
+
+            .shine {
+              font-size: 14px;
+              padding: 45px 1rem;
+              font-weight: 400;
+              border: none;
+              outline: none;
+              color: #000;
+              background: linear-gradient(
+                45deg,
+                #999999 5%,
+                #c2bebe 10%,
+                #ccc 30%,
+                #979595 50%,
+                #ccc 70%,
+                #ffffff 80%,
+                #999 95%
+              );
+              text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+            }
+
+    /* list styleing */
+
+      #statesList li,
+      #citiesList li,
+      #agenciesList li{
+        cursor: pointer;
+        padding: 6px 10px;
+        transition: background-color 0.2s ease-in-out;
+        margin-left: -16px;
+      }
+
+      /* make darker on hover */
+      #statesList li:hover,
+      #citiesList li:hover,
+      #agenciesList li:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* make mouse pointer when clicking polygon to open sidebar */
+      #click:hover, #layerID:hover, #layers:hover {
+        cursor:pointer
+      }
+
+  /* menu https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers /*/
+      #menu {
+          background: #fff;
+          position: absolute;
+          z-index: 500;
+          bottom: 25px;
+          right: 5px;
+          border-radius: 3px;
+          width: 170px;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          font-family: 'Open Sans', sans-serif;
+      }
+
+      #menu a {
+          font-size: 13px;
+          color: #404040;
+          display: block;
+          margin: 0;
+          padding: 10px;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+          text-align: left;
+      }
+
+          #menu a.active::after {
+        content: " ✓";
+        font-weight: bold;
+        margin-left: auto;
+      }
+
+          #menu a.legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+            .legend-swatch {
+          width: 12px;
+          height: 12px;
+          min-width: 12px;
+          min-height: 12px;
+          border: 1px solid #000;
+          box-sizing: border-box;
+        }
+            #menu-title {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 6px;
+        background: #eee;
+        border-bottom: 1px solid #ccc;
+      }
+
+      /* map overlay style */
+          .map-overlay {
+        display: none;
+        font: 12px/20px sans-serif;
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 230px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .map-overlay-inner {
+        background: #fff;
+        padding: 10px;
+        border-radius: 3px;
+    }
+
+  </style>
+
+  </head>
+<body>
+
+          <!-- added button to try and stop accruing raster tiles -->
+      <button id="loadMapBtn">Load Map</button>
+          <!-- map activation -->
+            <div id='map'></div>
+            <!-- menu taken from https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/ -->
+      <nav id="menu"><div id="menu-title">Data Legend</div></nav>
+
+      <!-- overlay  https://docs.mapbox.com/mapbox-gl-js/example/simple-interactions/-->
+      <div class="map-overlay right" id="properties"></div>
+
+      <!-- buttons at top -->
+      <div id="togglemodebtn">
+        <button id="city">UZA (Urbanized Area) Data</button><button id="commuter">ACS Commuter Statistics</button><button id="expenditure">FTA Transit Expenditure</button>
+      </div>
+
+      <div id="mySidebar" class="sidebar">
+        <div id="sidebarContent"></div>
+      </div>
+
+<div id="main">
+  <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
+</div>
+  
+    <script>
+
+          // sets layer ids
+          // layer class Key-Value Pairs https://www.w3schools.com/js/js_objects.asp
+        const LayerGroups = {
+          // background
+          'UZA (Urbanized Area)': ['UZA', 'UZA_point'],
+          // ACS Commuter Statistics
+          'Walk to Work': ['walked', 'walked_point'],
+          'Carpool': ['carpool', 'carpool_point'],
+          'Work from Home': ['home', 'home_point'],
+          'Take Transit': ['transit', 'transit_point'],
+          'Population without a Vehicle': ['novehicle', 'novehicle_point'],
+          'Drive to Work': ['drive', 'drive_point'],
+          // FTA Transit Expenditure
+          'Total Unlinked Passenger Trips (UPT)': ['trips_point', 'trips'],
+          'Total Operating Expenses': ['total', 'total_point'],
+          'Expenditure Per Capita': ['capita', 'capita_point'],
+          'Passenger Miles Traveled (PMT)': ['pmi', 'pmi_point'],       
+          'Expenditure Per Vehicle Mile (VMT)': ['expendaturepervehiclerevenuemile_point', 'expendaturepervehiclerevenuemile'],     
+          // UZA (Urbanized Area) Data
+          'Population Density': ['pop_dense', 'pop_dense_point'],
+          'Housing Units': ['housing_units_points', 'housing_units'],
+          'Population': ['population_point', 'population'],   
+          'Area (SQMI)': ['area', 'area_points']    
+        };
+
+        // map toggle categories object:
+        const ToggleCategories = {
+            'city': [
+              'UZA (Urbanized Area)',
+              'Population Density',
+              'Housing Units',
+              'Population',
+              'Area (SQMI)',
+            ],
+            'commuter': [
+              'Walk to Work',
+              'Carpool',
+              'Work from Home',
+              'Take Transit',
+              'Population without a Vehicle',
+              'Drive to Work'
+            ],
+            'expenditure': [
+              'Total Unlinked Passenger Trips (UPT)',
+              'Total Operating Expenses',
+              'Expenditure Per Capita',
+              'Passenger Miles Traveled (PMT)',
+              'Expenditure Per Vehicle Mile (VMT)'
+            ]
+          };
+
+        // Map legend color gradients
+        const layerColors = {
+          'UZA (Urbanized Area)': '',
+          // --- ACS COMMUTER ---
+          'Walk to Work': 'linear-gradient(to right, #e6f2ff, #1f78ff)',
+          'Carpool': 'linear-gradient(to right, #e8f5e9, #2e7d32)',
+          'Work from Home': 'linear-gradient(to right, #e0f7fa, #00acc1)',
+          'Take Transit': 'linear-gradient(to right, #f3e5f5, #7b1fa2)',
+          'Population without a Vehicle': 'linear-gradient(to right, #fdecea, #c62828)',
+          'Drive to Work': 'linear-gradient(to right, #edf7ed, #1b5e20)',
+          // --- FTA EXPENDITURE ---
+          'Total Unlinked Passenger Trips (UPT)': 'linear-gradient(to right, #fde4ef, #800080)',
+          'Total Operating Expenses': 'linear-gradient(to right, #fffde7, #f9a825)',
+          'Expenditure Per Capita': 'linear-gradient(to right, #e3f2fd, #1565c0)',
+          'Passenger Miles Traveled (PMT)': 'linear-gradient(to right, #e8f5e9, #2e7d32)',
+          'Expenditure Per Vehicle Mile (VMT)': 'linear-gradient(to right, #ffebee, #b71c1c)',
+          // --- UZA DATA ---
+          'Population Density': 'linear-gradient(to right, #ffebee, #c62828)',
+          'Housing Units': 'linear-gradient(to right, #e8f5e9, #2e7d32)',
+          'Population': 'linear-gradient(to right, #fff8e1, #fbc02d)',
+          'Area (SQMI)': 'linear-gradient(to right, #fff8e1, #fbc02d)'
+        };
+
+      //Mapboxtoken
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      console
+      // stops the map from being displayed until it is actively loaded in
+      document.getElementById('loadMapBtn').onclick = function() {
+      document.getElementById('map').style.display = 'block';
+      // Bounds around US
+      var bounds = [
+        [-186.1356, 16.7612], // Southwest (lon, lat)
+        [-20.8824, 71.6334]   // Northeast (lon, lat)
+      ];
+      // filter group
+      // const filterGroup = document.getElementById('filter-group');
+      // Initialize the map
+      var map = new mapboxgl.Map({
+        container: 'map',
+        // style: 'mapbox://styles/nferris1/cmlhna4ur001e01rh58mpa8rf',
+        center: [-122.679, 45.512],
+          zoom: 7, 
+          minZoom: 3,   
+          maxZoom: 10,
+        maxBounds: bounds
+      });
+
+
+
+
+      // stops rotation
+      map.dragRotate.disable();
+      map.touchZoomRotate.disableRotation();
+
+                  // Add search box https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
+                  var geocoder = new MapboxGeocoder({
+                  accessToken: mapboxgl.accessToken,
+                  mapboxgl: mapboxgl,
+                    marker: { color: 'orange' },
+                    placeholder: 'Search for places'
+                  });
+                  map.addControl(geocoder, 'top-right'); // Adds search box to top-left by default
+
+                  const nav = new mapboxgl.NavigationControl(); 
+              map.addControl(nav, 'top-right'); //change to match container and map ID.
+              // geolocator sits under controls. https://docs.mapbox.com/mapbox-gl-js/example/locate-user/
+              const geolocate = new mapboxgl.GeolocateControl({
+                  positionOptions: {
+                  enableHighAccuracy: true
+                  },
+                  trackUserLocation: true,
+                  showUserHeading: true
+                  });
+                  map.addControl(geolocate, 'top-right');
+                  
+      // hides the button after map load
+      this.style.display = 'none'; 
+
+      // when mapbox loads add toggle menu links
+      map.on('load', () => {
+        // chow layers
+        console.log(map.getStyle().layers.map(l => l.id));
+                  // force layers off on load.
+            for (const group in LayerGroups) {
+        LayerGroups[group].forEach(layerId => {
+          if (map.getLayer(layerId)) {
+            map.setLayoutProperty(layerId, 'visibility', 'none');
+          }
+        });
+      }
+
+              for (const group in LayerGroups) {
+                if (document.getElementById(group)) continue;
+
+                // this creates an <a> link grabs the group and sets css class to on. 
+                const link = document.createElement('a');
+                link.id = group;
+                link.href = '#';
+                link.classList.add('legend-item');
+
+        const swatch = document.createElement('span');
+        swatch.className = 'legend-swatch';
+
+          function showCategory(categoryId) {
+    const layersToShow = ToggleCategories[categoryId];
+
+    // hide all layers and legend links
+    for (const group in LayerGroups) {
+        LayerGroups[group].forEach(layerId => {
+            if (map.getLayer(layerId)) map.setLayoutProperty(layerId, 'visibility', 'none');
+        });
+        const link = document.getElementById(group);
+        if (link) link.style.display = 'none';
+        if (link) link.classList.remove('active');
+    }
+
+    // show only the selected category
+    layersToShow.forEach(group => {
+        LayerGroups[group].forEach(layerId => {
+            if (map.getLayer(layerId)) map.setLayoutProperty(layerId, 'visibility', 'none');
+        });
+        const link = document.getElementById(group);
+        if (link) link.style.display = 'flex';
+    });
+  }
+
+    // set active controls css to make button stay clicked when in that mode.
+    function setActiveButton(id) {
+    //all buttons off
+    document.querySelectorAll('#togglemodebtn button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // clicked button on
+    document.getElementById(id).classList.add('active');
+      // ALWAYS show base boundary layer
+    if (map.getLayer('id')) {
+    map.setLayoutProperty('id', 'visibility', 'visible');
+    }
+  }
+
+    // button events
+    // map.setLayoutProperty('id', 'visibility', 'visible'); makes id always visible
+        document.getElementById('city').onclick = () => {
+      showCategory('city');   
+      setActiveButton('city');    
+        map.setLayoutProperty('id', 'visibility', 'visible');
+    };
+
+    document.getElementById('commuter').onclick = () => {
+      showCategory('commuter');
+      setActiveButton('commuter');
+        map.setLayoutProperty('id', 'visibility', 'visible');
+    };
+
+    document.getElementById('expenditure').onclick = () => {
+      showCategory('expenditure');
+      setActiveButton('expenditure');
+        map.setLayoutProperty('id', 'visibility', 'visible');
+    };
+
+    // show default
+    showCategory('city');
+   setActiveButton('city');
+
+        // sets legond layer colors
+        swatch.style.background = layerColors[group] || '#999';
+
+        link.appendChild(swatch);
+        link.appendChild(document.createTextNode(group));
+
+            // when we click a link this function runs
+                link.onclick = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // turn everything off
+          for (const otherGroup in LayerGroups) {
+            LayerGroups[otherGroup].forEach(layerId => {
+              if (map.getLayer(layerId)) {
+                map.setLayoutProperty(layerId, 'visibility', 'none');
+              }
+            });
+
+            const otherLink = document.getElementById(otherGroup);
+            if (otherLink) otherLink.classList.remove('active');
+           }
+
+          // turn selected group on
+          LayerGroups[group].forEach(layerId => {
+            if (map.getLayer(layerId)) {
+              map.setLayoutProperty(layerId, 'visibility', 'visible');
+            }
+          });
+
+          this.classList.add('active');
+        };
+
+
+          document.getElementById('menu').appendChild(link);
+      }
+
+                  // map click logic
+      map.on('click', 'id', (e) => {
+        const feature = e.features[0];
+        if (!feature) return;
+
+        const name = feature.properties.NAME || "Unknown";
+        const population = feature.properties.POPULATION || 0;
+        const UA_CODE = feature.properties.UA_CODE || "Unknown";
+        const POP_DENSITY = feature.properties.POP_DENSITY || 0;
+        const HOUSING = feature.properties.HOUSING || 0;
+        const AREA_SQMI = feature.properties.AREA_SQMI || 0;
+        const OBJECTID_1 = feature.properties.OBJECTID_1 || "Unknown";
+        const NAME_1 = feature.properties.NAME_1 || "Unknown";
+        const censustotal = feature.properties.censustotal || 0;
+        const novehiclepercent = feature.properties.novehiclepercent || 0;
+        const drove_alone = feature.properties.drove_alone || 0;
+        const carpooled = feature.properties.carpooled || 0;
+        const public_transportation = feature.properties.public_transportation || 0;
+        const walked = feature.properties.walked || 0;
+        const bike_other = feature.properties.bike_other || 0;
+        const Worked_from_home_ = feature.properties.Worked_from_home_ || 0;
+        const Total_Vehicle_Revenue_Miles = feature.properties.Total_Vehicle_Revenue_Miles || 0;
+        const Total_Vehicle_Revenue_Hours = feature.properties.Total_Vehicle_Revenue_Hours || 0;
+        const Total_Passenger_Miles_Traveled = feature.properties.Total_Passenger_Miles_Traveled || 0;
+        const Total_Unlinked_Passenger_Trips = feature.properties.Total_Unlinked_Passenger_Trips || 0;
+        const Total_Operating_Expenses = feature.properties.Total_Operating_Expenses || 0;
+        const Fixed_Guideway_Vehicle_Revenue_Miles = feature.properties.Fixed_Guideway_Vehicle_Revenue_Miles || 0;
+        const Fixed_Guideway_Passenger_Miles = feature.properties.Fixed_Guideway_Passenger_Miles || 0;
+        const Fixed_Guideway_Operating_Expenses = feature.properties.Fixed_Guideway_Operating_Expenses || 0;
+        const Non_Fixed_Guideway_Vehicle_Revenue_Miles = feature.properties.Non_Fixed_Guideway_Vehicle_Revenue_Miles || 0;
+        const Non_Fixed_Guideway_Passenger_Miles = feature.properties.Non_Fixed_Guideway_Passenger_Miles || 0;
+        const Non_Fixed_Guideway_Operating_Expenses = feature.properties.Non_Fixed_Guideway_Operating_Expenses || 0;
+        const Shape_Length_1 = feature.properties.Shape_Length_1 || 0;
+        const Shape_Area_1 = feature.properties.Shape_Area_1 || 0;
+        const percapidaexpendature = feature.properties.percapidaexpendature || 0;
+        const expendaturepermile = feature.properties.expendaturepermile || 0;
+        const expendaturepertrip = feature.properties.expendaturepertrip || 0;
+        const expendaturepervehiclerevenuemile = feature.properties.expendaturepervehiclerevenuemile || 0;
+        const ORIG_FID = feature.properties.ORIG_FID || 0;
+
+
+        // Open sidebar automatically
+        sidebar.style.width = "250px";
+        toggleBtn.innerHTML = "× Close";
+
+        // Set content dynamically
+        sidebarContent.innerHTML = `
+          <a href="javascript:void(0)" class="closebtn" 
+            onclick="document.getElementById('mySidebar').style.width='0'; document.getElementById('sidebarbtn').innerHTML='☰ Sidebar'">
+          </a>
+          <section>
+            <h3>${name}</h3>
+            <hr><br>
+            <h2>UZA Urban Area Data<h2><hr>
+            <p>Population: ${Number(population).toLocaleString()}</p>
+            <p>Population Density: ${POP_DENSITY}</p>
+            <p>Housing Units: ${HOUSING}</p>><br>
+            <h2>Census Commuter Data<h2><hr>
+            <p>Drive Alone: ${drove_alone}%</p>
+            <p>Carpool: ${carpooled}%</p>
+            <p>Public Transit: ${public_transportation}%</p>
+            <p>Walked: ${walked}%</p>
+            <p>Bike/Other: ${bike_other}%</p>
+            <p>Worked from Home: ${Worked_from_home_}%</p><br>
+            <h2>Federal Transit Administration UZA Sums<h2><hr>
+    <p>Total Vehicle Revenue Miles: ${Total_Vehicle_Revenue_Miles}</p>
+    <p>Total Passenger Miles Traveled: ${Total_Passenger_Miles_Traveled}</p>
+    <p>Total Unlinked Passenger Trips: ${Total_Unlinked_Passenger_Trips}</p>
+    <p>Total Operating Expenses: $${Number(Total_Operating_Expenses).toLocaleString()}</p>
+    <p>Expenditure Per Capita: $${percapidaexpendature}</p>
+    <p>Expenditure Per Mile: $${expendaturepermile}</p>
+    <p>Expenditure Per Trip: $${expendaturepertrip}</p>
+    <p>Expenditure Per Vehicle Mile: $${expendaturepervehiclerevenuemile}</p>
+          </section>
+        `;
+      });
+
+
+      //  https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/
+            const popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+    // popup
+      map.on('mouseenter', 'id', (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+
+        const feature = e.features[0];
+        const name = feature.properties.NAME;
+
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML("<strong>" + name + "</strong><br> Click to view full detail")
+
+
+          .addTo(map);
+      });
+
+      map.on('mouseleave', 'id', () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+      });
+      })
+      }
+
+
+    </script>
+         <script src="sidebar/panel.js"></script>
+         <script src="config.js"></script>
+         <link rel="stylesheet" href="sidebar/sidebar.css">
+         
+  </body>
+</html>
