@@ -15,6 +15,7 @@
       <!-- Load the `mapbox-gl-geocoder` plugin. -->
       <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
       <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+      <script src="sidebar.js"></script>
 
 
     <style>
@@ -27,6 +28,17 @@
             overflow: hidden;
           }
            #map { position:absolute; z-index: -30; top:0; bottom:0; width:100%; } 
+
+           #main {
+              position: absolute;
+              top: 30px;
+              left: 15px;
+              z-index: 10000;
+            }
+
+            section {
+              padding: 5px;
+            }
           
 
           /* bottons */
@@ -49,7 +61,7 @@
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 8px 0;
+            padding: 8px 18px;
             background: linear-gradient(
                 45deg,
                 #999999 5%,
@@ -66,7 +78,7 @@
             z-index: 1;
           }
 
-          /* Toggle buttons */
+          Toggle buttons
           #togglemodebtn button {
             background: #f2f2f2;
             border: 1px solid #c9c9c9;
@@ -203,7 +215,7 @@
         border-bottom: 1px solid #ccc;
       }
 
-      /* map overlay style */
+      map overlay style
           .map-overlay {
         display: none;
         font: 12px/20px sans-serif;
@@ -243,12 +255,24 @@
       </div>
 
       <div id="mySidebar" class="sidebar">
-        <div id="sidebarContent"></div>
+        <div id="sidebarContent">
+          <!-- your state/city lists go here -->
+          <div id="state-hide">
+            <h3>States</h3>
+            <ul id="statesList"></ul>
+          </div>
+          <div id="city-hide" style="display:none;">
+            <button id="backButton">← Back to States</button>
+            <h3>Cities</h3>
+            <ul id="citiesList"></ul>
+          </div>
+        </div>
       </div>
 
-<div id="main">
-  <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
-</div>
+
+  <div id="main">
+    <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
+  </div>
   
     <script>
 
@@ -505,82 +529,103 @@
           document.getElementById('menu').appendChild(link);
       }
 
-      // map click logic
+
       map.on('click', 'id', (e) => {
-        const feature = e.features[0];
-        if (!feature) return;
+    const feature = e.features[0];
+    openSidebarWithFeature(feature);
+});
+      // map click logic
+        function openSidebarWithFeature(feature) {
+      // map.on('click', 'id', (e) => {
+      //   const feature = e.features[0];
+         if (!feature) return;
 
         const name = feature.properties.NAME || "Unknown";
-        const population = feature.properties.POPULATION || 0;
-        const UA_CODE = feature.properties.UA_CODE || "Unknown";
-        const POP_DENSITY = feature.properties.POP_DENSITY || 0;
-        const HOUSING = feature.properties.HOUSING || 0;
-        const AREA_SQMI = feature.properties.AREA_SQMI || 0;
-        const OBJECTID_1 = feature.properties.OBJECTID_1 || "Unknown";
-        const NAME_1 = feature.properties.NAME_1 || "Unknown";
-        const censustotal = feature.properties.censustotal || 0;
-        const novehiclepercent = feature.properties.novehiclepercent || 0;
-        const drove_alone = feature.properties.drove_alone || 0;
-        const carpooled = feature.properties.carpooled || 0;
-        const public_transportation = feature.properties.public_transportation || 0;
-        const walked = feature.properties.walked || 0;
-        const bike_other = feature.properties.bike_other || 0;
-        const Worked_from_home_ = feature.properties.Worked_from_home_ || 0;
-        const Total_Vehicle_Revenue_Miles = feature.properties.Total_Vehicle_Revenue_Miles || 0;
-        const Total_Vehicle_Revenue_Hours = feature.properties.Total_Vehicle_Revenue_Hours || 0;
-        const Total_Passenger_Miles_Traveled = feature.properties.Total_Passenger_Miles_Traveled || 0;
-        const Total_Unlinked_Passenger_Trips = feature.properties.Total_Unlinked_Passenger_Trips || 0;
-        const Total_Operating_Expenses = feature.properties.Total_Operating_Expenses || 0;
-        const Fixed_Guideway_Vehicle_Revenue_Miles = feature.properties.Fixed_Guideway_Vehicle_Revenue_Miles || 0;
-        const Fixed_Guideway_Passenger_Miles = feature.properties.Fixed_Guideway_Passenger_Miles || 0;
-        const Fixed_Guideway_Operating_Expenses = feature.properties.Fixed_Guideway_Operating_Expenses || 0;
-        const Non_Fixed_Guideway_Vehicle_Revenue_Miles = feature.properties.Non_Fixed_Guideway_Vehicle_Revenue_Miles || 0;
-        const Non_Fixed_Guideway_Passenger_Miles = feature.properties.Non_Fixed_Guideway_Passenger_Miles || 0;
-        const Non_Fixed_Guideway_Operating_Expenses = feature.properties.Non_Fixed_Guideway_Operating_Expenses || 0;
-        const Shape_Length_1 = feature.properties.Shape_Length_1 || 0;
-        const Shape_Area_1 = feature.properties.Shape_Area_1 || 0;
-        const percapidaexpendature = feature.properties.percapidaexpendature || 0;
-        const expendaturepermile = feature.properties.expendaturepermile || 0;
-        const expendaturepertrip = feature.properties.expendaturepertrip || 0;
-        const expendaturepervehiclerevenuemile = feature.properties.expendaturepervehiclerevenuemile || 0;
-        const ORIG_FID = feature.properties.ORIG_FID || 0;
+        const population = feature.properties.POPULATION || "Unknown";
+        const popDensity = feature.properties.POP_DENSITY || "Unknown";
+        const housing = feature.properties.HOUSING || "Unknown";
+        const areaSqmi = feature.properties.AREA_SQMI || "Unknown";
 
+        const totalVehicleRevenueMiles = feature.properties.Total_Vehicle_Revenue_Miles || "Unknown";
+        const totalVehicleRevenueHours = feature.properties.Total_Vehicle_Revenue_Hours || "Unknown";
+        const totalPassengerMilesTraveled = feature.properties.Total_Passenger_Miles_Traveled || "Unknown";
+        const totalUnlinkedPassengerTrips = feature.properties.Total_Unlinked_Passenger_Trips || "Unknown";
+        const totalOperatingExpenses = feature.properties.Total_Operating_Expenses || "Unknown";
+        const total = feature.properties.Total_ || "Unknown";
+
+        const noVehicleAvailable = feature.properties.No_vehicle_available || "Unknown";
+        const f1VehicleAvailable = feature.properties.F1_vehicle_available || "Unknown";
+        const f2VehiclesAvailable = feature.properties.F2_vehicles_available || "Unknown";
+        const f3OrMoreVehiclesAvailable = feature.properties.F3_or_more_vehicles_available || "Unknown";
+
+        const droveAlone = feature.properties.Car__truck__or_van___drove_alone_ || "Unknown";
+        const carpooled = feature.properties.Car__truck__or_van___carpooled_ || "Unknown";
+        const publicTransportation = feature.properties.Public_transportation__excluding_taxicab__ || "Unknown";
+        const walked = feature.properties.Walked_ || "Unknown";
+        const otherMeans = feature.properties.Taxicab__motorcycle__bicycle__or_other_means_ || "Unknown";
+        const workedFromHome = feature.properties.Worked_from_home_ || "Unknown";
+
+        const capita1 = feature.properties.capita1 || "Unknown";
+        const vmt1 = feature.properties.vmt1 || "Unknown";
+        const epp = feature.properties.epp || "Unknown";
+
+        
+        
 
         // Open sidebar automatically
-        sidebar.style.width = "250px";
+        sidebar.style.width = "320px";
         toggleBtn.innerHTML = "× Close";
 
         // Set content dynamically
         sidebarContent.innerHTML = `
-          <a href="javascript:void(0)" class="closebtn" 
-            onclick="document.getElementById('mySidebar').style.width='0'; document.getElementById('sidebarbtn').innerHTML='☰ Sidebar'">
-          </a>
-          <section>
-            <h3>${name}</h3>
-            <hr><br>
-            <h2>UZA Urban Area Data<h2><hr>
-            <p>Population: ${Number(population).toLocaleString()}</p>
-            <p>Population Density: ${POP_DENSITY}</p>
-            <p>Housing Units: ${HOUSING}</p>><br>
-            <h2>Census Commuter Data<h2><hr>
-            <p>Drive Alone: ${drove_alone}%</p>
-            <p>Carpool: ${carpooled}%</p>
-            <p>Public Transit: ${public_transportation}%</p>
-            <p>Walked: ${walked}%</p>
-            <p>Bike/Other: ${bike_other}%</p>
-            <p>Worked from Home: ${Worked_from_home_}%</p><br>
-            <h2>Federal Transit Administration UZA Sums<h2><hr>
-    <p>Total Vehicle Revenue Miles: ${Total_Vehicle_Revenue_Miles}</p>
-    <p>Total Passenger Miles Traveled: ${Total_Passenger_Miles_Traveled}</p>
-    <p>Total Unlinked Passenger Trips: ${Total_Unlinked_Passenger_Trips}</p>
-    <p>Total Operating Expenses: $${Number(Total_Operating_Expenses).toLocaleString()}</p>
-    <p>Expenditure Per Capita: $${percapidaexpendature}</p>
-    <p>Expenditure Per Mile: $${expendaturepermile}</p>
-    <p>Expenditure Per Trip: $${expendaturepertrip}</p>
-    <p>Expenditure Per Vehicle Mile: $${expendaturepervehiclerevenuemile}</p>
-          </section>
+
+  <section><br>
+    <h3>${name}</h3>
+      <hr><br>
+
+      <h2>UZA Demographic Data</h2>
+      <hr>
+      <p><strong>Population:</strong> ${Number(population).toLocaleString()}</p>
+      <p><strong>Population Density:</strong> ${Number(popDensity).toLocaleString()}</p>
+      <p><strong>Housing Units:</strong> ${Number(housing).toLocaleString()}</p>
+      <p><strong>Land Area (sq mi):</strong> ${Number(areaSqmi).toLocaleString()}</p>
+      <br>
+
+      <h2>Household Vehicle Availability</h2>
+      <hr>
+      <p><strong>No Vehicle Available:</strong> ${noVehicleAvailable}%</p>
+      <p><strong>1 Vehicle:</strong> ${f1VehicleAvailable}%</p>
+      <p><strong>2 Vehicles:</strong> ${f2VehiclesAvailable}%</p>
+      <p><strong>3+ Vehicles:</strong> ${f3OrMoreVehiclesAvailable}%</p>
+      <br>
+
+      <h2>Census Commuter Mode Share</h2>
+      <hr>
+      <p><strong>Drive Alone:</strong> ${droveAlone}%</p>
+      <p><strong>Carpool:</strong> ${carpooled}%</p>
+      <p><strong>Public Transit:</strong> ${publicTransportation}%</p>
+      <p><strong>Walked:</strong> ${walked}%</p>
+      <p><strong>Bike/Other:</strong> ${otherMeans}%</p>
+      <p><strong>Worked from Home:</strong> ${workedFromHome}%</p>
+      <br>
+
+      <h2>Federal Transit Administration Totals</h2>
+      <hr>
+      <p><strong>Total Vehicle Revenue Miles:</strong> ${Number(totalVehicleRevenueMiles).toLocaleString()}</p>
+      <p><strong>Total Vehicle Revenue Hours:</strong> ${Number(totalVehicleRevenueHours).toLocaleString()}</p>
+      <p><strong>Total Passenger Miles Traveled:</strong> ${Number(totalPassengerMilesTraveled).toLocaleString()}</p>
+      <p><strong>Total Unlinked Passenger Trips:</strong> ${Number(totalUnlinkedPassengerTrips).toLocaleString()}</p>
+      <p><strong>Total Operating Expenses:</strong> $${Number(totalOperatingExpenses).toLocaleString()}</p>
+      <br>
+
+      <h2>Derived Performance Metrics</h2>
+      <hr>
+      <p><strong>Expenditure Per Capita:</strong> $${Number(capita1).toLocaleString()}</p>
+      <p><strong>Vehicle Miles Traveled (per capita):</strong> ${Number(vmt1).toLocaleString()}</p>
+      <p><strong>Expenditure Per Passenger Mile:</strong> $${Number(epp).toLocaleString()}</p><br><br>
+    </section>
         `;
-      });
+      }})
 
 
       //  https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/
@@ -608,13 +653,13 @@
         map.getCanvas().style.cursor = '';
         popup.remove();
       });
-      })
       }
+      
 
 
     </script>
          <script src="panel.js"></script>
-         <link rel="stylesheet" href="sidebar/sidebar.css">
+         <link rel="stylesheet" href="sidebar.css">
          
   </body>
 </html>

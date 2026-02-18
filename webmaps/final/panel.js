@@ -1,16 +1,9 @@
 const sidebar = document.getElementById("mySidebar");
-const toggleBtn = document.getElementById("toggleSidebarBtn");
+const toggleBtn = document.getElementById("sidebarbtn");
 const sidebarContent = document.getElementById("sidebarContent");
 
-toggleBtn.onclick = () => {
-  const currentWidth = window.getComputedStyle(sidebar).width;
-  if (sidebar.style.width === "250px") {
-    // close
-    sidebar.style.width = "0";
-    toggleBtn.innerHTML = "☰ Menu";
-  } else {
-    // open
-    sidebar.style.width = "250px"; // or whatever width you want
-    toggleBtn.innerHTML = "× Close";
-  }
-};
+toggleBtn.onclick = () => { // Check current width of the sidebar 
+if (sidebar.style.width === "350px") { // If open, close it 
+sidebar.style.width = "0"; toggleBtn.innerHTML = "☰ Sidebar"; } else { // If closed, open it 
+sidebar.style.width = "350px"; toggleBtn.innerHTML = "× Close"; } };
+

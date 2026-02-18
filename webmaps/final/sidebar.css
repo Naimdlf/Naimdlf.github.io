@@ -1,0 +1,71 @@
+.sidebar {
+  height: 100%;
+  width: 0; /* start closed */
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    45deg,
+    #333 5%,
+    #555 30%,
+    #777 50%,
+    #555 70%,
+    #333 95%
+  ); /* metallic gradient look */
+  color: #fff;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.sidebar a {
+  padding: 12px 14px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  transition: 0.2s;
+  border-radius: 6px;
+  margin: 4px 12px; /* gives a little spacing between items */
+}
+
+.sidebar a:hover {
+  background: linear-gradient(90deg, #666, #999);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #333, #555);
+  color: white;
+  padding: 10px 20px;
+  z-index: 100;
+  border: none;
+  position: fixed;
+  border-radius: 6px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.2s;
+}
+
+.openbtn:hover {
+  background: linear-gradient(45deg, #555, #777);
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+
+
