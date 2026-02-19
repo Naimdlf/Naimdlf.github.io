@@ -261,7 +261,7 @@
             <h3>States</h3>
             <ul id="statesList"></ul>
           </div>
-          <div id="city-hide" style="display:none;">
+          <div id="city-hide" style="display:none;"><br><br><hr>
             <button id="backButton">← Back to States</button>
             <h3>Cities</h3>
             <ul id="citiesList"></ul>
@@ -569,9 +569,6 @@
         const vmt1 = feature.properties.vmt1 || "Unknown";
         const epp = feature.properties.epp || "Unknown";
 
-        
-        
-
         // Open sidebar automatically
         sidebar.style.width = "320px";
         toggleBtn.innerHTML = "× Close";
@@ -622,7 +619,7 @@
       <hr>
       <p><strong>Expenditure Per Capita:</strong> $${Number(capita1).toLocaleString()}</p>
       <p><strong>Vehicle Miles Traveled (per capita):</strong> ${Number(vmt1).toLocaleString()}</p>
-      <p><strong>Expenditure Per Passenger Mile:</strong> $${Number(epp).toLocaleString()}</p><br><br>
+      <p><strong>Expenditure Per Passenger Mile:</strong> $${Number(epp).toLocaleString()}</p><br><br><br><br>
     </section>
         `;
       }})

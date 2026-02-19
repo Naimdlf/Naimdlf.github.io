@@ -614,6 +614,28 @@
       citiesList.innerHTML = ''; // optional: clear city list
     });
         
+    function sidebarClickToMap(cityName) {
+    if (!map) return;
+
+    // Save current city globally
+    currentCity = cityName;
+
+    // Look up feature data for the city (you may need a city-to-feature mapping)
+    const feature = cityFeatures[cityName]; // assumes you have a dictionary linking cityName to its GeoJSON feature
+
+    if (!feature) return;
+
+    // Fly to city coordinates
+    if (feature.geometry && feature.geometry.coordinates) {
+        map.flyTo({
+            center: feature.geometry.coordinates,
+            zoom: 9
+        });
+    }
+
+    // Open sidebar with city details
+    openSidebarWithFeature(feature);
+}
 
 
 
