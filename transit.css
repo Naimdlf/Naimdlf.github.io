@@ -1,0 +1,150 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("photos/Metal.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+
+html,body {
+    padding: 0;
+    margin: 0;
+}
+
+/* dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Toggle dropdown */
+.show {
+  display: block;
+}
+
+/* dropdown */
+
+/* Footer Style */
+footer {
+  text-align: center;
+  list-style-type: none;
+  margin-top: 30px;
+  background-color: rgba(44, 62, 80, 0.1);
+  border-radius: 8px;
+}  
+/* footer */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  position: relative;
+  background: linear-gradient(180deg, #4f4f4f, #2f2f2f);
+  box-shadow: 0px 8px 60px rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-bottom: 3px solid #444;
+  z-index: 4;
+}
+
+/* content */
+
+.map {
+  position: relative;
+  padding: 1rem;
+  background: linear-gradient(35deg, #ccc, #cbb);
+  width: 100;
+  z-index: 3;
+}
+
+.panel {
+  z-index: 15;
+}
+
+/* Shine */
+
+.shine {
+  font-size: 14px;
+  padding: 6px 16px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  color: #000;
+  background: linear-gradient(
+    45deg,
+    #999 5%,
+    #c2bebe 10%,
+    #ccc 30%,
+    #979595 50%,
+    #ccc 70%,
+    #ffffff66 80%,
+    #999 95%
+  );
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Shine */
+
+/* context section */
+h1 {
+  font-family: Helvetica, Arial;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+.contextsection {
+  background: linear-gradient(#297fb955, #8abbeb40);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-radius: 1rem;
+  margin: auto;
+}
+/* context section */
+
+.iframe-container {
+  width: 90vw; /* 90% of the viewport width */
+  aspect-ratio: 16 / 8;
+  margin: 2rem auto; /* Centers the container with vertical spacing */
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

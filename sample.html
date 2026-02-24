@@ -1,0 +1,216 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Naim Ferris">
+    <meta name="description" content="Writing Samples">
+    <title>Naim's Portfolio - Writing Samples</title>
+    <!--CSS Link-->
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+     <!--Dropdown script-->
+<script src="js/dropdown.js"></script>
+
+<!--header script-->
+<script src="js/minimizeheader.js"></script>
+
+<!--read more Script-->
+<script src="js/readmore.js"></script>
+
+<br>
+
+<section>
+    <h2 style="text-align: center;"><strong>Using Cap and Trade to Reduce Greenhouse Gas Emissions</strong></h2>
+    <p>
+    <p>
+      In 2006, the state of California passed the California Global Warming Solutions Act (AB-32), a landmark climate policy designed to reduce greenhouse gas (GHG) emissions through a cap-and-trade (C&T) system administered by the California Air Resources Board (CARB) (California Air Resources Board, 2018). AB-32 was framed as a turning point in California’s climate policy, relying on market-based mechanisms to achieve emissions reductions in a cost effective manner. Under the program, regulated firms across multiple sectors may either reduce emissions directly or purchase allowances from other firms, while overall emissions are constrained through a declining cap on allowances. Since its adoption, AB-32 has served as a model for similar market-based climate policies in other states, including Oregon’s Climate Protection Program (CPP) (Johnson, 2023). Given this influence, it is important to examine how cap-and-trade has functioned in practice in California and whether it has contributed to meaningful emissions reductions. While C&T has theoretical advantages, evidence from AB-32 suggests that significant implementation complications (policy complexity, interactions with complementary regulations, and political constraints) limit C&T effectiveness in reducing GHG, and complicate both causal attribution and equity outcomes.
+      </p><br>
+          <span id="dots2"></span>
+          <div id="more2">
+
+
+      <p>
+      AB-32 set the goal of reducing GHG emissions to 1990 levels by 2020. This would constitute a 15 percent emission reduction relative to projections (California Air Resources Board, 2018). California achieved their 1990 emissions target in 2016, four years ahead of schedule (Lessmann and Kramer, 2024,  pp.2-3). In 2022 California extended its 2020 target to achieve net-zero greenhouse gas emissions by 2045 (Johnson, 2023). 
+      </p><br>
+
+      <p>
+      Despite these apparent successes, attributing emissions reductions directly to C&T is difficult. AB-32 phased into operations gradually, starting by only regulating energy producers and large industrial facilities. In 2015 this extended to suppliers of fuels. Because of the staggered rollout, there is limited information on the abatement directly attributable to C&T (Lessmann and Kramer, 2024,  P.2). Moreover, California has implemented some of the most stringent environmental regulations in the United States, including energy efficiency standards, fuel standards, and other regulations that likely significantly reduced GHG emissions over the time period C&T was being implemented (California Air Resources Board, 2018) . This raises questions about how effectively we can isolate the effectiveness of C&T compared to direct regulation. 
+      </p><br>
+
+      <p>
+      Contributing to AB-32's causal attribution problem is the fact that C&T can have mixed effects when applied across sectors. For example, An analysis by Christian Lessmann in Energy Policy titled, “The effect of cap-and-trade on sectoral emissions: Evidence from California” found that when accounting for these and other factors California C&T likely only accounted for an annual reduction of 6% in the electricity sector, while industrial emissions actually increased relative to counterfactual scenarios (Lessmann and Kramer, 2024, p.8). AB-32 is a broad application of C&T, but other C&T applications have been sector specific. Attribution is not the only barrier to C&T effectiveness.
+      </p><br>
+
+      <p>
+      Emissions trading schemes are also prone to phenomenon experts refer to as carbon leakage. This occurs when a firm creatively relocates emissions to create the perception of lower emissions. Carbon leakage occurs when firms shift production or emissions outside the regulated jurisdiction, creating the appearance of reduced emissions without achieving real global reductions. In California, utilities have engaged in practices such as resource shuffling and changes in electricity imports to comply with emissions limits on paper while maintaining similar emissions levels elsewhere (Lessmann and Kramer, 2024, p. 8). These dynamics complicate enforcement and weaken the environmental integrity of emissions trading schemes.
+      </p><br>
+
+      <p>
+      Equity concerns present another major challenge for C&T. In AB-32 broad sectors make it difficult for the government to set prices, and these different costs will end up impacting different sectors unequally by design. This means that if a climate change policy is passed that affects one sector without changing C&T it can create what Christian Lessmann describes as “negative synergies”. Where impacted sectors can trade forced carbon savings to unaffected (dirty) sectors (Lessmann and Kramer, 2024, p.8). 
+      </p><br>
+
+      <p>
+      The empirical evidence on environmental justice impacts under AB 32 is mixed. A 2022 study by Danae Harnandex-Cortes and Kyle C. Meng in the Journal of Public Economics titled, “Do environmental markets cause environmental injustice? Evidence from California’s carbon market” argues that AB-32 reduced emissions by 3–9 percent and narrowed emissions disparities between facilities in low- and high-income communities by 6–10 percent annually (Hernandez-Cortes and Meng, 2023, p.1). They state that C&T actually reduces the existing compliance gap between firms operating in lower income communities and higher income communities. Though they point out that it is hard to determine causation (Hernandez-Cortes and Meng, 2023, p.15). In contrast, a paper by Michael Sah and Manuel Pastor in 2023 titled “Not So Clear: Revisiting the Impacts of Cap-and-Trade on Environmental Justice” argues that by making different assumptions using the same data you actually can't determine a statistically significant narrowing (Ash et al., 2023, p.11). While a theoretical argument could be made that C&T will always prejudice unequal outcomes by design, as different firms have different resources and abatement capacity. It remains unclear whether AB 32 has exacerbated or mitigated environmental injustice.
+      </p><br>
+
+      <p>
+      Finally, regulatory capture also has an effect on the implementation of C&T. A study by Kenneth Johnson in Energy Policy found that in trying to achieve, “cost effective” reductions the CARB has in effect created a “waterbed effect,” in which industries are made to achieve minimum statutory requirements disincentivizing over compliance and mitigating the effect of subsequent actions (Johnson, 2023, pp.1-3). Although CARB modeled more ambitious C&T scenarios consistent with limiting warming to 1.5°C, these options were rejected as politically or economically infeasible. As a result, the emissions cap was set conservatively to ensure compliance even under worst-case economic conditions, such as recessions, thereby limiting ambition during more favorable periods (Johnson, 2023, p. 3). Similarly, there was enough flexibility in AB-32 that as California lowered their GHG emissions firms were able to buy 310 million surplus allowances, which could be used in later years as the cap tightened. This banking, combined with periods of unexpectedly low emissions, effectively released additional allowances back into the system, offsetting some of the intended climate benefits in the name of cost containment. (Johnson, 2023, p.6).
+      </p><br>
+      <p>California’s experience with C&T under AB-32 demonstrates that while C&T can contribute to emissions reductions, their real-world effectiveness is highly contingent on policy design, complementary regulations and political constraints. Although California achieved its 1990 emissions target ahead of schedule, the evidence suggests that C&T played a relatively small role compared to direct regulatory measures. Carbon leakage, allowance banking, regulatory capture, cost efficiency, and the interaction of C&T with other climate policies have diluted the program’s environmental impact. This does not mean that there is no use case for a C&T type policy (especially a small sector specific application), but large scale C&T is likely too complicated in effective implementation to be a silver bullet. Alternative policy instruments may offer clearer and more reliable pathways to emissions reduction. A carbon tax, for example, would provide a transparent and predictable price signal across the economy without the complexity of allowance allocation and banking. California’s own experience suggests that direct command and control style regulations (like energy efficiency mandates) can also be effective in sectors where monitoring is feasible. States like Oregon, the lesson is not that market-based mechanisms should be abandoned entirely, but that carbon pricing or direct regulation may better align policy ambition with climate targets. </p><br>
+        <footer>
+  <h2>References</h2>
+  <ul style="text-align: left;">
+    <li>
+      Ash, Michael, et al. <em>Not so Clear: Revisiting the Impacts of Cap-and-Trade on Environmental Justice</em>.
+      Working Paper Series, 2023.
+    </li>
+
+    <li>
+      California Air Resources Board.
+      “AB 32 Global Warming Solutions Act of 2006.”
+      <em>California Air Resources Board</em>, 2018,
+      <a href="https://ww2.arb.ca.gov/resources/fact-sheets/ab-32-global-warming-solutions-act-2006" target="_blank" rel="noopener noreferrer">
+        ww2.arb.ca.gov/resources/fact-sheets/ab-32-global-warming-solutions-act-2006
+      </a>.
+    </li>
+
+    <li>
+      Hernandez-Cortes, Danae, and Kyle C. Meng.
+      “Do Environmental Markets Cause Environmental Injustice? Evidence from California’s Carbon Market.”
+      <em>Journal of Public Economics</em>, vol. 217, Jan. 2023, p. 104786.
+      <a href="https://doi.org/10.1016/j.jpubeco.2022.104786" target="_blank" rel="noopener noreferrer">
+        https://doi.org/10.1016/j.jpubeco.2022.104786
+      </a>
+    </li>
+
+    <li>
+      Johnson, Kenneth C.
+      “California’s Ambitious Greenhouse Gas Policies: Are They Ambitious Enough?”
+      <em>Energy Policy</em>, vol. 177, June 2023, p. 113545.
+      <a href="https://doi.org/10.1016/j.enpol.2023.113545" target="_blank" rel="noopener noreferrer">
+        https://doi.org/10.1016/j.enpol.2023.113545
+      </a>
+    </li>
+
+    <li>
+      Lessmann, Christian, and Niklas Kramer.
+      “The Effect of Cap-and-Trade on Sectoral Emissions: Evidence from California.”
+      <em>Energy Policy</em>, vol. 188, May 2024, p. 114066.
+      <a href="https://doi.org/10.1016/j.enpol.2024.114066" target="_blank" rel="noopener noreferrer">
+        https://doi.org/10.1016/j.enpol.2024.114066
+      </a>
+    </li>
+          </ul>
+        </footer>
+        </p>
+        </div>
+        <button onclick="myFunction(2)" id="myBtn2">Read more</button>
+  </section>
+        <section>
+            <h2 style="text-align: center;"><strong>Effects of Policy and Practice on Early TOMS Shoes</strong></h2>  
+            <p>TOMS Shoes launched in May 2006 and immediately became a hit. By October 2008 TOMS was selling $48 canvas Shoes in 400 retail outlets and online. The canvas shoes were modeled off of those TOMS Founder, Blake Mycoskie, found in Argentina. According to “Power Point: Be the change” Patricia Sellers writes that Mycoskies business model was simple, instead of spending 20% of the shoe companies’ gross margin on advertising, they would instead use word of mouth from giving free pairs of shoes to people in Argentina, South Africa, and Ethiopia to get word out about their product (Stellers, 2009).</p> <br>
+            <span id="dots1"></span>
+            <div id="more1">
+            <p>TOMS also sought to use this business model to fulfill an altruistic mission and fulfill a need. In 2011 Blake Mycoskie Wrote a piece in Business Insider titled “Blake Mycoskie Conceived the Idea For TOMS Shoes While Sitting On A Farm, Pondering Life, In Argentina” explaining what his goals for TOMS where at the time. He explains that while meeting a American woman in Argentina running a “shoe drive” that many kids lacked shoes. She argued that this was an issue because it made different aspects of their lives either inconvenient, uncomfortable, or unsafe. Mycoskie states, “[lack of shoes complicated] essentials like attending school and getting water from the local well -- but also exposed them to a wide range of diseases.” And then went on to explain that the shoe drive was hampered by, “Their complete dependence on donations (…) [meaning] that they had little control over their supply of shoes. And even when donations did come in sufficient quantities, they were often not in the correct sizes, which meant that many of the children were left barefoot even after the shoe drop-offs. (Mycoskie, 2011)” Toms main brake through grew out of this experience and exists till this day. As they state on their website “TOMS founder Blake Mycoskie pioneered the One for One® model—giving away one pair of shoes for every pair sold, supporting larger health, education, and community development programs through strategic partnerships. (TOMS, 2024)” </p><br>
+            <p>This buy one give one (BOGO) model would arguably fail in part due to structural policies affecting its success. An article in Forbes by David Hessekiel titled “The Rise And Fall Of The Buy-One-Give-One Model At TOMS” outlines what happened with the BOGO model TOMS would be bought up by Bain Capital in 2014, reportedly to avoid filing for bankruptcy. The article points out in the early stages of TOMS, around 2008, they were having issues distributing the volume of shoes needed to fulfill BOGO. Blake Mycoskie stated that “Giving is really hard” it seems apparent that in the early TOMS did not do the due diligence to understand how to implement this scale of program. They later would build out a network of nonprofits to distribute shoes to across different countries. Distribution models verified in effectiveness depending on place and program, but a common criticism is that TOMS hurt footwear manufacturers and distributers in impacted markets (Hessekiel, 2021). </p><br>
+            <p>Now let’s look at some examples of where Supply chains issues and atomized government policies did affect the course of early TOMS BOGO program. In “Come To Africa For Business, Not Handouts” Michael Buckler and Beau Jackson from the National Peace Corps Association outline how BOGO affects African Economies. They state that African Countries are sometimes skeptical of social enterprises like TOMS because they bring American business perspectives to African business environments. As of 2012 TOMS had given away 2 million pairs of shoes while only having a pilot local manufacturing program set up in Ethiopia. The vast majority of shoes where not constructed in local markets.  The article also states that the BOGO model inflicts invisible harms on Africans. This is because, “However, successful marketing is the most insidious way in which these organizations inflict harm. When an investment banker returns home from work and sees his child wearing TOMS Shoes, the message is clear—Africa is not ready for my investment money. (…) Surveys of American companies confirm this bias (Buckler & Jackson, 2013, P. 1-2).” TOMS BOGO model is problematic for African countries on multiple levels. </p><br>
+            <p>The practice of giving product giving massive amounts of free product to low-income countries is referred to as dumping. As Charles Kenny points out in “Haiti Doesn’t Need Your Old T-Shirt” An organization like the National Football League can dump 100,000 shirts on Nicaragua and Zambia and write it off as a charitable donation and tax break. People in these countries argue that they might not even need to product, because often the need is exaggerated due to cultural misunderstanding or just looking at the worst cases of poverty. Even if they needed the product, it would be better for the economy and environment if they got it from a local distributor rather than a Western NGO that has to ship the product overseas. The article states that programs like the U.S. food aid program air dropped 2.4 million Pop-Tarts on Afghanistan, “the scale of U.S. food aid isn't strongly tied to how much recipient countries actually require it -- but it does rise after a bumper crop in the American heartland, suggesting that food aid is far more about dumping American leftovers than about sending help where help is needed. And just like secondhand clothing, castoff food exports can hurt local economies.” Local rice production declined over the period of time the U.S. food aid program was operating in Haiti. Direct monetary donations to farmers would have been more effective and selfless then distributing US manufactured foods in Haiti. Kenny argues that, “if [TOMS Shoes} consumers are buying Toms instead of donating to charity, as some surely are? Much better to stop giving them the stuff we don't want -- and start giving them the money they do. Kenny (2014)” </p><br>
+            <p>In 2016 there was a study done on the TOMS BOGO program in El Salvador. It measured the effect of toms on school aged children and households. They measured the same metrics Blake Mycoskie was trying to address with his original mission, mainly children’s time allocation, school attendance, health, self-esteem, and aid dependency. There was found to be a correlation between shoe access and time doing outdoor activities but insignificant impacts on all other metrics. The program negatively impacted dependency. This study is another example of the murky impact of this kind of BOGO in-kind donation programs (Wydick et al., 2016, P. 727). The study points out that the success of the TOMS program is very contextual and may be more effective in countries that are lower income and lack shoe access (Wydick et al., 2016, P. 747-749). Ultimately TOMS probably would have been more successful from a philanthropic perspective if they had chosen to use a business model other than BOGO. In essence, the TOMS BOGO program's impact, as highlighted by this study in El Salvador, reveals the complexities of aid initiatives and prompts a reconsideration of strategies that could more effectively address global social challenges.</p><br>
+            <footer>
+                <h2>References</h2>
+                <ul>
+                    <li>Buckler, M., & Jackson, B. (2013). Wayback Machine. National Peace Corps Association, 1–2. <a href="https://web.archive.org/web/20131217044106/http://www.peacecorpsconnect.org/wordpress/wp-content/uploads/2013/07/ComeToAfricaForBusinessNotHandouts_WV.pdf" target="_blank">https://web.archive.org/web/20131217044106/http://www.peacecorpsconnect.org/wordpress/wp-content/uploads/2013/07/ComeToAfricaForBusinessNotHandouts_WV.pdf</a></li>
+                    <li>Hessekiel, D. (2021). The Rise And Fall Of The Buy-One-Give-One Model At TOMS. Forbes. <a href="https://www.forbes.com/sites/davidhessekiel/2021/04/28/the-rise-and-fall-of-the-buy-one-give-one-model-at-toms/?sh=ffb522a71c45" target="_blank">https://www.forbes.com/sites/davidhessekiel/2021/04/28/the-rise-and-fall-of-the-buy-one-give-one-model-at-toms/?sh=ffb522a71c45</a></li>
+                    <li>Kenny, C. (2014, January 2). Haiti Doesn’t Need Your Old T-Shirt. FP.com. <a href="https://web.archive.org/web/20140102230013/http://www.foreignpolicy.com/articles/2011/10/11/haiti_doesnt_need_your_old_tshirt?page=full#sthash.WzXb2uF7.dpbs" target="_blank">https://web.archive.org/web/20140102230013/http://www.foreignpolicy.com/articles/2011/10/11/haiti_doesnt_need_your_old_tshirt?page=full#sthash.WzXb2uF7.dpbs</a></li>
+                    <li>Mycoskie, B. (2011). Blake Mycoskie Conceived the Idea For TOMS Shoes While Sitting On A Farm, Pondering Life, In Argentina. Business Insider. <a href="https://www.businessinsider.com/blake-mycoskie-argentina-toms-shoes-2011-09" target="_blank">https://www.businessinsider.com/blake-mycoskie-argentina-toms-shoes-2011-09</a></li>
+                    <li>Stellers, P. (2009, April 29). Power Point: Be the change - Postcards. CNN.com. <a href="https://web.archive.org/web/20090429204104/http://postcards.blogs.fortune.cnn.com/2008/10/11/power-point-be-the-change/" target="_blank">https://web.archive.org/web/20090429204104/http://postcards.blogs.fortune.cnn.com/2008/10/11/power-point-be-the-change/</a></li>
+                    <li>TOMS. (2024, April 14). Our Story. TOMS. <a href="https://www.toms.com/us/about-toms.html#:~:text=In%202006%2C%20TOMS%20founder%20Blake" target="_blank">https://www.toms.com/us/about-toms.html#:~:text=In%202006%2C%20TOMS%20founder%20Blake</a></li>
+                    <li>Wydick, B., Katz, E., Calvo, F., Gutierrez, F., & Janet, B. (2016). Shoeing the Children: The Impact of the TOMS Shoe Donation Program in Rural El Salvador. The World Bank Economic Review, 727, 747–749. <a href="https://doi.org/10.1093/wber/lhw042" target="_blank">https://doi.org/10.1093/wber/lhw042</a></li>
+                </ul>
+            </footer></div>
+            <button onclick="myFunction('1')" id="myBtn1">Read more</button>
+        </section>
+  <section>
+    <h2 style="text-align: center;"><strong>The Impact of Home Energy Scores on Cities</strong></h2>
+    <P>Many Oregon Cities have set ambitious targets for lowering their carbon footprints in recent years. In Portland they set the goal of lowering carbon emissions by 50 percent compared to emissions set in the year 1990. By 2050 they want to be net-zero meaning the amount of greenhouse gases emitted is equal to the amount removed by carbon sinks (City of Portland, 2024). Other cities like Hillsboro are more detailed. Hillsboro wants 80% of the cities greenhouse gas emissions compared to a 2007 baseline with the rest being offset (City of Hillsboro, 2019). One of the policies both cities have tried in pursuit of that effort is a home energy score policy. The US Department of energy has found that 21% of energy consumption comes from residential homes. 15% of greenhouse gas emissions also come from the same source (U.S. Department of Energy, 2021).</P> <br>
+    <span id="dots3">...</span>
+    <div id="more3">   <p>Home energy scores are a tool to help cities address this problem. They are assessments mandated by cities before a home is sold. In cities like Portland and Hillsboro it follows guidelines set forth by the US Department of Energy Scoring energy efficiency on a scale from 1-10. 10 would mean a very energy efficient building and 1 would mean significant room for improvement. The Average home has a score of 5. Home Energy Score system score sheet also outlines how much carbon the home is responsible for and what the homeowner would save if they improved their energy efficiency. It then has recommendations and improvements for things that could be done to improve the score (City of Hillsboro, 2020). This policy is a huge win for the consumer and cities. Home Energy Score Policies guaranty home buyers the right to know the energy efficiency of their home just like they know the fuel efficiency of their car. It is a win for the low-income individual because they may avoid a long-term cost burden of inefficient energy usage. We could also offset or eliminate the up-front costs for an upgrade depending on what types of financial aid or programs from non-profits like the Energy Trust of Oregon (Energy Trust of Oregon, 2024). Today we are going to go into further detail about the impact of a home energy score and by analyzing the problem, looking at case studies in Oregon from cities like Portland, analyze impacts and criticism, and talk about the next steps for advancing home energy score programs in cities. </p><br>
+    The City of Portland has a massive housing market comprising more then 20,000 homes (City of Portland, 2020). We already know that lots of housing is not very energy efficient and it is a considerable contributor to greenhouse gasses for cities. When proposing the Home Energy Score policy to city council the city of Portland commissioned a report looking at the impact of a scoring policy. They pointed to the Regional Building Stock Assessment in western Oregon as a blueprint for their own home energy score. The Home Energy Score (HES) data helps stakeholders like nonprofits, energy organizations, and researchers improve energy efficiency, assist low-income households, and track carbon reduction progress. Many Portland homes have low energy efficiency, with outdated heating systems and little insulation, presenting significant opportunities for upgrades. If recommended upgrades with a 10-year payback were made, carbon savings would equal powering 2,541 homes annually. Their where 2 main issues they were trying to address (City of Portland, 2020). Much like how Zillow has walkability scores consumers deserve the right to understand their homes energy efficiency a considerable cost and operating in the home before purchase. The total cost of a home energy score in Portland settled to around $125.00 with a means tested low-income program applied to home sellers operating in areas with low area median income. The program in Portland received positive reviews from home buyers because it increased transparency when surveyed. Though there was a marginal cost associated with implementing the home energy score the intangible costs to home buyers along with long term tenure costs more than offset both the upfront cost of the home energy score assessment and the cost to install energy efficient upgrades to a home. In fact, a plurality of homes in Portland received a score of 1 meaning much room for improvement but when applying the recommended improvements in the home energy score the average home receives an 8. This is because some homes art equipped to become completely energy efficient (City of Portland, 2020). The report found that the most common recommended home energy score improvements were ceiling gaps in windows sealing ducts, upgrading the water heater and heat pump and insulating walls (City of Portland, 2020). Addressing higher energy bills that burden low-income consumers and environmental issues associated with climate change like the urban heat island effect are the main reasons to undergo the policy. </p><br>
+    There are some major criticisms and negative externalities associated with home energy score policies. High upfront costs and reluctance to take on debt hinder homeowners from upgrading, though incentives from the Energy Trust of Oregon aim to address this. HES compliance has improved through education and enforcement, though challenges remain in reaching vulnerable communities and achieving higher compliance rates. HES contributes to Portland’s climate goals, but further efforts are needed to decarbonize all buildings and protect at-risk communities. The report also points out that commercial buildings are a bigger issue in Portland then single family homes and suggests department resources should be pushed in that direction. Home sellers pay the price for the score, and it is assumed pass the cost off to consumers during the sale of the home. This might make a HES policy a tough sell when housing costs are high or among the real estate industry (City of Portland, 2020). A report by the US Department of Energy found only small disparities in the predictive power of home energy scores following different guidelines. The report looked at 2 different ways of calculating home energy scores, one of which being HEScore which is the US Department of Energy’s scoring model. Results show that the effect of whole-house leakage on energy use is small, whether estimated through qualitative input or a blower door test. Comparing energy use predictions from these two methods revealed only a 2-3% difference on average, with most homes scoring within one bin of each other. The study found that the qualitative input (sealed vs. unsealed) had a minimal impact on energy predictions, and overall, the HEScore model accurately estimates energy use even without a blower door test. The results suggest that the HEScore's algorithm, which includes factors like home age and size, provides a reliable estimate of energy use and is suitable for cases where blower door tests are not available (Merket & Heaney, 2014). </p><br>
+    The main negative externality associated with home energy scores and levied by critics is that it leads to unnecessary cost burden placed on the home seller and then passed on to the buyer. A Study conducted in 2024 titled “How Does Mandatory Energy Efficiency Disclosure Affect Housing Prices?” looked to answer this question. In homes, sellers may know more about energy efficiency than buyers, which can affect pricing. An energy efficiency audit policy could help address this by making energy efficiency more noticeable to buyers, which could influence their decisions. The study defined the term Salience, a concept where certain factors get more attention in decision-making, plays a role here. For example, buyers may not initially focus on energy efficiency, but when prompted by realtors, they might consider it more. This could raise prices for energy-efficient homes. The study suggests that energy efficiency policies may encourage long-term investment in energy efficiency by increasing awareness, benefiting both the environment and consumer decisions. Additionally, such policies could help buyers more easily find homes that match their preferences for energy efficiency (Cassidy, 2024). Basically, the report suggests that the main positive externality outside of price is that thou homeowners already have a general sense of their home’s energy efficiency having a mandated audit increases the salience of the issue for the buyer. This decreases the likelihood that an omitted variable in a home buyer's purchase decision could impact home value. This study however does not conclude that home energy scores make it more likely 4 energy upgrades to happen only that a home with a positive home energy score has a positive correlation with housing price (Cassidy, 2024), </p><br>
+    Portland and Hillsboro use the Home Energy Score to assess home energy efficiency, helping buyers understand energy costs. Homes are rated from 1 to 10, with recommendations for improvements. The program supports climate goals but faces challenges like high upfront costs and compliance issues. Critics argue the cost burden is passed to buyers, potentially raising home prices. However, it increases awareness of energy efficiency and supports long-term environmental goals. Programs like home energy scores are only present in some cities in the state. A great next step for this environmental policy might be creating a larger statewide framework for home energy scores in Oregon cities. Mandating a home energy score could prevent a race to the bottom where Realtors are less likely to operate in urban areas where the score is present due to cost or time burden. The policy creates a market-based mechanism to counter climate change in cities. There's a need for a larger call to action from the state to create compliance in all cities and give smaller or marginalized communities a chance to benefit from the program. </p><br>
+    <footer>
+    <h2>References</h2>
+    <footer>
+        <ul>
+          <li>Cassidy, A. (2024). <em>How Does Mandatory Energy Efficiency Disclosure Affect Housing Prices?</em></li>
+          <li>City of Hillsboro. (2019). <em>Sustainability Goals & Initiatives | City of Hillsboro, OR</em>. <a href="https://www.hillsboro-oregon.gov/our-city/departments/city-manager-s-office/sustainability/sustainability-goals-initiatives" target="_blank">Hillsboro-Oregon.gov</a></li>
+          <li>City of Hillsboro. (2020). <em>HOME PROFILE</em>.</li>
+          <li>City of Portland. (2020). <em>Report to Portland City Council on Residential Energy Performance Rating and Disclosure (Ordinance No. 188143)</em>. <a href="https://www.portland.gov/sites/default/files/2020/report-to-portland-city-council-on-residential-energy-performance-rating-and-disclosure-ordinance-no.-188143.pdf" target="_blank">Portland.gov</a></li>
+          <li>City of Portland. (2024). <em>Climate policy and programs: The work to achieve our climate goals</em>. <a href="https://www.portland.gov/bps/climate-action/climate-program" target="_blank">Portland.gov</a></li>
+          <li>Energy Trust of Oregon. (2024). <em>Energy Trust of Oregon</em>. <a href="https://www.energytrust.org/" target="_blank">EnergyTrust.org</a></li>
+          <li>Merket, N., & Heaney, M. (2014). <em>Assessment of the U.S. Department of Energy’s Home Energy Scoring Tool: 2014 Update</em>.</li>
+          <li>Portland Home Energy Score. (2017). <em>Portland Home Energy Score</em>. <a href="https://www.homeenergyscoreportland.com/" target="_blank">HomeEnergyScorePortland.com</a></li>
+          <li>U.S. Department of Energy. (2021). <em>U.S. Residential Building Stock Analysis</em>. <a href="https://www.energy.gov/eere/buildings/us-residential-building-stock-analysis" target="_blank">Energy.gov</a></li>
+        </ul>
+      </footer> </div><br>  <button onclick="myFunction('3')" id="myBtn3">Read more</button>     
+  </section>
+  <footer class="footer-attribution">
+    <p>© 2025 Naim Ferris |</p>
+    <p>
+      Header background image by 
+      <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+      transferred by 
+      <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+      <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+    </p>
+    <p>
+      <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+    </p>
+    <p>
+      Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+    </p>
+  </footer>
+</body>
+    </html>

@@ -1,0 +1,213 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Naim Ferris">
+    <meta name="description" content="Resume">
+    <title>Naim's Portfolio - Writing Samples</title>
+    <!--CSS Link-->
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <h1> Naim Ferris</h1>
+    <div class="button-group">
+      <button type="button" onclick="window.location.href='index.html';">Home</button>
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+<body>
+     <!--Dropdown script-->
+<script src="js/dropdown.js"></script>
+
+<!--header script-->
+<script src="js/minimizeheader.js"></script>
+
+<br>
+
+  <meta charset="UTF-8"> <!--taken from old class-->
+  <title>US Civics Quiz</title>
+</head>
+<body>
+  <section>
+    <h2>Page Context</h2>
+    <section class="contextsection">The bellow projects where coded at The University or Oregon between 2023-2024. Most of it was programed in CS 111.</section>
+  </section>
+
+  <section>
+
+  <h2>US Civics Quiz</h2>
+
+  <label>1. What is Susan B. Anthony known for?</label><br>
+  <select id="q1">
+    <option value="">Choose an answer</option>
+    <option value="A">A. Women's rights advocate who fought for women's right to vote</option>
+    <option value="B">B. Made the first US flag</option>
+  </select><br>
+
+  <label>2. When was the Declaration of Independence published?</label><br>
+  <select id="q2">
+    <option value="">Choose an answer</option>
+    <option value="A">A. July 4th, 2011</option>
+    <option value="B">B. July 4th, 1876</option>
+    <option value="C">C. July 4th, 1776</option>
+  </select><br>
+
+  <label>3. How many amendments are there in the US Constitution?</label><br>
+  <select id="q3">
+    <option value="">Choose an answer</option>
+    <option value="A">A. 10</option>
+    <option value="B">B. 27</option>
+    <option value="C">C. 33</option>
+  </select><br>
+
+  <label>4. Why was the 14th amendment important?</label><br>
+  <select id="q4">
+    <option value="">Choose an answer</option>
+    <option value="A">A. Granted African Americans the right to vote</option>
+    <option value="B">B. Granted women the right to vote</option>
+    <option value="C">C. Gave equal protection and due process to all born/naturalized in the US</option>
+  </select><br>
+
+  <label>5. When is Tax Day?</label><br>
+  <select id="q5">
+    <option value="">Choose an answer</option>
+    <option value="A">A. January 27th</option>
+    <option value="B">B. April 15th</option>
+  </select><br><br>
+
+  <button onclick="gradeQuiz()">Submit Answers</button>
+
+  <div id="results"></div>
+
+  <script>
+    function gradeQuiz() {
+      const answers = {
+        q1: "A",
+        q2: "C",
+        q3: "B",
+        q4: "C",
+        q5: "B"
+      };
+
+      let score = 0;
+      let feedback = [];
+
+      for (let q in answers) {
+        const userAnswer = document.getElementById(q).value;
+        if (userAnswer === answers[q]) {
+          score++;
+        } else {
+          feedback.push(` Question ${q.slice(1)} is incorrect.`);
+        }
+      }
+
+      const resultsDiv = document.getElementById("results");
+      if (score === 5) {
+        resultsDiv.innerHTML = `You scored 5/5!`;
+      } else {
+        resultsDiv.innerHTML = `You scored ${score}/5.<br>${feedback.join("<br>")}`;
+      }
+    }
+  </script>
+</section>
+<section> <!--taken from old class-->
+  <h2>Calculator</h2>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="CS 111 Lab 8">
+    <meta name="author" content="Naim Ferris">
+    <title>An Interesting Title Goes Here</title>
+    <style></style>
+  </head>
+  <body>
+    
+    </div>
+        <div class="light red"><span></span></div>
+        <div class="light yellow"><span></span></div>
+        <div class="light green"><span></span></div>
+      </div>
+      <div>
+        <input type="text" id="num1" placeholder="Number 1" />
+        <input type="text" id="num2" placeholder="Number 2" />
+        <button id="add">+</button>
+        <button id="subtract">-</button>
+        <button id="multiply">*</button>
+        <button id="divide">/</button>
+        <input type="text" id="result" readonly />
+      </div>
+      <br />
+      <div>History</div>
+      <ul id="history"></ul>
+    <script src="/JS/lab8.js"></script>
+</section>
+
+<section>
+  <h2>Drawing board!</h2> <!--taken from old class-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="CS 111 Lab 9">
+    <meta name="author" content="Naim Ferris">
+    <title>An Interesting Title Goes Here</title>
+    <style>canvas {
+        border: 1px solid black;
+      }</style>
+  </head>
+  <body>
+    <div><canvas id="canvas" width="600" height="400"></canvas></div>
+<div><button id="clearButton">Clear Canvas</button></div>
+    <select id="colorSelect"></select>
+    <script src="/JS/lab9.js"></script>
+  </body>
+</section>
+<footer class="footer-attribution">
+  <p>© 2025 Naim Ferris |</p>
+  <p>
+    Header background image by 
+    <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+    transferred by 
+    <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+    <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+  </p>
+  <p>
+    <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+  </p>
+  <p>
+    Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+  </p>
+</footer>
+</body>
+</html>

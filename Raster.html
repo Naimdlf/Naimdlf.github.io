@@ -1,0 +1,227 @@
+        <!--meta tags https://www.w3schools.com/html/html_head.asp-->
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="Naim Ferris">
+            <meta name="description" content="Raster Analysis">
+            <title>Naim's Portfolio - Raster Analysis</title>
+            <!--CSS Link-->
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+        <header>
+        <div class="header-container">
+            <h1> Naim Ferris</h1>
+            <div class="button-group">
+            <button type="button" onclick="window.location.href='index.html';">Home</button>
+            <!--Projects Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+                <div id="projectsDropdown" class="dropdown-content">
+                <a href="gis.html">GIS</a>
+                <a href="JS.html">Java Script</a>
+                <a href="Python.html">Python</a>
+                <a href="sample.html">Writing Samples</a>
+                <a href="Raster.html">Raster Analysis</a>
+                </div>
+            </div>
+
+            <!--Web Maps Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+                <div id="mapsDropdown" class="dropdown-content">
+                <a href="webmaps.html">Webmaps</a>
+                <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+                </div>
+            </div>
+
+            <!--About Me Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+                <div id="aboutDropdown" class="dropdown-content">
+                <a href="portresume.html">Resume</a>
+                <a href="index.html#contact">Contact Info</a>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        </header>
+            <!--Dropdown script-->
+        <script src="js/dropdown.js"></script>
+
+        <!--header script-->
+        <script src="js/minimizeheader.js"></script>
+        <br>
+        <section class="about-website">
+        <h2>Raster Analysis of Porto Velho, Brazil (2005–2025)</h2>
+        <p><strong>Tools:</strong> ArcGIS Pro, Landsat (5, 8, 9) <br>
+        <strong>Methods:</strong> Raster processing, mosaicking, supervised classification (SVM) <br> <br> <h2>Project Overview</h2> project uses Landsat satellite imagery and raster analysis to measure land-cover change in Porto Velho, Brazil between 2005, 2015, and 2025. The goal was to quantify forest loss and urban/agricultural expansion in one of the most deforested regions of the Amazon.</p>
+        </section>
+        <Section>
+            <h2>Background</h2>
+            The Amazon rainforest is one of the most important natural areas in the world. For years it has been a target of conservation groups and cause for activism due to its critical role in global biodiversity, climate regulation, and carbon storage. The Amazon stores 123 billion tons of carbon but the expansion of urban areas (particularly cropland and pasture) have reduced the Amazon's capacity to absorb carbon (NOAA Research). Deforestation in the Amazon has been highlighted by recent research, due to its role as a carbon sink. Roughly 30% of forest cover has been lost causing the area that formally comprised the Amazon rainforest to become a net carbon source (Gatti et al.).  
+
+            <br> <br>
+
+            The City of Porto Velho sits along the Amazon river basin. It is the capital of the Brazilian state of Rondônia and is also the largest urban metro in the state. Rondônia is one of the most deforested states in the Amazon partially due to Porto Velhos expansion as well as cattle ranching, and mining (Nag). It’s a municipality spanning more than 34,000 km² and encompasses over half a million people (World Population Review). Porto Velho will make a good case study for what is happening in the rest of the Amazon. It is also a location that encompasses the key drivers of deforestation and frontier development. 
+
+        </Section>
+
+        <section><h2>Data and Methods</h2>
+        Landsat imagery was selected because it provides consistent, long-term coverage suitable for multi-decade vegetation analysis. Landsat 5 imagery was used for 2005, Landsat 8 for 2015, and Landsat 8/9 for 2025. All data came from USGS Earth Explorer using Landsat Collection 2 Level-2 products. <br> <br>
+
+        Multiple scenes were required to cover the full study area for each year. Scenes were filtered by cloud cover and selected from January through September. Individual bands were combined into three-band composites, mosaicked by year, and exported as 16-bit GeoTIFF rasters. Each mosaic was clipped to the Porto Velho study boundary to ensure consistent spatial extent across years. <br> <br>
+
+        Land cover was classified into three categories: forest, urban/farm, and water. Training samples were manually created for each year, and a supervised classification was performed using a Support Vector Machine (SVM) classifier. SVM was chosen because it produces cleaner class boundaries and reduces noise compared to simpler classifiers. <br> <br>
+        <section style="text-align: center;">
+        <h2 style="text-align: left;">Figure 1. Raster Mosaic 2025</h2>
+        <img src="photos/rasterphotos/Mosaic_example.png" alt="2025 Mosaic Example" style="max-width: 40%; height: auto;">
+
+        <br><br><h2 style="text-align: left;">Figure 2. Arc GIS Classification Workflow</h2>
+        <i>The figure below summarizes the ArcGIS raster processing and supervised classification workflow used for all three time periods. </i> <br>
+        <img src="photos/rasterphotos/SOP2.png" alt="steps done in ArcGIS as a chart" style="max-width: 60%; height: auto;">
+        </section>
+        </section>
+
+        <Section>
+            <h2>Analysis</h2>
+            Classified rasters were analyzed using ArcGIS Raster Calculator and Tabulate Area. For each year, the total area of forest, urban/farm, and water was calculated. Changes were then compared across time periods (2005–2015 and 2015–2025) to identify trends in deforestation and development. The resulting maps and summary statistics allow for a clear visualization of how the Amazon landscape has transformed over time and provided evidence of long-term environmental change.
+            <br> <br>
+            <section>
+            <h2>Figure 3. Supervised land-cover classification results for Porto Velh(2005–2025)</h2>
+            <img src="photos/rasterphotos/classification.png" alt="3 maps showing classification over the 3 years" style="max-width: 100%; height: auto;"">
+            <br>
+            <br>
+            <h2> Figure 4. Supervised Land-cover Forest Loss results for Porto Velho (2005–2025)</h2>
+            <img src="photos/rasterphotos/Screenshot 2026-02-09 at 3.22.35 PM.png" alt="3 maps showing forest distruction over the 3 years" style="max-width: 100%; height: auto;"">
+            </section>
+        </Section>
+
+        <section><h2>Results</h2>
+        Between 2005 and 2025, Porto Velho experienced substantial forest loss and rapid urban and agricultural expansion. <br> <br>
+
+                <h2>Figure 5. Relative Forest Change between 2005 and 2025</h2>
+          <div style="text-align: center;">
+        <img src="photos/rasterphotos/relativechange.png" alt="map showing relative change mostly in the south east." style="max-width: 50%; height: auto;"> </div><br> <br>
+        
+        <ul>
+            <li>Forest cover declined from 30,565 km² (2005) to 23,778 km² (2025)</li>
+            <li>Urban/farm land increased from 3,849 km² to 8,666 km²</li>
+            <li>Total forest loss over the study period was 6,787 km², a 22.2% decline</li>
+        </ul>
+
+                Forest loss accelerated over time. From 2005–2015, Porto Velho lost 3,243 km² of forest (10.6%). From 2015–2025, forest loss increased to 3,544 km² (13%), representing a higher rate of deforestation in the later decade. Most expansion occurred through farmland growth in the southern portion of the municipality and increased density near the urban core. 
+            <br><br>
+        <section>
+
+        <h2>Figure 6. Land-cover Changes by Class Porto Velho (2005–2025)</h2> <i>Values represent change categories where −1 = loss, 0 = no change, and 1 = gain.</i> 
+        <img src="photos/rasterphotos/990d0811-1.png" alt="table showing Value Class Area Gain/Loss -1 Urban 2113 km2 -1 Forest 657 km2 0 Urban 6799 km2 0 Forest 22959 km2 1 Urban 45 km2 1 Forest 913 km2" style="max-width: 50%; height: auto;"><br> <br>
+                <!-- <h2>Figure 7. Land-cover Changes Bar Graph</h2>
+        <img src="photos/rasterphotos/Pictureofchange.png" alt="bar chart showing results from above chart" style="max-width: 100%; height: auto;"> -->
+        </section>
+
+        <section style="text-align: center;">
+        <h2>Figure 7. Land-Cover in Porto Velho by Year (2005-2025)</h2>
+        <img src="photos/rasterphotos/changeinlandcoverbyyear.png" alt="chart showing data from table" style="max-width: 100%; height: auto;">
+        <!-- <img src="photos/rasterphotos/32f49384-1.png" alt="table showing total land cover" style="max-width: 50%; text-align: center; height: auto;"> -->
+        </section>
+        </section>
+
+        <section><h2>Limitations</h2> Analysis used only three land-cover classes, which simplified interpretation and complexity. Agriculture and urban areas were grouped together due to spectral similarity on a NIR raster distrobution, which reduced precision in distinguishing specific land uses. For example, splitting out agriculture from urban areas would have added depth to analysis, but Doing so would have required more bands of data in a second set of analysis to reduce ambiguity between classes. <br> <br>
+
+        There is a mapping project creating a larger raster mosaic of the Amazon with a more specific land cover called MapBIOMAS Amazonia. Their project called the Amazon Annual Land Cover and Land Use Mapping, seeks to facilitation of on demand up to date information on the Amazon Rainforest. They do a complete raster analysis for each year, with the last one being done in 2023. Their analysis can compartmentalize land use change dynamics by applying state-of-the-art tools and a partnership with Google (MapBIOMAS Amazonia). 
+        </section>
+
+        <Section>
+            <h2>Conclusion</h2>
+            This raster analysis shows that forest loss in Porto Velho has not only continued but accelerated between 2005 and 2025. The results confirm that urban and agricultural expansion are major drivers of deforestation in the region. Despite a simplified classification scheme, the project demonstrates how remote sensing can be used to track long-term land-cover change and support land-use planning and environmental monitoring in the Amazon.
+
+        <section style="text-align: center;">
+        <h2>Figure 8. Forest Change Relative to 2005</h2>
+        <img src="photos/rasterphotos/waterfall.png" alt="chart showing data from table" style="max-width: 100%; height: auto;">
+        </Section>
+
+    <section>
+  <h2 style="text-align: center;">Works Cited</h2>
+  <ul>
+    <li>
+      Gatti, Luciana V., et al. “Amazonia as a Carbon Source Linked to Deforestation and Climate Change.”
+      <em>Nature</em>, vol. 595, July 2021, pp. 388–393.
+      <a href="https://doi.org/10.1038/s41586-021-03629-6" target="_blank" rel="noopener noreferrer">
+        https://doi.org/10.1038/s41586-021-03629-6
+      </a>
+    </li>
+
+    <li>
+      MapBIOMAS Amazonia. “MapBiomas Amazonia.” <em>Mapbiomas.org</em>, 2017.
+      <a href="https://amazonia.mapbiomas.org/en/the-project/" target="_blank" rel="noopener noreferrer">
+        amazonia.mapbiomas.org/en/the-project/
+      </a>
+      (accessed December 12, 2025).
+    </li>
+
+    <li>
+      Nag, Oishimaya Sen. “Porto Velho – the Capital of the Rondônia State of Brazil.”
+      <em>WorldAtlas</em>, May 31, 2019.
+      <a href="https://www.worldatlas.com/articles/porto-velho-the-capital-of-the-rondonia-state-of-brazil.html" target="_blank" rel="noopener noreferrer">
+        www.worldatlas.com
+      </a>
+      (accessed December 12, 2025).
+    </li>
+
+    <li>
+      NOAA Research. “Deforestation, Warming Flip Part of Amazon Forest from Carbon Sink to Source.”
+      <em>NOAA Research</em>, July 14, 2021.
+      <a href="https://research.noaa.gov/deforestation-warming-flip-part-of-amazon-forest-from-carbon-sink-to-source/" target="_blank" rel="noopener noreferrer">
+        research.noaa.gov
+      </a>
+    </li>
+
+    <li>
+      USGS. “Landsat Missions Timeline.” <em>U.S. Geological Survey</em>, 2025.
+      <a href="https://www.usgs.gov/media/images/landsat-missions-timeline" target="_blank" rel="noopener noreferrer">
+        www.usgs.gov
+      </a>
+    </li>
+
+    <li>
+      Wikipedia Contributors. “Landsat Program.” <em>Wikipedia</em>, August 27, 2019.
+      <a href="https://en.wikipedia.org/wiki/Landsat_program" target="_blank" rel="noopener noreferrer">
+        en.wikipedia.org
+      </a>
+    </li>
+
+    <li>
+        World Population Review. “Porto Velho Population 2025.”
+        <em>World Population Review</em>, December 5, 2025.
+        <a href="https://worldpopulationreview.com/cities/brazil/porto-velho" target="_blank" rel="noopener noreferrer">
+            worldpopulationreview.com
+        </a>
+        (accessed December 12, 2025).
+        </li>
+    </ul>
+
+</section>
+</Section>
+
+    <footer class="footer-attribution">
+    <p>© 2025 Naim Ferris |</p>
+    <p>
+        Header background image by 
+        <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+        transferred by 
+        <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+        <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+    </p>
+    <p>
+        <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+    </p>
+    <p>
+        Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+    </p>
+    </footer>
+</body>
+

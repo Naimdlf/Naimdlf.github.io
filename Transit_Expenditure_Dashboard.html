@@ -1,0 +1,82 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="Naim Ferris">
+            <meta name="description" content="Resume">
+            <title>Naim's Transit Expenditure Dashboard - GIS</title>
+        </head>
+        <link rel="stylesheet" href="transit.css">
+        <script src="js/dropdown.js"></script>
+    <body>
+        <header>
+            <h1>Transit Expenditure Dashboard</h1>
+
+            <button onclick="window.location.href='index.html';">Home</button>
+            <!--Projects Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+                <div id="projectsDropdown" class="dropdown-content">
+                <a href="gis.html">GIS</a>
+                <a href="JS.html">Java Script</a>
+                <a href="Python.html">Python</a>
+                <a href="sample.html">Writing Samples</a>
+                <a href="Raster.html">Raster Analysis</a>
+                </div>
+            </div>
+
+            <!--Web Maps Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+                <div id="mapsDropdown" class="dropdown-content">
+                <a href="webmaps.html">Webmaps</a>
+                <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+                </div>
+            </div>
+
+            <!--About Me Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+                <div id="aboutDropdown" class="dropdown-content">
+                <a href="portresume.html">Resume</a>
+                <a href="index.html#contact">Contact Info</a>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        </header>
+        <div class="map">
+            <h1>About this project</h1>
+            <div class="contextsection">This web map visualizes the relationship between public transit expenditures and ridership across U.S. cities by combining Federal Transit Administration (FTA) data with U.S. Census commuter statistics. Built using Mapbox, the map allows users to explore summarized transit spending and usage data through clickable vector layers and a responsive sidebar interface.</div>
+
+        <div class="iframe-container">
+            <!-- <button id="togglebtn" onclick="w3_open()">☰ Open Sidebar</button> -->
+            <iframe src="webmaps/final/transitwebmap.html"></iframe>
+        </div>
+        <div class="contextsection">
+                      <h1>Data</h1>
+          This web map integrates data from three different sources:
+          <ol>
+            <li>
+              <strong>Federal Transit Administration:</strong> Provides agency-level expenditure data, including operating expenses by mode and type.<br>
+              Source: Federal Transit Administration. “2023 Annual Database UZA Sums | FTA.” Dot.gov, <i>Transportation.gov</i>, 5 Sept. 2023, <a href="www.transit.dot.gov/ntd/data-product/2023-annual-database-uza-sums. " target="_blank">data.transportation.gov</a>. Accessed 10 June 2025.
+            </li>
+            <li>
+              <strong>U.S. Census Bureau:</strong> Provides city-level data on commuting methods, including public transportation usage. In this map, transit agency data is summed by city to align with these figures.<br>
+              Source: U.S. Census Bureau, U.S. Department of Commerce. “Means of Transportation to Work by Vehicles Available.” <i>American Community Survey, ACS 1-Year Estimates Detailed Tables</i>, Table B08141, <a href="https://data.census.gov/table/ACSDT1Y2023.B08141?t=Transportation&y=2023" target="_blank">data.census.gov</a>. Accessed 9 June 2025.
+            </li>
+            <li>
+              <strong>2020 Census Urban Areas:</strong> Used to define the boundaries of urban areas for spatial alignment in the American Community Survey.<br>
+              Source: Esri; U.S. Department of Commerce, Census Bureau. “USA Census Urban Areas.” <i>ArcGIS Online</i>, 2024, <a href="https://www.arcgis.com/home/item.html?id=10551da8fcd24062b1857473252b3df8" target="_blank">arcgis.com</a>.
+            </li>
+          </ol>
+        </div>
+        </div>
+        <footer class="shine">
+            <p>Background image by <a href="https://www.freepik.com/free-photo/abstract-grunge-metal-background_4540218.htm#fromView=keyword&page=1&position=4&uuid=76124ef2-bcac-4368-978d-f5f4cc2ed226&query=Metal+Background" target="_blank" rel="noopener noreferrer">kjpargeter on Freepik</a>.</p>
+        </footer>
+    </body>
+</html>

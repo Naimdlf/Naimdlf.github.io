@@ -1,0 +1,619 @@
+<!--meta tags https://www.w3schools.com/html/html_head.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Naim Ferris" />
+  <meta name="description" content="Resume" />
+  <title>Naim's Portfolio - GIS</title>
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Mapbox GL -->
+  <!--Assignment 1-->
+  <!-- <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script> -->
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet" />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+        <!-- token -->
+        <script src="webmaps/final/config.js"></script>
+  <!--Assignment 2 map 1-->
+      <!--    1.1.  Include the reference to the Mapbox JavaScript here in the <head> of the page  -->
+  <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+      <-- 1.2 Include the reference to the Mapbox CSS here in the <head> of the page  -->
+  <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' /> -->
+  
+ <!-- hello -->
+
+    <style>
+      #map, #map1, #map3 { 
+        height: 700px;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    }
+
+      p {
+      color: white;
+      }
+
+      /* style for heading level 4 tags */
+      h4 {
+      color: white;
+      margin-left: 10px;
+      }
+
+      /*  style for items with the class "LegendContainer" */
+      .LegendContainer {
+      position: absolute;
+      bottom: 220px;
+      left: 35px;
+      z-index: 2;
+      width: 300px;
+      height: 40px;
+      background: rgba(80, 80, 80, .75);
+      transition: width 2s, height 2s; /* this is the time it takes for the container to transition */
+      border-radius: 7px;
+    }
+
+    /*  style for items with the class "descriptionPanel" */
+    .descriptionPanel {
+      position: absolute;
+      bottom: 265px;
+      left: 35px;
+      z-index: 2;
+      width: 300px;
+      height: 40px;
+      background: rgba(80, 80, 80, .75);
+      transition: width 2s, height 2s;
+      overflow: auto;
+      border-radius: 7px;
+    }
+
+      /*  style for items with the class "descriptionPanel" when active */
+      .LegendContainer:active {
+      width: 240px;
+      height: 250px;
+      }
+
+      /* style for items with the class "legendItem" */
+      .legendItem {
+      margin: 0px;
+      padding-left: 10px;
+      display:inline-block;
+      margin:auto;
+      transform: translate(50%, 50%);
+      }
+        
+
+      /* style for items with the class "layerDescription" */
+      .layerDescription {
+      color: white;
+      padding-left: 10px;
+      }
+
+        
+      .renter {
+        color:#1036e1;
+      }
+      .owner{
+        color:#d30808;
+      }
+
+      /* style for items with the class "chevron" */
+      .chevron {
+      position: relative;
+      margin-left: 45%;
+      font-size: x-large;
+      color: white;
+      cursor: pointer;
+      }
+
+        /*https://gis.stackexchange.com/questions/279127/how-to-add-css-styling-in-mapbox-gl-popup*/
+        .mapboxgl-popup-close-button {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding-bottom: 10px;
+      color: black;
+      }
+
+      .mapboxgl-popup-close-button:hover {
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      }
+
+  .mapboxgl-ctrl {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .mapboxgl-ctrl-group > button {
+    border-radius: 6px;
+    margin: 2px;
+    opacity: .9;
+  }
+
+      .mapboxgl-marker{
+      opacity: 0.75;
+      }
+
+
+        /* The CSS for the "Fly" button  */
+
+
+      </style>
+    </head>
+
+<body>
+  <header style="color: aliceblue;">
+    <div class="header-container">
+      <h1 style="color: whitesmoke; font-size: 2em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);"><strong>Naim Ferris</strong></h1>
+      <div class="button-group">
+        <button type="button" onclick="window.location.href='index.html';">Home</button>
+
+      <!--Projects Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+        <div id="projectsDropdown" class="dropdown-content">
+          <a href="gis.html">GIS</a>
+          <a href="JS.html">Java Script</a>
+          <a href="Python.html">Python</a>
+          <a href="sample.html">Writing Samples</a>
+          <a href="Raster.html">Raster Analysis</a>
+        </div>
+      </div>
+
+      <!--Web Maps Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+        <div id="mapsDropdown" class="dropdown-content">
+          <a href="webmaps.html">Webmaps</a>
+          <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+        </div>
+      </div>
+
+      <!--About Me Button-->
+      <div class="dropdown">
+        <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+        <div id="aboutDropdown" class="dropdown-content">
+          <a href="portresume.html">Resume</a>
+          <a href="index.html#contact">Contact Info</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- JS Files -->
+  <script src="js/dropdown.js"></script>
+  <script src="js/minimizeheader.js"></script>
+
+
+    <!-- JavaScript -->
+    <!--Assignment 1-->
+      <!-- <h2>Assignment 1: Explore Hillsboro</h2>
+      <section class="contextsection">Hillsboro is a beautiful city outside of Portland. Bellow you can see notable buildings in Hillsboro marked. Further down the page their are fixed maps exploring each of the areas in detail. </section>
+      <div id="map"></div> -->
+
+    <script>
+
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-v9',
+        center: [-122.989, 45.522],
+        zoom: 17
+      });
+
+      const nav = new mapboxgl.NavigationControl(); 
+              map.addControl(nav, 'top-left'); //change to match container and map ID.
+              // geolocator sits under controls.
+              const geolocate = new mapboxgl.GeolocateControl({
+                  positionOptions: {
+                  enableHighAccuracy: true
+                  },
+                  trackUserLocation: true,
+                  showUserHeading: true
+                  });
+                  map.addControl(geolocate, 'top-left');
+
+      //hillsboro Civic Center Marker//
+      new mapboxgl.Marker({color: 'green'})
+        .setLngLat([-122.989, 45.522])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('Hillsboro Civic Center'))
+        .addTo(map);
+
+        new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-right' })
+        .setLngLat([-122.99, 45.52])
+        .setHTML('<h1>We Love Hillsboro</h1>')
+        .addTo(map);
+
+        //Hillsboro Max Station
+      new mapboxgl.Marker({ color: 'green' })
+        .setLngLat([-122.99104302088651, 45.52222127773033])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<a href="https://www.hillsboro-oregon.gov/">City of Hillsboro Website</a>'))
+        .addTo(map);
+
+      new mapboxgl.Popup({ closeOnClick: true, anchor: 'top-left'})
+        .setLngLat([-122.98890595841216, 45.5229335513485])
+        .setHTML('<a href="https://www.hillsboro-oregon.gov/">City of Hillsboro Website</a>')
+        .addTo(map);
+
+        //Hillsboro Airport
+        new mapboxgl.Marker({ color: 'red'})
+        .setLngLat([-122.9491848370618, 45.54204498307635])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Airport <br> <a href="https://www.portofportland.com/HIO">Learn more</a>'))
+        .addTo(map);
+
+        //Nike Air Hanger
+        new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([-122.93943442280144, 45.5399079892515])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Nike Air Corporate Hanger <br> <a href="https://tvaarchitects.com/project/nike-air-hangar/">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([-122.95058490459954,
+        45.5324332425852])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is where Hillsboro Airways classes take place <br> <a href="https://www.hillsboronewstimes.com/news/new-ae">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([-122.9883241737372,
+        45.52159144283624])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the HART Community Theater <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([-122.98506352755274,
+        45.52241931291533])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is Bag and Baggage on Main Street <br> <a href="https://bagnbaggage.org/">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([-122.98644318712616,
+        45.52373237347916])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is The Hillsboro Collective Market <br> <a href="https://www.collectivemarket.net//">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'pink' })
+        .setLngLat([-122.92772531069409,
+        45.5318961579253])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is The Intel Hawthorn Farm Campus <br> <a href="https://www.exploreintel.com/campuses/oregon">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'pink' })
+        .setLngLat([-122.92961336702757,
+        45.558746675478915])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro QTS data center <br> <a href="https://qtsdatacenters.com/">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([-122.90843039863512,
+        45.55371746719268])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Hillsboro Ballpark <br> <a href="https://en.wikipedia.org/wiki/Hillsboro_Ballpark">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'pink' })
+        .setLngLat([-122.93130754638672,
+        45.55306796672471])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the Genentech Hillsboro Campus <br> <a href="https://www.gene.com/contact-us/visit-us/hillsboro">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'pink' })
+        .setLngLat([-122.94571345984596,
+        45.55472800541068])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is the GXO Logistics Wharehouse <br> <a href="https://gxo.com/">Learn more</a>'))
+        .addTo(map);
+
+        new mapboxgl.Marker({ color: 'pink' })
+        .setLngLat([-122.91775837089844,
+        45.54439145163215])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br>This is Intel Gordon Moore Park<br> <a href="https://www.exploreintel.com/ronleracres">Learn more</a>'))
+        .addTo(map);
+
+
+  </script>
+  <br>
+
+    <!--Assignment 2 Map 1 Fixed-->
+
+    <style>
+        /* 1.4 Insert the CSS code here between the <style> tags */
+        /*  body { margin:50px; padding:0; } */
+          #map1 { position:relative; height:500px; width:100%; border-radius: 8px;}
+        /* 2.5.2 Insert additional CSS code here between the <style> tags */
+          /* #map2 { position:relative; height:300px; width:100%; border-radius: 8px;}
+          #map3 {position:relative; height:500px; width:100%; border-radius: 8px;} */
+    </style>
+
+        <!-- 1.3 Insert the div for the structure of the page here in the <body> of the page -->
+          <section>
+            <h2> Explore Hillsboro </h2>
+            <section class="contextsection"><div id="mapDescription">Loading...</div>
+          </section>
+            <div id='map1'></div>
+            <br/>
+            <button id="fly"><strong>Next</strong></button>
+          </section>
+          <!-- <section>
+            <h2> Assignment 2 Map 2 Fixed:</h2>
+            <section class="contextsection">Here we can see the Hillsboro Airport. The markers in red are inforstructure related to the airport. The Hillsboro Airshow is hosted here every year. link:"https://oregonairshow.com/hillsboro-2025/">Learn more</a></section>
+            <div id='map2'></div>
+          </section>
+          <section>
+            <h2> Assignment 2 Map 3 Fixed:</h2>
+            <section class="contextsection">In the North East corner of Hillsboro there are many industrial and tech jobs (marked in pink!). Intel is the <a href="https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000">biggest employer in Hillsboro and Oregon</a>. </section>
+            <div id='map3'></div>
+          </section> -->
+        <script>
+            /* Insert the JavaScript within the <script> tags, within the body */
+            // 2.1 Start with the Mapbox access token
+
+
+            // 2.2 Then initialize the first map
+            var map1 = new mapboxgl.Map({
+       container: 'map1', // id of a div on your page, where the map will be inserted
+       style: 'mapbox://styles/mapbox/satellite-v9', // the style URL 'mapbox://styles/mapbox/streets-v11' 
+       center: [-122.986189, 45.522638], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+       zoom: 15 // starting zoom 
+   });
+
+
+        var flyLocations = [
+          {
+            center: [-122.986189, 45.522638], 
+            zoom: 15,     // Downtown
+            essential: true,
+            description: "hi guys"
+          },
+          {
+            center: [-122.9491848370618, 45.54204498307635],  // Airport
+            zoom: 13,
+            essential: true
+          },
+          {
+            center: [-122.91775837089844, 45.54599145163215],
+            zoom: 13,  // Tech area
+            essential: true
+          }
+        ];
+        var clickCounter = 0;
+        // Add event listener for the fly button
+        document.getElementById('fly').addEventListener('click', function() {
+            console.log("flying to " + flyLocations[clickCounter]);
+            
+            map1.flyTo({
+                center: flyLocations[clickCounter].center,
+                zoom: flyLocations[clickCounter].zoom,
+            });
+
+            if (clickCounter == 0) {
+          document.getElementById("mapDescription").innerHTML = 'Here we can see the Hillsboro Main Street. The blue markers mark major community buildings in the area. Green marks government buildings. This downtown is a popular spot for shopping and theater.';
+        } else if (clickCounter == 1) {
+          document.getElementById("mapDescription").innerHTML = 'Here we can see the Hillsboro Airport. The markers in red are infrastructure related to the airport. The Hillsboro Airshow is hosted here every year. <a href="https://oregonairshow.com/hillsboro-2025" target="_blank">Learn more</a>';
+        } else if (clickCounter == 2) {
+          document.getElementById("mapDescription").innerHTML = 'In the North East corner of Hillsboro there are many industrial and tech jobs (marked in pink). Intel is the <a href="https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000" target="_blank">biggest employer in Hillsboro and Oregon</a>.';
+        }
+            
+            // Update the click counter to the next location
+            clickCounter = clickCounter + 1;
+            
+            // Reset counter when it reaches the end of locations
+            if (clickCounter > flyLocations.length - 1) {
+                clickCounter = 0;
+            }
+        });
+        //     // 2.3 Add any other variables (such as popups and markers) to the first map
+        //     var popup = new mapboxgl.Popup()
+        //               .setText('This is my first point.');
+
+        //           var marker = new mapboxgl.Marker({color:'red'})
+        //             .setLngLat([-122.6788, 45.5212]) // starting position [lng, lat]
+        //             .setPopup(popup) //add the popup named "popup" to this marker 
+		    // .addTo(map); // add it to the map with the ID "map"
+
+            // 2.4 Add arguments to disable the map interactivity here
+                           // Disable drag and zoom handlers.
+              map1.dragPan.disable();
+               map1.scrollZoom.disable();
+               map1.boxZoom.disable();
+               map1.dragRotate.disable();
+               map1.keyboard.disable();
+               map1.doubleClickZoom.disable();
+               map1.touchZoomRotate.disable();
+               map1.touchZoomRotate.disableRotation();
+            // Disable drag and zoom handlers.
+
+	// Change the map pointers
+	      map1.getCanvas().style.cursor = 'auto';
+	      // map2.getCanvas().style.cursor = 'auto';
+        // map3.getCanvas().style.cursor = 'auto';
+
+  // map markers
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.94571345984596,
+    45.52159144283624])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> HART Community Theater <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98506352755274,
+    45.52241931291533])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Bag and Baggage on Main Street <br> <a href="https://bagnbaggage.org/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.98644318712616,
+    45.52373237347916])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> Hillsboro Collective Market <br> <a href="https://www.collectivemarket.net//">Learn more</a>'))
+    .addTo(map1);
+
+    //Hillsboro Airport
+    new mapboxgl.Marker({ color: 'red'})
+    .setLngLat([-122.9491848370618, 45.54204498307635])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Hillsboro Airport <br> <a href="https://www.portofportland.com/HIO">Learn more</a>'))
+    .addTo(map1);
+
+    //Nike Air Hanger
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.93943442280144, 45.5399079892515])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Nike Air Corporate Hanger <br> <a href="https://tvaarchitects.com/project/nike-air-hangar/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'red' })
+    .setLngLat([-122.95058490459954,
+    45.5324332425852])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Hillsboro Airways <br> <a href="https://www.hillsboronewstimes.com/news/new-ae">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92772531069409,
+    45.5318961579253])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Intel Hawthorn Farm Campus <br> <a href="https://www.exploreintel.com/campuses/oregon">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.92961336702757,
+    45.558746675478915])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>This Hillsboro QTS data center <br> <a href="https://qtsdatacenters.com/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.90843039863512,
+    45.55371746719268])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Hillsboro Ballpark <br> <a href="https://en.wikipedia.org/wiki/Hillsboro_Ballpark">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.93130754638672,
+    45.55306796672471])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>Genentech Hillsboro Campus <br> <a href="https://www.gene.com/contact-us/visit-us/hillsboro">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.94571345984596,
+    45.55472800541068])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br>GXO Logistics Wharehouse <br> <a href="https://gxo.com/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'pink' })
+    .setLngLat([-122.91775837089844,
+    45.54439145163215])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> Intel Gordon Moore Park<br> <a href="https://www.exploreintel.com/ronleracres">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([-122.9883241737372,
+    45.52159144283624])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> HART Community Theater <br> <a href="https://www.hart-theatre.org/">Learn more</a>'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({color: 'green'})
+    .setLngLat([-122.989, 45.522])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> Hillsboro Civic Center'))
+    .addTo(map1);
+
+    new mapboxgl.Marker({ color: 'green' })
+    .setLngLat([-122.99104302088651, 45.52222127773033])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<br><br> Hatfield Government Center MAX station'))
+    .addTo(map1);
+        </script>
+
+  <!-- assignment 3 -->
+ <section>
+  <h2> Mapping Renters vs Owners in Portland </h2>
+  <div id='map3'></div>
+  <!-- map discription panel -->
+  <div class="descriptionPanel" id="descriptionPanel" style="height: 250px;">
+      <span onClick=panelSelect() id="glyph" class="chevron glyphicon glyphicon-chevron-down"></span>
+      <hr/>
+      <h4>WHAT AM I LOOKING AT?</h4>
+      <p style="margin-left: 10px; margin-right: 10px; font-size: small;">
+        This is a map showing every single person in the Portland Area as a dot. Data is taken from the 2017 US Census, and is accurate at the level of a block; however, within each block location is randomized. Points are colored based on the number of home owners versus renters on a block.
+      </p>
+    </div>
+    <!-- Legend Container -->
+    <div class="LegendContainer">
+      <div class="legendItem">
+          <span class="owner">&#11044;</span>
+          <span class="layerDescription">Owners</span>
+      </div>
+      <div class="legendItem">
+          <span class="renter">&#11044;</span>
+          <span class="layerDescription">Renters</span>
+      </div>
+    </div>
+    </section>
+  <script>
+      // initializes the map
+      var map3 = new mapboxgl.Map({
+          container: 'map3', // container id
+          style: 'mapbox://styles/nferris1/cm9alzceg001s01rca1xtgt6j', // stylesheet location
+          center: [-122.6765, 45.5231], // example coordinates (Portland)
+          zoom: 10
+});
+       const nav3 = new mapboxgl.NavigationControl(); 
+      map3.addControl(nav3, 'top-left'); //change to match container and map ID.
+      // geolocator sits under controls.
+      const geolocate3 = new mapboxgl.GeolocateControl({
+          positionOptions: {
+          enableHighAccuracy: true
+          },
+          trackUserLocation: true,
+          showUserHeading: true
+          });
+          map3.addControl(geolocate3, 'top-left');
+
+          // Legend Interaction
+          var state = { panelOpen: true };
+
+          function panelSelect(e){
+          if(state.panelOpen){
+              document.getElementById('descriptionPanel').style.height = '26px';
+              document.getElementById('glyph').className = "chevron glyphicon glyphicon-chevron-up";
+              state.panelOpen = false;
+          } else {
+              document.getElementById('descriptionPanel').style.height = '250px';
+              document.getElementById('glyph').className = "chevron glyphicon glyphicon-chevron-down";
+              state.panelOpen = true;
+          }
+          }
+  </script>
+
+  
+        <footer>
+          <p>© 2025 Naim Ferris |</p>
+          <p>
+            Header background image by 
+            <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+            transferred by 
+            <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+            <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+          </p>
+          <p>
+            <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+          </p>
+          <p>
+            Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+          </p>
+        </footer>
+  </body>
+</html>

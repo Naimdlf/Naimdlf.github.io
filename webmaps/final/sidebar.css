@@ -1,0 +1,80 @@
+.sidebar {
+  height: 100%;
+  width: 0; /* start closed */
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    45deg,
+    #333 5%,
+    #555 30%,
+    #777 50%,
+    #555 70%,
+    #333 95%
+  ); /* metallic gradient look */
+  color: #fff;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 0px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.sidebar a {
+  padding: 12px 14px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  transition: 0.2s;
+  border-radius: 6px;
+  margin: 4px 12px; /* gives a little spacing between items */
+}
+
+.sidebar a:hover {
+  background: linear-gradient(90deg, #666, #999);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.openbtn {
+background: #f2f2f2;
+border: 1px solid #c9c9c9;
+border-radius: 999px;
+z-index: 10000;
+padding: 5px 22px;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.3px;
+box-shadow: 0 2px 6px rgb (0, 0, 0, 0.06);
+color: #333;
+cursor: pointer;
+transition: all 0.15s ease;
+  z-index: 100;
+  position: absolute;
+}
+
+.openbtn:hover {
+  background: linear-gradient(45deg, #555, #777);
+}
+
+#sidebarbtn {
+  background: #f2f2f2;
+  border: 1px solid #c9c9c9;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+
+
