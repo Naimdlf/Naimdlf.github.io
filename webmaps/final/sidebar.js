@@ -578,6 +578,21 @@
     const stateDiv = document.getElementById('state-hide');
     const cityDiv = document.getElementById('city-hide');
     const backButton = document.getElementById('backButton');
+
+    // button
+    document.getElementById('backToNav').addEventListener('click', () => {
+      document.getElementById('sidebarData').style.display = 'none';
+      document.getElementById('sidebarNav').style.display = 'block';
+
+      // Go back to city list (not all the way to states)
+      if (currentCity) {
+        document.getElementById('city-hide').style.display = 'block';
+        document.getElementById('state-hide').style.display = 'none';
+      } else {
+        document.getElementById('city-hide').style.display = 'none';
+        document.getElementById('state-hide').style.display = 'block';
+      }
+    });
        
     // populate states
     for (const abbr in stateFullNames) {
@@ -603,16 +618,21 @@
         const li = document.createElement('li');
         li.textContent = city;
         li.dataset.city = city;
+          li.addEventListener('click', () => {
+        sidebarClickToMap(city);
+      });
         citiesList.appendChild(li);
       });
     });
 
     // back button: show states again
     backButton.addEventListener('click', () => {
-      cityDiv.style.display = 'none';
-      stateDiv.style.display = 'block';
       citiesList.innerHTML = ''; // optional: clear city list
-    });
+        // If we came from a city, go back to city list; otherwise go to states
+        currentCity = null;
+        cityDiv.style.display = 'none';
+        stateDiv.style.display = 'block';
+      });
         
     function sidebarClickToMap(cityName) {
     if (!map) return;
@@ -621,22 +641,22 @@
     currentCity = cityName;
 
     // Look up feature data for the city (you may need a city-to-feature mapping)
-    const feature = cityFeatures[cityName]; // assumes you have a dictionary linking cityName to its GeoJSON feature
+    const feature = cityFeatures[cityName]; // links to nity name directory
 
-    if (!feature) return;
+      function tryOpen(attemptsLeft) {
+        const feature = cityFeatures[cityName];
+        if (feature) {
+          const coords = feature.geometry.coordinates;
+          map.flyTo({ center: coords, zoom: 9 });
+          window.openSidebarWithFeature(feature);
+        } else if (attemptsLeft > 0) {
+          // wait 300ms and try again
+          setTimeout(() => tryOpen(attemptsLeft - 1), 300);
+        } else {
+          alert("Could not find data for " + cityName + ". Try zooming into that area on the map first.");
+        }
+      }
 
-    // Fly to city coordinates
-    if (feature.geometry && feature.geometry.coordinates) {
-        map.flyTo({
-            center: feature.geometry.coordinates,
-            zoom: 9
-        });
+      tryOpen(10); // try up to 10 times = 3 seconds total
     }
-
-    // Open sidebar with city details
-    openSidebarWithFeature(feature);
-}
-
-
-
-  })
+    })

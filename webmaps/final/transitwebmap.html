@@ -30,9 +30,7 @@
            #map { position:absolute; z-index: -30; top:0; bottom:0; width:100%; } 
 
            #main {
-              position: absolute;
-              top: 30px;
-              left: 15px;
+              position: fixed;
               z-index: 10000;
             }
 
@@ -43,26 +41,30 @@
 
           /* bottons */
 
-          #loadMapBtn {
+          /* #loadMapBtn {
             position: absolute;
             top: 45%;
             left: 45%;
             z-index: 9999;
             text-align: center;
-          }
+          } */
 
           /* toggel mode panel */
 
           /* Top toggle container */
           #togglemodebtn {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 18px;
-            background: linear-gradient(
+              position: fixed;
+              top: 0;
+              width: 100%;
+              height: 48px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between; 
+
+
+              padding: 0 16px;
+
+              background: linear-gradient(
                 45deg,
                 #999999 5%,
                 #c2bebe 10%,
@@ -72,25 +74,37 @@
                 #ffffff 80%,
                 #999 95%
               );
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
-            z-index: 1;
-          }
 
-          Toggle buttons
+              box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+              backdrop-filter: blur(4px);
+
+              z-index: 1000;
+            }
+
+          /* Toggle buttons */
           #togglemodebtn button {
             background: #f2f2f2;
             border: 1px solid #c9c9c9;
-            border-radius: 20px;
-            padding: 6px 16px;
+            border-radius: 999px;
+            position: relative;
+            padding: 5px 22px;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
             color: #333;
             cursor: pointer;
+            z-index: 999;
             transition: all 0.15s ease;
           }
+
+          #toggles {
+            display: flex;
+            justify-content: flex-end;
+          }
+          #toggles button:last-child {
+  margin-right: 25px; 
+}
 
           /* Hover */
           #togglemodebtn button:hover {
@@ -98,16 +112,11 @@
             border-color: #999;
           }
 
-          /* Pressed */
-          #togglemodebtn button:active {
-            transform: translateY(4px);
-          }
-
           /* Active selected state */
           #togglemodebtn button.active {
             background: #525151;
             color: white;
-            border-color: #0e2b3f;
+            border-color: #1e1e1e;
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
           }
 
@@ -238,9 +247,10 @@
 
   </head>
 <body>
+      <script>const cityFeatures = {};</script>
 
           <!-- added button to try and stop accruing raster tiles -->
-      <button id="loadMapBtn">Load Map</button>
+      <!-- <button id="loadMapBtn">Load Map</button> -->
           <!-- map activation -->
             <div id='map'></div>
             <!-- menu taken from https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/ -->
@@ -248,16 +258,20 @@
 
       <!-- overlay  https://docs.mapbox.com/mapbox-gl-js/example/simple-interactions/-->
       <div class="map-overlay right" id="properties"></div>
-
       <!-- buttons at top -->
       <div id="togglemodebtn">
+              <div style="z-index: 9999;">
+          <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
+      </div>
+      <div id= "toggles">
         <button id="city">UZA (Urbanized Area) Data</button><button id="commuter">ACS Commuter Statistics</button><button id="expenditure">FTA Transit Expenditure</button>
+      </div>
       </div>
 
       <div id="mySidebar" class="sidebar">
-        <div id="sidebarContent">
+        <div id="sidebarNav">
           <!-- your state/city lists go here -->
-          <div id="state-hide">
+          <div id="state-hide"><br><br><hr>
             <h3>States</h3>
             <ul id="statesList"></ul>
           </div>
@@ -266,13 +280,12 @@
             <h3>Cities</h3>
             <ul id="citiesList"></ul>
           </div>
+      </div>
+        <div id="sidebarData" style="display:none;"><br><br><hr>
+          <button id="backToNav">← Back to Cities</button>
+          <div id="sidebarDataContent"></div>
         </div>
       </div>
-
-
-  <div id="main">
-    <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
-  </div>
   
     <script>
 
@@ -354,8 +367,8 @@
       mapboxgl.accessToken = MAPBOX_TOKEN;
 
       // stops the map from being displayed until it is actively loaded in
-      document.getElementById('loadMapBtn').onclick = function() {
-      document.getElementById('map').style.display = 'block';
+      // document.getElementById('loadMapBtn').onclick = function() {
+      // document.getElementById('map').style.display = 'block';
       // Bounds around US
       var bounds = [
         [-186.1356, 16.7612], // Southwest (lon, lat)
@@ -367,15 +380,12 @@
       var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/nferris1/cmlhna4ur001e01rh58mpa8rf',
-        center: [-122.679, 45.512],
-          zoom: 7, 
-          minZoom: 3,   
-          maxZoom: 10,
+        center: [-96, 38],   // center of lower 48
+        zoom: 1, 
+        minZoom: 1, // allows zooming out to see whole US          
+        maxZoom: 10,
         maxBounds: bounds
       });
-
-
-
 
       // stops rotation
       map.dragRotate.disable();
@@ -403,7 +413,7 @@
                   map.addControl(geolocate, 'top-right');
                   
       // hides the button after map load
-      this.style.display = 'none'; 
+      // this.style.display = 'none'; 
 
       // when mapbox loads add toggle menu links
       map.on('load', () => {
@@ -417,6 +427,20 @@
           }
         });
       }
+
+      map.on('sourcedata', (e) => {
+        if (e.sourceId === 'composite' && e.isSourceLoaded) {
+          const features = map.querySourceFeatures('composite', {
+            sourceLayer: 'tr2point-bb7ny7'
+          });
+          features.forEach(f => {
+            if (f.properties.NAME) {
+              cityFeatures[f.properties.NAME] = f;
+            }
+          });
+          console.log('cityFeatures loaded:', Object.keys(cityFeatures).length, 'cities');
+        }
+      });
 
               for (const group in LayerGroups) {
                 if (document.getElementById(group)) continue;
@@ -535,10 +559,14 @@
     openSidebarWithFeature(feature);
 });
       // map click logic
-        function openSidebarWithFeature(feature) {
+        window.openSidebarWithFeature = function(feature) {
       // map.on('click', 'id', (e) => {
       //   const feature = e.features[0];
          if (!feature) return;
+        
+                   // Hide nav, show data panel
+        document.getElementById('sidebarNav').style.display = 'none';
+        document.getElementById('sidebarData').style.display = 'block';
 
         const name = feature.properties.NAME || "Unknown";
         const population = feature.properties.POPULATION || "Unknown";
@@ -576,9 +604,8 @@
         // Set content dynamically
         sidebarContent.innerHTML = `
 
-  <section><br>
-    <h3>${name}</h3>
-      <hr><br>
+  <section>
+    <h1>${name}</h1><hr>
 
       <h2>UZA Demographic Data</h2>
       <hr>
@@ -650,7 +677,7 @@
         map.getCanvas().style.cursor = '';
         popup.remove();
       });
-      }
+      
       
 
 

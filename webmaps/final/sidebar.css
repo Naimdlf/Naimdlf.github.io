@@ -2,7 +2,7 @@
   height: 100%;
   width: 0; /* start closed */
   position: fixed;
-  z-index: 50;
+  z-index: 0;
   top: 0;
   left: 0;
   background: linear-gradient(
@@ -16,7 +16,7 @@
   color: #fff;
   overflow-x: hidden;
   transition: 0.3s;
-  padding-top: 60px;
+  padding-top: 0px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   font-family: 'Open Sans', sans-serif;
 }
@@ -45,26 +45,35 @@
 }
 
 .openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background: linear-gradient(45deg, #333, #555);
-  color: white;
-  padding: 10px 20px;
+background: #f2f2f2;
+border: 1px solid #c9c9c9;
+border-radius: 999px;
+z-index: 10000;
+padding: 5px 22px;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.3px;
+box-shadow: 0 2px 6px rgb (0, 0, 0, 0.06);
+color: #333;
+cursor: pointer;
+transition: all 0.15s ease;
   z-index: 100;
-  border: none;
-  position: fixed;
-  border-radius: 6px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-  transition: 0.2s;
+  position: absolute;
 }
 
 .openbtn:hover {
   background: linear-gradient(45deg, #555, #777);
 }
 
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
+#sidebarbtn {
+  background: #f2f2f2;
+  border: 1px solid #c9c9c9;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 
