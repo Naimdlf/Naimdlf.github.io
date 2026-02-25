@@ -347,11 +347,11 @@
         <!-- 1.3 Insert the div for the structure of the page here in the <body> of the page -->
           <section>
             <h2> Explore Hillsboro </h2>
-            <section class="contextsection"><div id="mapDescription">Loading...</div>
+            <section class="contextsection"><div id="mapDescription">Click start to begin</div>
           </section>
             <div id='map1'></div>
             <br/>
-            <button id="fly"><strong>Next</strong></button>
+            <button id="fly">Start</button>
           </section>
           <!-- <section>
             <h2> Assignment 2 Map 2 Fixed:</h2>
@@ -415,6 +415,7 @@
             
             // Update the click counter to the next location
             clickCounter = clickCounter + 1;
+            document.getElementById("fly").innerHTML = "Next";
             
             // Reset counter when it reaches the end of locations
             if (clickCounter > flyLocations.length - 1) {
@@ -547,7 +548,7 @@
       <hr/>
       <h4>WHAT AM I LOOKING AT?</h4>
       <p style="margin-left: 10px; margin-right: 10px; font-size: small;">
-        This is a map showing every single person in the Portland Area as a dot. Data is taken from the 2017 US Census, and is accurate at the level of a block; however, within each block location is randomized. Points are colored based on the number of home owners versus renters on a block.
+        Each dot represents aggregated Census block-level housing tenure data (owners vs renters), spatially randomized within block boundaries. Data is taken from the 2017 US Census, and is accurate at the level of a block; however, within each block location is randomized. Points are colored based on the number of home owners versus renters on a block.
       </p>
     </div>
     <!-- Legend Container -->

@@ -58,9 +58,9 @@
         <section class="about-website">
         <h2>Raster Analysis of Porto Velho, Brazil (2005–2025)</h2>
         <p><strong>Tools:</strong> ArcGIS Pro, Landsat (5, 8, 9) <br>
-        <strong>Methods:</strong> Raster processing, mosaicking, supervised classification (SVM) <br> <br> <h2>Project Overview</h2> project uses Landsat satellite imagery and raster analysis to measure land-cover change in Porto Velho, Brazil between 2005, 2015, and 2025. The goal was to quantify forest loss and urban/agricultural expansion in one of the most deforested regions of the Amazon.</p>
+        <strong>Methods:</strong> Raster processing, mosaicking, supervised classification (SVM) <br> <br> <h2>Project Overview</h2> Project uses Landsat satellite imagery and raster analysis to measure land-cover change in Porto Velho, Brazil between 2005, 2015, and 2025. The goal was to quantify forest loss and urban/agricultural expansion in one of the most deforested regions of the Amazon.</p>
         </section>
-        <Section>
+        <section>
             <h2>Background</h2>
             The Amazon rainforest is one of the most important natural areas in the world. For years it has been a target of conservation groups and cause for activism due to its critical role in global biodiversity, climate regulation, and carbon storage. The Amazon stores 123 billion tons of carbon but the expansion of urban areas (particularly cropland and pasture) have reduced the Amazon's capacity to absorb carbon (NOAA Research). Deforestation in the Amazon has been highlighted by recent research, due to its role as a carbon sink. Roughly 30% of forest cover has been lost causing the area that formally comprised the Amazon rainforest to become a net carbon source (Gatti et al.).  
 
@@ -68,7 +68,7 @@
 
             The City of Porto Velho sits along the Amazon river basin. It is the capital of the Brazilian state of Rondônia and is also the largest urban metro in the state. Rondônia is one of the most deforested states in the Amazon partially due to Porto Velhos expansion as well as cattle ranching, and mining (Nag). It’s a municipality spanning more than 34,000 km² and encompasses over half a million people (World Population Review). Porto Velho will make a good case study for what is happening in the rest of the Amazon. It is also a location that encompasses the key drivers of deforestation and frontier development. 
 
-        </Section>
+        </section>
 
         <section><h2>Data and Methods</h2>
         Landsat imagery was selected because it provides consistent, long-term coverage suitable for multi-decade vegetation analysis. Landsat 5 imagery was used for 2005, Landsat 8 for 2015, and Landsat 8/9 for 2025. All data came from USGS Earth Explorer using Landsat Collection 2 Level-2 products. <br> <br>
@@ -91,7 +91,7 @@
             Classified rasters were analyzed using ArcGIS Raster Calculator and Tabulate Area. For each year, the total area of forest, urban/farm, and water was calculated. Changes were then compared across time periods (2005–2015 and 2015–2025) to identify trends in deforestation and development. The resulting maps and summary statistics allow for a clear visualization of how the Amazon landscape has transformed over time and provided evidence of long-term environmental change.
             <br> <br>
             <section>
-            <h2>Figure 3. Supervised land-cover classification results for Porto Velh(2005–2025)</h2>
+            <h2>Figure 3. Supervised land-cover classification results for Porto Velho (2005–2025)</h2>
             <img src="photos/rasterphotos/classification.png" alt="3 maps showing classification over the 3 years" style="max-width: 100%; height: auto;"">
             <br>
             <br>
@@ -118,7 +118,7 @@
         <section>
 
         <h2>Figure 6. Land-cover Changes by Class Porto Velho (2005–2025)</h2> <i>Values represent change categories where −1 = loss, 0 = no change, and 1 = gain.</i> 
-        <img src="photos/rasterphotos/990d0811-1.png" alt="table showing Value Class Area Gain/Loss -1 Urban 2113 km2 -1 Forest 657 km2 0 Urban 6799 km2 0 Forest 22959 km2 1 Urban 45 km2 1 Forest 913 km2" style="max-width: 50%; height: auto;"><br> <br>
+        <img src="photos/rasterphotos/table1.jpg" alt="table showing Value Class Area Gain/Loss -1 Urban 2113 km2 -1 Forest 657 km2 0 Urban 6799 km2 0 Forest 22959 km2 1 Urban 45 km2 1 Forest 913 km2" style="max-width: 50%; height: auto;"><br> <br>
                 <!-- <h2>Figure 7. Land-cover Changes Bar Graph</h2>
         <img src="photos/rasterphotos/Pictureofchange.png" alt="bar chart showing results from above chart" style="max-width: 100%; height: auto;"> -->
         </section>
@@ -130,14 +130,14 @@
         </section>
         </section>
 
-        <section><h2>Limitations</h2> Analysis used only three land-cover classes, which simplified interpretation and complexity. Agriculture and urban areas were grouped together due to spectral similarity on a NIR raster distrobution, which reduced precision in distinguishing specific land uses. For example, splitting out agriculture from urban areas would have added depth to analysis, but Doing so would have required more bands of data in a second set of analysis to reduce ambiguity between classes. <br> <br>
+        <section><h2>Limitations</h2> Analysis used only three land-cover classes, which simplified interpretation and complexity. Agriculture and urban areas were grouped together due to spectral similarity on a NIR raster distribution, which reduced precision in distinguishing specific land uses. For example, splitting out agriculture from urban areas would have added depth to analysis, but doing so would have required more bands of data in a second set of analysis to reduce ambiguity between classes. <br> <br>
 
         There is a mapping project creating a larger raster mosaic of the Amazon with a more specific land cover called MapBIOMAS Amazonia. Their project called the Amazon Annual Land Cover and Land Use Mapping, seeks to facilitation of on demand up to date information on the Amazon Rainforest. They do a complete raster analysis for each year, with the last one being done in 2023. Their analysis can compartmentalize land use change dynamics by applying state-of-the-art tools and a partnership with Google (MapBIOMAS Amazonia). 
         </section>
 
         <Section>
             <h2>Conclusion</h2>
-            This raster analysis shows that forest loss in Porto Velho has not only continued but accelerated between 2005 and 2025. The results confirm that urban and agricultural expansion are major drivers of deforestation in the region. Despite a simplified classification scheme, the project demonstrates how remote sensing can be used to track long-term land-cover change and support land-use planning and environmental monitoring in the Amazon.
+            This raster analysis shows that forest loss in Porto Velho has not only continued but accelerated between 2005 and 2025. The results confirm that urban and agricultural expansion are major drivers of deforestation in the region. Despite a simplified classification scheme, the project demonstrates how remote sensing can be used to track long-term land-cover change and support land-use planning and environmental monitoring in the Amazon. The acceleration of forest loss between 2015–2025 suggests intensifying land conversion pressure rather than stabilization.
 
         <section style="text-align: center;">
         <h2>Figure 8. Forest Change Relative to 2005</h2>
@@ -187,12 +187,12 @@
       </a>
     </li>
 
-    <li>
+    <!-- <li>
       Wikipedia Contributors. “Landsat Program.” <em>Wikipedia</em>, August 27, 2019.
       <a href="https://en.wikipedia.org/wiki/Landsat_program" target="_blank" rel="noopener noreferrer">
         en.wikipedia.org
       </a>
-    </li>
+    </li> -->
 
     <li>
         World Population Review. “Porto Velho Population 2025.”
