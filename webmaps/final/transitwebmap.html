@@ -24,8 +24,7 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            /* content does not spill out of page */
-            overflow: hidden;
+
           }
           text {
           font-family: Helvetica, Arial;
@@ -249,10 +248,6 @@
         border-radius: 3px;
     }
 
-    div {
-
-    }
-
   </style>
 
   </head>
@@ -271,6 +266,7 @@
       <!-- buttons at top -->
       <div id="togglemodebtn">
               <div style="z-index: 9999;">
+              <button id="fullscreen">⛶ Full Screen</button>
           <button id="sidebarbtn" class="openbtn">☰ Sidebar</button>  
       </div>
       <div id= "toggles">
@@ -297,14 +293,14 @@
         </div>
       </div>
 
-      <div id="tutorial" style="
+  <div id="tutorial" style="
     position: fixed;
     top:0; left:0; right:0; bottom:0;
     background: rgba(0,0,0,0.6);
     z-index: 10000;
     display: none;
     color: white;
-">
+  ">
     <div class="shine" style="position:absolute; top:20%; left:50%; transform:translateX(-50%); width: 400px; padding:20px; cursor:default;text-align:center;">
         <h2 style="text-align:center;">Welcome to the Transit Dashboard</h2>
         <ul style="text-align: start;">
@@ -723,6 +719,7 @@
     </script>
          <script src="panel.js"></script>
          <link rel="stylesheet" href="sidebar.css">
+         <script src="fullscreen.js"></script>
          
   </body>
 </html>
