@@ -6,6 +6,7 @@ census_api_key("fbb3f7914f7097828de7fd0ce50ab55c51222d60", install = TRUE, overw
 library(tigris)
 library(tidyverse)
 library(sf)
+library(scales)
 
 options(tigris_use_cache = TRUE)
 #_________________________________ACS VERIABLES_______________________________________
@@ -117,14 +118,16 @@ pop<-ggplot() +
   geom_sf(data = SL_metro, fill = NA, color = "grey") +
   scale_fill_viridis_c(option = "magma") +
   theme_void() +
-  labs(fill = "Pop per Sq Km")
+  labs(title = "Population by Census Tract",
+       fill = "Pop per Sq Km")
 
 density<-ggplot() +
   geom_sf(data = SL_tracts_density_catagorized, aes(fill = density_class), color = NA) +
   geom_sf(data = SL_metro, fill = NA, color = "grey") +
   scale_fill_viridis_d(option = "magma") +
   theme_void() +
-  labs(fill = "Density Class")
+  labs(title = "Population Density by Census Tract",
+       fill = "Density Class")
 
 income_map <- ggplot() +
   geom_sf(data = SL_all_data, aes(fill = MedIncE), color = NA) +
@@ -166,9 +169,58 @@ boxplot <- ggplot(SL_all_data, aes(y = MedIncE)) +
   labs(title = "Boxplot of Median Household Income",
        subtitle = "Salt Lake City MSA Tracts",
        y = "Median Income")
+
+#____________________________POP Pyrimid_________________________-
+
+SEX <- get_estimates(
+  geography = "metropolitan statistical area/micropolitan statistical area",
+  state = "UT",
+  product = "characteristics",
+  breakdown = c("SEX", "AGEGROUP"),
+  breakdown_labels = TRUE,
+  year = 2020
+)
+
+SL_SEX_AGE_filtered<- SEX %>%
+  filter(GEOID == "41620") %>%
+  filter(str_detect(AGEGROUP, "^Age")) %>% 
+  filter(SEX != "Both sexes") %>%
+  mutate(value = if_else(SEX == "Male", -value, value))
+
+print(nrow(SL_SEX_AGE_filtered))
+#80
+
+utah_pyramid<-ggplot(SL_SEX_AGE_filtered, aes(x = value, y = AGEGROUP, fill = SEX)) +
+  geom_col()
+utah_pyramid <- ggplot(SL_SEX_AGE_filtered,
+                       aes(x = value,
+                           y = AGEGROUP,
+                           fill = SEX)) +
+  geom_col(width = 0.95, alpha = 0.75) +
+  theme_minimal(base_family = "Verdana",
+                base_size = 12) +
+  scale_x_continuous(
+    labels = ~ number_format(scale = .001, suffix = "k")(abs(.x)),
+    limits = 100000 * c(-1,1)
+  ) +
+  scale_y_discrete(labels = ~ str_remove_all(.x, "Age\\s|\\syears")) +
+  scale_fill_manual(values = c("darkred", "navy")) +
+  labs(x = ""
+       ,
+       y = "2019 Census Bureau population estimate",
+       title = "Population structure in Salt Lake City",
+       fill = ""
+       ,)
+
+utah_pyramid
+
+
+
+
 #______________________________________________________________________GGSAVE_____
 
 ggsave("slc_pop_density.png", plot = pop, width = 8, height = 6, dpi = 150)
+ggsave("utah_pyramid.png", plot = pop, width = 8, height = 6, dpi = 150)
 ggsave("slc_density_class.png", plot = density, width = 8, height = 6, dpi = 150)
 ggsave("slc_income_map.png", plot = income_map, width = 8, height = 6, dpi = 150)
 ggsave("slc_income_errorbars.png", plot = error, width = 10, height = 7, dpi = 150)
