@@ -110,6 +110,46 @@ SL_all_data <- SL_tracts_density_catagorized %>%
     
     pct_bachelors = 100 * (Edu_BachelorsE / Edu_TotalE)
   )
+#___________________________ Pull Stats for Question 1 ___________________________
+
+# Drop the spatial geometry to make calculation faster
+stats_data <- SL_all_data %>% st_drop_geometry()
+
+# 1. Total Population & Breakdown of Race (Summing up raw estimates)
+overall_demographics <- stats_data %>%
+  summarise(
+    Total_Population = sum(summary_est, na.rm = TRUE),
+    Total_White      = sum(WhiteE, na.rm = TRUE),
+    Total_Hispanic   = sum(HispanicE, na.rm = TRUE),
+    Total_Black      = sum(BlackE, na.rm = TRUE),
+    Total_Asian      = sum(AsianE, na.rm = TRUE),
+    Total_Native     = sum(NativeE, na.rm = TRUE),
+    Total_HIPI       = sum(HIPIE, na.rm = TRUE)
+  ) %>%
+  mutate(
+    pct_White    = (Total_White / Total_Population) * 100,
+    pct_Hispanic = (Total_Hispanic / Total_Population) * 100,
+    pct_Black    = (Total_Black / Total_Population) * 100,
+    pct_Asian    = (Total_Asian / Total_Population) * 100,
+    pct_Native   = (Total_Native / Total_Population) * 100,
+    pct_HIPI     = (Total_HIPI / Total_Population) * 100
+  )
+
+# 2. General Economic / Age Metrics (Averages or Medians across tracts)
+overall_economics <- stats_data %>%
+  summarise(
+    Avg_Median_Household_Income = mean(MedIncE, na.rm = TRUE),
+    Avg_Per_Capita_Income       = mean(PerCapIncE, na.rm = TRUE),
+    Avg_Median_Age              = mean(MedAgeE, na.rm = TRUE),
+    Avg_Median_Home_Value       = mean(MedHomeValE, na.rm = TRUE)
+  )
+
+# 3. Print results to your console to copy into your report
+print("--- DEMOGRAPHIC BREAKDOWN ---")
+print(overall_demographics %>% select(Total_Population, starts_with("pct_")))
+
+print("--- ECONOMIC & GENERAL METRICS ---")
+print(overall_economics)
 
 #_________________________________________MAPS_________________________________________
 
@@ -226,3 +266,5 @@ ggsave("slc_income_map.png", plot = income_map, width = 8, height = 6, dpi = 150
 ggsave("slc_income_errorbars.png", plot = error, width = 10, height = 7, dpi = 150)
 ggsave("slc_income_histogram.png", plot = histogram, width = 7, height = 5, dpi = 150)
 ggsave("slc_income_boxplot.png", plot = boxplot, width = 5, height = 5, dpi = 150)
+write_csv(overall_demographics, "slc_overall_demographics.csv")
+write_csv(overall_economics, "slc_overall_economics.csv")
