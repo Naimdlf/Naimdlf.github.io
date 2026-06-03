@@ -1,0 +1,141 @@
+        <!--meta tags https://www.w3schools.com/html/html_head.asp-->
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="Naim Ferris">
+            <meta name="description" content="R Demography">
+            <title>Naim's Portfolio - R: Housing Analysis Lane County</title>
+            <!--CSS Link-->
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+        <header>
+        <div class="header-container">
+            <h1> Naim Ferris</h1>
+            <div class="button-group">
+            <button type="button" onclick="window.location.href='index.html';">Home</button>
+            <!--Projects Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('projectsDropdown')">Projects</button>
+                <div id="projectsDropdown" class="dropdown-content">
+                <a href="gis.html">GIS</a>
+                <a href="JS.html">Java Script</a>
+                <a href="Python.html">Python</a>
+                <a href="sample.html">Writing Samples</a>
+                <a href="Raster.html">Raster Analysis</a>
+                <a href="R.html">R: Housing Analysis Lane County</a>
+                </div>
+            </div>
+
+            <!--Web Maps Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('mapsDropdown')">Web Maps</button>
+                <div id="mapsDropdown" class="dropdown-content">
+                <a href="webmaps.html">Webmaps</a>
+                <a href="Transit_Expenditure_Dashboard.html">Transit Expenditure Dashboard</a>
+                </div>
+            </div>
+
+            <!--About Me Button-->
+            <div class="dropdown">
+                <button onclick="toggleDropdown('aboutDropdown')">About Me</button>
+                <div id="aboutDropdown" class="dropdown-content">
+                <a href="portresume.html">Resume</a>
+                <a href="index.html#contact">Contact Info</a>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        </header>
+            <!--Dropdown script-->
+        <script src="js/dropdown.js"></script>
+
+        <!--header script-->
+        <script src="js/minimizeheader.js"></script>
+        
+        <br>
+<section class="about-website">
+    <h2>Spatial Analysis of Lane County Housing Affordability (2005–2024)</h2>
+    <p><strong>Tools:</strong> RStudio, Tidycensus, Mapbox API, Tmap<br>
+    <strong>Methods:</strong> Geospatial data wrangling, API integration, bivariate choropleth mapping, and spatial autocorrelation (Moran's I).</p> <br>
+    
+    <hr>
+    
+    <h2>Project Overview</h2> 
+    <p>This project leverages U.S. Census Bureau American Community Survey (ACS) data to evaluate the growing mismatch between housing costs and local incomes across Lane County, Oregon. By examining the spatial distribution of median home values, gross rent burdens, and household incomes by Census Tract, this analysis identifies stark geographic disparities between the high-density student/renter core in Eugene and the county's rural periphery. We will be looking at 3 key veriables: </p> <br>
+        <li>1. (B25077) Median Value for Owner-Occupied Housing Units.</li>
+        <li>2. (B25070) Gross Rent as a Percentage of Household Income.</li>
+        <li>3. (B19013) Median Household Income in the Past 12 Months.</li>
+        <br>
+                <section style="text-align: center;">
+        <h2 style="text-align: left;">Figure 1. Lane County Outline 2025</h2>
+        <img src="GEOG_490/online_final/laneimage.png" alt="2025 Lane County Outline" style="max-width: 40%; height: auto;">
+</section>
+        <section>
+            <h2>Home Values</h2>
+        <p>Looking at Lane between 2005 and 2024 we can see a drastic increase in home values. Representing the self-reported estimate of a property's market value, this metric captures neighborhood desirability, real estate market strength, and the primary vehicle for generational wealth building within local communities. </p>
+                        <section style="text-align: center;">
+        <h2 style="text-align: left;">Figure 2. Change in Housing Price (2005-2024)</h2>
+        <img src="GEOG_490/online_final/Rplot.png" alt="Chart Change in Housing Price Over Time" style="max-width: 40%; height: auto;">
+                        <section style="text-align: center;">
+        <h2 style="text-align: left;">Figure 3. Lane County Home Value by Census Tract 2024</h2>
+        <img src="GEOG_490/online_final/lanehomeval.png" alt="2024 Lane County Home Value" style="max-width: 40%; height: auto;">
+                        <section style="text-align: center;">
+        <h2 style="text-align: left;">Figure 4. Lane County Regional Comparison Bar Chart 2024</h2>
+        <img src="GEOG_490/online_final/Regionalcomphomeval.png" alt="2025 Lane County Regional Comparison Bar Chart" style="max-width: 40%; height: auto;">
+        <br> <br>
+        </section>
+
+        <Section>
+            <h2>Rent Burden</h2>
+            <p>Representing the self-reported estimate of a property's market value, this metric captures neighborhood desirability, real estate market strength, and the primary vehicle for generational wealth building within local communities.</p>
+            <section>
+            <h2>Figure 5. Map of Lane Rent Burden</h2>
+            <img src="GEOG_490/online_final/lanerrentburden.png" alt="map showing rent burden hot spots" style="max-width: 100%; height: auto;"">
+            <h2> Figure 6. Chart Showing Median Rent Burden by Tract</h2>
+            <img src="GEOG_490/online_final/medianrentburden.png" alt="Chart Showing Median Rent Burden by Tract" style="max-width: 100%; height: auto;"">
+            </section>
+        </Section>
+
+        <section><h2>Median Income</h2>
+        This variable tracks the median income of households within a given census tract, serves as a primary gauge of local economic health, and helps identify areas of concentrated wealth or financial disinvestment across the county. <br> <br>
+
+                <h2>Figure 7. Map Showing Relative Income Lane County</h2>
+          <div style="text-align: center;">
+        <img src="GEOG_490/online_final/lanemedian_inc.png" alt="Map Showing Relative Income Lane County" style="max-width: 50%; height: auto;"> </div><br> <br>
+
+    <section>
+  <h2 style="text-align: center;">Works Cited</h2>
+  <ul>
+<li>
+  U.S. Census Bureau. “American Community Survey 5-Year Estimates, 2020–2024.”
+  <em>United States Department of Commerce</em>, Dec. 2025.
+  <a href="https://api.census.gov/data/2024/acs/acs5" target="_blank" rel="noopener noreferrer">
+    https://api.census.gov/data/2024/acs/acs5
+  </a>
+</li>
+
+
+</section>
+</Section>
+
+    <footer class="footer-attribution">
+    <p>© 2025 Naim Ferris |</p>
+    <p>
+        Header background image by 
+        <a href="https://en.wikipedia.org/wiki/User:Aboutmovies" target="_blank" rel="noopener">M.O. Stevens</a>, 
+        transferred by 
+        <a href="https://commons.wikimedia.org/wiki/User:Werewombat" target="_blank" rel="noopener">Werewombat</a>, 
+        <a href="https://commons.wikimedia.org/w/index.php?curid=6985895" target="_blank" rel="noopener">Public Domain</a>.
+    </p>
+    <p>
+        <a href="https://www.vecteezy.com/free-vector/blue-green-background" target="_blank" rel="noopener">Blue Green Background Vectors by Vecteezy</a>
+    </p>
+    <p>
+        Starter code for header taken from <a href="https://www.w3schools.com/howto/howto_js_shrink_header_scroll.asp">w3schools</a>
+    </p>
+    </footer>
+</body>
